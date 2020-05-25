@@ -49,6 +49,7 @@ const ChildrenContainer = styled.div`
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
+  background: #f0f0f0;
 `;
 
 const Layout = ({ edges, children }) => (

@@ -1,36 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled, { css } from "react-emotion";
+import styled from "react-emotion";
 import { Link, graphql } from "gatsby";
-import kebabCase from "lodash/kebabCase";
-import { SEO, Container, Content, Line, Layout } from "elements";
+import { SEO, Container, Content, Line, Layout, PostItem } from "elements";
 import { InfoText } from "utilities";
+import { Centered } from 'styles/shared';
 import { Tags, Suggestions, Header } from "components";
-
-const Information = styled.div`
-  font-family: ${props => props.theme.fontFamily.heading};
-  color: ${props => props.theme.colors.white.lightblue};
-`;
-
-const lightLine = css`
-  padding: 0 0.5rem;
-  color: #999999;
-`;
-
-const CatLink = styled(Link)`
-  padding: 0.5rem;
-`;
-const H1 = styled.h1`
-  font-size: 2.25rem;
-  color: white;
-`;
-const TitleContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
 
 const Post = ({
   pageContext: { slug, left, right },
@@ -45,16 +20,9 @@ const Post = ({
     <Layout>
       <SEO postPath={slug} postNode={postNode} postSEO />
       <Header>
-        <TitleContainer>
-          <H1>{post.title}</H1>
-          <Information>
-            {post.date}
-            <span className={lightLine}>|</span>
-            Time to read: {postNode.timeToRead} Min.
-            <span className={lightLine}>|</span>
-            <Link to={`/categories/${post.category}`}>{post.category}</Link>
-          </Information>
-        </TitleContainer>
+        <Centered>
+          <PostItem post={post} timeToRead={postNode.timeToRead} />
+        </Centered>
       </Header>
       <Container pt3 type="article">
         <Content input={postNode.html} />

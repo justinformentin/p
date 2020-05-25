@@ -81,7 +81,7 @@ const shadow = {
   },
   text: {
     small: '0 2px 10px rgba(0, 0, 0, 0.85)',
-    big: '0 15px 20px rgba(0, 0, 0, 0.13)',
+    big: '0 5px 10px rgba(0, 0, 0, 0.18)',
   },
 };
 

@@ -174,7 +174,7 @@ const Block = styled.div`
   }
 `;
 
-class FeaturedPost extends React.Component {
+class BlogList extends React.Component {
   constructor(props) {
     super(props);
     this.handleMouseHover = this.handleMouseHover.bind(this);
@@ -219,9 +219,9 @@ class FeaturedPost extends React.Component {
   }
 }
 
-export default FeaturedPost;
+export default BlogList;
 
-FeaturedPost.propTypes = {
+BlogList.propTypes = {
   cover: PropTypes.any.isRequired,
   path: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,

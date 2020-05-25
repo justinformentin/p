@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import styled from 'react-emotion';
 
 const Wrapper = styled.div`
-  margin: 0 auto;
-  padding: ${props => (props.pt3 ? '4rem 1.5rem 1rem 1.5rem' : '1rem 1.5rem')};
-  max-width: ${props => props.theme.layout[props.type]};
+  // padding: ${props => (props.pt3 ? '4rem 1.5rem 1rem 1.5rem' : '1rem 1.5rem')};
+  padding: 2rem 10rem;
+  // background: #f0f0f0;
 `;
 
 const Container = ({ children, type, className, pt3 }) => (

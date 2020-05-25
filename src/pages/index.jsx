@@ -1,76 +1,18 @@
-/* eslint max-len: 0 */
-
 import React from "react";
 import PropTypes from "prop-types";
 import { Link, graphql } from "gatsby";
 import styled from "react-emotion";
-import { Container, Layout, Sidebar } from "elements";
+import { Container, Layout, PostItem } from "elements";
 import { Button } from "components";
-import kebabCase from "lodash/kebabCase";
 
-// const ProjectsWrapper = styled.div`
-//   display: flex;
-//   flex-wrap: wrap;
-//   justify-content: space-between;
-//   flex-direction: row;
-//   margin-top: -7rem;
-// `;
-
-const PostsWrapper = styled.div`
-  // display: flex;
-  // flex-direction: row;
-  // flex-wrap: wrap;
-  margin: 0 2rem;
-`;
-
-
-const PostItem = styled.article`
-  display: flex;
-  flex-direction: column;
-  margin: 2rem 3rem 3rem 3rem;
-`;
-
-const Information = styled.div`
-  h1 {
-    font-size: 1.5rem;
-    margin-bottom: 1.25rem;
-    display: inline-block;
-    color: ${props => props.theme.colors.black.base};
-    transition: all ${props => props.theme.transitions.default.duration};
-    &:hover {
-      color: #666666;
-    }
-  }
-`;
-
-const Statistics = styled.div`
-  color: ${props => props.theme.colors.black.lighter};
-  margin-bottom: 0.5rem;
-`;
-
-const Excerpt = styled.div`
-  margin-top: 0.5rem;
-`;
-
-const MorePostContainer = styled.div`
+const MorePostsLink = styled(Link)`
   display: flex;
   justify-content: center;
 `;
 
-const PostList = ({ category, path, title, date, excerpt }) => (
-  <PostItem>
-    <Information>
-      <Link to={path}>
-        <h1>{title}</h1>
-      </Link>
-      <Statistics>
-        {date} |{" "}
-        <Link to={`/categories/${kebabCase(category)}`}>{category}</Link>
-      </Statistics>
-      <Excerpt>{excerpt}</Excerpt>
-    </Information>
-  </PostItem>
-);
+const PostWrapper = styled.div`
+  margin: 2rem 0 3rem 0;
+`;
 
 const Index = ({
   data: {
@@ -79,28 +21,29 @@ const Index = ({
   }
 }) => (
   <Layout edges={postEdges}>
-        <PostsWrapper>
-          {postEdges.map(post => (
-            <PostList
+        <Container>
+          {postEdges.map(post => {
+            return <PostWrapper>
+              <PostItem
               key={post.node.frontmatter.title}
-              date={post.node.frontmatter.date}
+              // date={post.node.frontmatter.date}
               path={post.node.fields.slug}
-              title={post.node.frontmatter.title}
-              category={post.node.frontmatter.category}
-              chunk={post.node.frontmatter.chunk}
-              tags={post.node.frontmatter.tags}
+              // title={post.node.frontmatter.title}
+              // category={post.node.frontmatter.category}
+              // chunk={post.node.frontmatter.chunk}
+              // tags={post.node.frontmatter.tags}
+            post={post.node.frontmatter}
               excerpt={post.node.excerpt}
-              timeToRead={post.node.timeToRead}
+              timeToRead={'Time to read: ' + post.node.timeToRead}
             />
-          ))}
-        </PostsWrapper>
-          <MorePostContainer>
-            <Link to="/blog">
+            </PostWrapper>
+          })}
+            <MorePostsLink to="/blog">
               <Button large type="primary">
                 More Posts
               </Button>
-            </Link>
-          </MorePostContainer>
+            </MorePostsLink>
+        </Container>
   </Layout>
 );
 
@@ -165,7 +108,9 @@ export const pageQuery = graphql`
             title
             category
             tags
-            date(formatString: "MM-DD-YYYY")
+            # date(formatString: "MM-DD-YYYY")
+            date(formatString: "MMMM DD, YYYY")
+
           }
         }
       }
