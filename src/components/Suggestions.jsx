@@ -97,7 +97,7 @@ const Suggestions = ({ left, right }) => (
     {left && (
       <Wrapper>
         <Image>
-          <img src={left.frontmatter.cover.childImageSharp.resize.src} alt={left.frontmatter.title} />
+          {/* <img src={left.frontmatter.cover.childImageSharp.resize.src} alt={left.frontmatter.title} /> */}
         </Image>
         <StyledLink to={left.fields.slug}>
           <Title>{left.frontmatter.title}</Title>
@@ -108,7 +108,7 @@ const Suggestions = ({ left, right }) => (
     {right && (
       <Wrapper>
         <Image>
-          <img src={right.frontmatter.cover.childImageSharp.resize.src} alt={right.frontmatter.title} />
+          {/* <img src={right.frontmatter.cover.childImageSharp.resize.src} alt={right.frontmatter.title} /> */}
         </Image>
         <StyledLink to={right.fields.slug}>
           <Title>{right.frontmatter.title}</Title>

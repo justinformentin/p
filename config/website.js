@@ -1,6 +1,7 @@
 module.exports = {
   // Basics
-  blogPostDir: 'blog',
+  codePostDir: 'code',
+  generalPostDir: 'general',
   projectPostDir: 'projects',
   // Meta Data
   siteTitle: 'Justin Formentin - Personal Portfolio and Blog',
@@ -14,7 +15,7 @@ module.exports = {
     'Justin Formentin - This site is to showcase my personal projects, as well as my blog which contains tutorials related to my youtube channel.',
   // IDs
   googleAnalyticsID: 'UA-107933755-3',
-  twitter: '@justinformentin',
+  twitter: '@whatjustin',
   // Manifest
   themeColor: '#3498DB',
   backgroundColor: '#2e3246',

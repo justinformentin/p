@@ -4,7 +4,7 @@ import { graphql } from "gatsby";
 import Helmet from "react-helmet";
 import styled from "react-emotion";
 import { Layout, PostItem } from "elements";
-import { Container } from "styles/shared";
+import { Container } from 'styles/shared'
 import { Header } from "components";
 import config from "../../config/website";
 
@@ -59,43 +59,34 @@ const PostWrapper = styled.div`
   }
 `;
 
-const Blog = ({
+const General = ({
   data: {
-    code: { edges: codeEdges },
-    general: { edges: generalEdges }
+    allMarkdownRemark: { edges }
   }
-}) => {
-  const allEdges = [...codeEdges, ...generalEdges];
-  const sortedEdges = allEdges.sort((a,b) => {
-    const ae = new Date(a.node.frontmatter.date);
-    const be = new Date(b.node.frontmatter.date);
-    return ae < be ? 1 : ae > be ? -1 : 0
-  })
-  return (
-    <Layout>
-      <Helmet title={`Blog | ${config.siteTitle}`} />
-      <Header title="Blog" />
-      <Container small={true}>
-        <Base>
-          {sortedEdges.map(post => (
-            <PostWrapper key={post.node.frontmatter.title}>
-              <PostItem
-                post={post.node.frontmatter}
-                path={post.node.fields.slug}
-                chunk={post.node.frontmatter.chunk}
-                timeToRead={post.node.timeToRead}
-              />
-            </PostWrapper>
-          ))}
-        </Base>
-      </Container>
-    </Layout>
-  );
-};
+}) => (
+  <Layout>
+    <Helmet title={`General | ${config.siteTitle}`} />
+    <Header title="General" />
+    <Container small={true}>
+      <Base>
+        {edges.map(post => (
+          <PostWrapper key={post.node.frontmatter.title}>
+            <PostItem
+              post={post.node.frontmatter}
+              path={post.node.fields.slug}
+              chunk={post.node.frontmatter.chunk}
+              timeToRead={post.node.timeToRead}
+            />
+          </PostWrapper>
+        ))}
+      </Base>
+    </Container>
+  </Layout>
+);
 
-export default Blog;
+export default General;
 
-Blog.propTypes = {
+General.propTypes = {
   data: PropTypes.shape({
     allMarkdownRemark: PropTypes.shape({
       edges: PropTypes.array.isRequired
@@ -104,32 +95,9 @@ Blog.propTypes = {
 };
 
 export const pageQuery = graphql`
-  query Blog {
-    code: allMarkdownRemark(
-      limit: 100
-      sort: { fields: [frontmatter___date], order: DESC }
-      filter: { fields: { sourceInstanceName: { eq: "code" } } }
-    ) {
-      edges {
-        node {
-          fields {
-            slug
-          }
-          timeToRead
-          excerpt(pruneLength: 200)
-          frontmatter {
-            kind
-            chunk
-            title
-            category
-            tags
-            date(formatString: "M-DD-YY")
-          }
-        }
-      }
-    }
-    general: allMarkdownRemark(
-      limit: 100
+  query GeneralQuery {
+    allMarkdownRemark(
+      limit: 1000
       sort: { fields: [frontmatter___date], order: DESC }
       filter: { fields: { sourceInstanceName: { eq: "general" } } }
     ) {
@@ -138,15 +106,16 @@ export const pageQuery = graphql`
           fields {
             slug
           }
+          excerpt(pruneLength: 175)
           timeToRead
-          excerpt(pruneLength: 200)
           frontmatter {
             kind
-            chunk
             title
+            # date(formatString: "MMMM DD, YYYY")
+            date(formatString: "M-DD-YY")
             category
             tags
-            date(formatString: "M-DD-YY")
+            chunk
           }
         }
       }

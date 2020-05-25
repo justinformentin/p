@@ -22,7 +22,6 @@ const Text = styled.div`
 
 const Subtitle = styled.div`
   margin: 0;
-  color: ${props => props.theme.colors.white.blue};
 `;
 
 const Header = ({ children, title }) => (

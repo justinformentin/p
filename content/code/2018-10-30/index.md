@@ -4,6 +4,7 @@ path: "guide-to-building-a-gatsby-site"
 cover: "./gatsby-header.jpg"
 date: "2018-10-30"
 chunk: "Learn how to build a site using Gatsby from empty folder to deployment."
+kind: "Article"
 category: "Gatsby"
 tags:
     - React

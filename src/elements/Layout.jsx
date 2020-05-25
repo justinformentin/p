@@ -1,5 +1,3 @@
-/* eslint no-unused-expressions: 0 */
-
 import React from "react";
 import PropTypes from "prop-types";
 import { injectGlobal } from "emotion";
@@ -58,10 +56,10 @@ const Layout = ({ edges, children }) => (
       <SEO />
       <BodyContainer>
         <Sidebar edges={edges} />
-          <ChildrenContainer>
+          <ChildrenContainer id="child-container">
             {children}
+            <ScrollTop />
           </ChildrenContainer>
-        <ScrollTop />
       </BodyContainer>
     </React.Fragment>
   </ThemeProvider>

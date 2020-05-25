@@ -4,6 +4,7 @@ path: "google-pagespeed"
 cover: "./pagespeed-header.jpg"
 date: "2018-07-14"
 category: "Optimization"
+kind: "Article"
 chunk: "Google PageSpeed is a useful tool, but there's more to consider."
 tags:
     - Google

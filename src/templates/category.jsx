@@ -8,10 +8,6 @@ import { Header, ItemTagCategory } from 'components';
 import config from '../../config/website';
 import { Container } from 'styles/shared'
 
-const StyledLink = styled(Link)`
-  color: ${props => props.theme.colors.white.light};
-`;
-
 const Category = ({
   pageContext: { category },
   data: {
@@ -21,7 +17,7 @@ const Category = ({
   <Layout>
     <Helmet title={`${category} | ${config.siteTitle}`} />
     <Header title={category}>
-      <StyledLink to="/categories">All Categories</StyledLink>
+      <Link to="/categories">All Categories</Link>
     </Header>
     <Container>
       {edges.map(edge => (
@@ -69,6 +65,7 @@ export const pageQuery = graphql`
           excerpt(pruneLength: 300)
           timeToRead
           frontmatter {
+            kind
             title
             tags
             date(formatString: "MMMM DD, YYYY")

@@ -51,24 +51,11 @@ export const pageQuery = graphql`
       timeToRead
       excerpt
       frontmatter {
+        kind
         title
         date(formatString: "MMMM DD, YYYY")
         category
         tags
-        cover {
-          childImageSharp {
-            fluid(
-              maxWidth: 1920
-              quality: 90
-              duotone: { highlight: "#2f61a8", shadow: "#1a355b", opacity: 90 }
-            ) {
-              ...GatsbyImageSharpFluid_withWebp
-            }
-            resize(width: 1200, quality: 90) {
-              src
-            }
-          }
-        }
       }
       fields {
         slug

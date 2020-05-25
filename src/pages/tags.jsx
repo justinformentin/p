@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, graphql } from "gatsby";
+import { Link } from "gatsby";
 import PropTypes from "prop-types";
 import styled from "react-emotion";
 import kebabCase from "lodash/kebabCase";
@@ -37,26 +37,32 @@ const Number = styled.span`
 
 const Tags = ({
   data: {
-    allMarkdownRemark: { group }
+    code: { group: codeGroup },
+    general: { group: generalGroup }
   }
-}) => (
-  <Layout>
-    <Helmet title={`Tags | ${config.siteTitle}`} />
-    <Header title="Tags" />
-    <Container>
-      <TagsContainer>
-        {group.map(tag => (
-          <Link key={tag.fieldValue} to={`/tags/${kebabCase(tag.fieldValue)}`}>
-            <span>
-              {tag.fieldValue} <Number>{tag.totalCount}</Number>
-            </span>
-          </Link>
-        ))}
-      </TagsContainer>
-    </Container>
-  </Layout>
-);
-
+}) => {
+  const allTags = [...codeGroup, ...generalGroup];
+  return (
+    <Layout>
+      <Helmet title={`Tags | ${config.siteTitle}`} />
+      <Header title="Tags" />
+      <Container>
+        <TagsContainer>
+          {allTags.map(tag => (
+            <Link
+              key={tag.fieldValue}
+              to={`/tags/${kebabCase(tag.fieldValue)}`}
+            >
+              <span>
+                {tag.fieldValue} <Number>{tag.totalCount}</Number>
+              </span>
+            </Link>
+          ))}
+        </TagsContainer>
+      </Container>
+    </Layout>
+  );
+};
 export default Tags;
 
 Tags.propTypes = {
@@ -70,8 +76,21 @@ Tags.propTypes = {
 
 export const pageQuery = graphql`
   query TagsPage {
-    allMarkdownRemark(
-      filter: { fields: { sourceInstanceName: { eq: "blog" } } }
+    code: allMarkdownRemark(
+      filter: { fields: { sourceInstanceName: { eq: "code" } } }
+    ) {
+      group(field: frontmatter___tags) {
+        fieldValue
+        totalCount
+      }
+      edges {
+        node {
+          id
+        }
+      }
+    }
+    general: allMarkdownRemark(
+      filter: { fields: { sourceInstanceName: { eq: "general" } } }
     ) {
       group(field: frontmatter___tags) {
         fieldValue

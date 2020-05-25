@@ -85,6 +85,7 @@ const Photo = styled.img`
 
 const StyledLink = styled(Link)`
   margin-left: ${props => (props.sub ? "1.5rem" : "")};
+  margin-bottom: 0.5rem;
 `;
 
 const LinkText = styled.div`
@@ -144,13 +145,13 @@ const Navigation = () => (
   <Nav>
     <SidebarLink to="/" text="Home" />
     <SidebarLink to="/about" text="About" />
-    <SidebarLink to="/code-related" text="Code Related" />
-    <SidebarLink sub="true" to="/code-related/articles" text="Articles" />
-    <SidebarLink sub="true" to="/code-related/random" text="Random" />
-    <SidebarLink to="/everything-else" text="Everything Else" />
-    <SidebarLink sub="true" to="/everything-else/articles" text="Articles" />
-    <SidebarLink sub="true" to="/everything-else/random" text="Random" />
-    <SidebarLink to="/blog" text="Blog" />
+    <SidebarLink to="/code" text="Code Related" />
+    {/* <SidebarLink sub="true" to="/code-related/articles" text="Articles" /> */}
+    {/* <SidebarLink sub="true" to="/code-related/random" text="Random" /> */}
+    <SidebarLink to="/general" text="Everything Else" />
+    {/* <SidebarLink sub="true" to="/general/articles" text="Articles" />
+    <SidebarLink sub="true" to="/general/random" text="Random" /> */}
+    <SidebarLink to="/blog" text="All Posts" />
     <SidebarLink to="/portfolio" text="Portfolio" />
   </Nav>
 );

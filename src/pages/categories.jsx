@@ -9,6 +9,7 @@ import { Layout } from 'elements';
 import { Header } from 'components';
 import config from '../../config/website';
 import { Container } from 'styles/shared'
+// import { useCodeCats, useGeneralCats } from 'utilities/hooks'
 
 const TagsContainer = styled.div`
   margin: 2rem 0 4rem 0;
@@ -37,15 +38,24 @@ const Number = styled.span`
 
 const Categories = ({
   data: {
-    allMarkdownRemark: { group },
+    code: { group: codeGroup },
+    general: { group: generalGroup },
   },
-}) => (
-  <Layout>
+}) => {
+
+
+    // const codeCats = useCodeCats();
+    // const generalCats = useGeneralCats();
+    // const allCats = [...codeCats, ...generalCats];
+    const allCats = [...codeGroup, ...generalGroup];
+
+
+  return (<Layout>
     <Helmet title={`Categories | ${config.siteTitle}`} />
     <Header title="Categories" />
     <Container>
       <TagsContainer>
-        {group.map(category => (
+        {allCats.map(category => (
           <Link key={category.fieldValue} to={`/categories/${kebabCase(category.fieldValue)}`}>
             <span>
               {category.fieldValue} <Number>{category.totalCount}</Number>
@@ -54,8 +64,8 @@ const Categories = ({
         ))}
       </TagsContainer>
     </Container>
-  </Layout>
-);
+  </Layout>)
+}
 
 export default Categories;
 
@@ -70,7 +80,18 @@ Categories.propTypes = {
 
 export const pageQuery = graphql`
   query CategoriesPage {
-    allMarkdownRemark(filter: { fields: { sourceInstanceName: { eq: "blog" } } }) {
+    code: allMarkdownRemark(filter: { fields: { sourceInstanceName: { eq: "code" } } }) {
+      group(field: frontmatter___category) {
+        fieldValue
+        totalCount
+      }
+      edges {
+        node {
+          id
+        }
+      }
+    }
+    general: allMarkdownRemark(filter: { fields: { sourceInstanceName: { eq: "general" } } }) {
       group(field: frontmatter___category) {
         fieldValue
         totalCount

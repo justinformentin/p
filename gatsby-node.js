@@ -1,26 +1,30 @@
-const path = require('path');
-const _ = require('lodash');
+const path = require("path");
+const _ = require("lodash");
 
 const pathPrefixes = {
-  blog: '',
-  projects: '/portfolio',
+  code: "/code",
+  general: "/general",
+  projects: "/portfolio"
 };
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions;
   let slug;
-  if (node.internal.type === 'MarkdownRemark') {
+  if (node.internal.type === "MarkdownRemark") {
     const fileNode = getNode(node.parent);
     const pathPrefix = pathPrefixes[fileNode.sourceInstanceName];
     if (
-      Object.prototype.hasOwnProperty.call(node, 'frontmatter') &&
-      Object.prototype.hasOwnProperty.call(node.frontmatter, 'title')
+      Object.prototype.hasOwnProperty.call(node, "frontmatter") &&
+      Object.prototype.hasOwnProperty.call(node.frontmatter, "title")
     ) {
       slug = `/${_.kebabCase(node.frontmatter.path)}`;
-      console.log('second if statemnet', slug)
     }
-    createNodeField({ node, name: 'sourceInstanceName', value: fileNode.sourceInstanceName });
-    createNodeField({ node, name: 'slug', value: `${pathPrefix}${slug}` });
+    createNodeField({
+      node,
+      name: "sourceInstanceName",
+      value: fileNode.sourceInstanceName
+    });
+    createNodeField({ node, name: "slug", value: `${pathPrefix}${slug}` });
   }
 };
 
@@ -28,31 +32,45 @@ exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
 
   return new Promise((resolve, reject) => {
-    const postPage = path.resolve('src/templates/post.jsx');
-    const projectPage = path.resolve('src/templates/project.jsx');
-    const tagPage = path.resolve('src/templates/tag.jsx');
-    const categoryPage = path.resolve('src/templates/category.jsx');
+    const postPage = path.resolve("src/templates/post.jsx");
+    const projectPage = path.resolve("src/templates/project.jsx");
+    const tagPage = path.resolve("src/templates/tag.jsx");
+    const categoryPage = path.resolve("src/templates/category.jsx");
     resolve(
       graphql(`
         {
-          posts: allMarkdownRemark(
-            filter: { fields: { sourceInstanceName: { eq: "blog" } } }
+          code: allMarkdownRemark(
+            filter: { fields: { sourceInstanceName: { eq: "code" } } }
             sort: { fields: [frontmatter___date], order: DESC }
           ) {
             edges {
               node {
                 frontmatter {
+                  kind
                   tags
                   category
                   title
                   chunk
-                  cover {
-                    childImageSharp {
-                      resize(width: 600) {
-                        src
-                      }
-                    }
-                  }
+                }
+                fields {
+                  slug
+                }
+              }
+            }
+          }
+
+          general: allMarkdownRemark(
+            filter: { fields: { sourceInstanceName: { eq: "general" } } }
+            sort: { fields: [frontmatter___date], order: DESC }
+          ) {
+            edges {
+              node {
+                frontmatter {
+                  kind
+                  tags
+                  category
+                  title
+                  chunk
                 }
                 fields {
                   slug
@@ -93,10 +111,11 @@ exports.createPages = ({ graphql, actions }) => {
         const tagSet = new Set();
         const categorySet = new Set();
 
-        const postsList = result.data.posts.edges;
+        const codeList = result.data.code.edges;
+        const generalList = result.data.general.edges;
         const projectsList = result.data.projects.edges;
 
-        postsList.forEach(post => {
+        codeList.forEach(post => {
           if (post.node.frontmatter.tags) {
             post.node.frontmatter.tags.forEach(tag => {
               tagSet.add(tag);
@@ -107,7 +126,9 @@ exports.createPages = ({ graphql, actions }) => {
             categorySet.add(post.node.frontmatter.category);
           }
 
-          const filtered = postsList.filter(input => input.node.fields.slug !== post.node.fields.slug);
+          const filtered = codeList.filter(
+            input => input.node.fields.slug !== post.node.fields.slug
+          );
           const sample = _.sampleSize(filtered, 2);
           const left = sample[0].node;
           const right = sample[1].node;
@@ -118,13 +139,48 @@ exports.createPages = ({ graphql, actions }) => {
             context: {
               slug: post.node.fields.slug,
               left,
-              right,
-            },
+              right
+            }
           });
         });
 
+        generalList.forEach(post => {
+          if(post){
+            if(post.node){
+          if (post.node.frontmatter.tags) {
+            post.node.frontmatter.tags.forEach(tag => {
+              tagSet.add(tag);
+            });
+          }
+
+          if (post.node.frontmatter.category) {
+            categorySet.add(post.node.frontmatter.category);
+          }
+
+          // const filtered = generalList.filter(
+          //   input => input.node.fields.slug !== post.node.fields.slug
+          // );
+          // const sample = _.sampleSize(filtered, 2);
+          // const left = sample[0].node;
+          // const right = sample[1].node;
+
+          createPage({
+            path: post.node.fields.slug,
+            component: postPage,
+            context: {
+              slug: post.node.fields.slug,
+              // left,
+              // right
+            }
+          });
+        }
+      }
+        });
+
         projectsList.forEach(project => {
-          const filtered = projectsList.filter(input => input.node.fields.slug !== project.node.fields.slug);
+          const filtered = projectsList.filter(
+            input => input.node.fields.slug !== project.node.fields.slug
+          );
           const sample = _.sampleSize(filtered, 2);
           const left = sample[0].node;
           const right = sample[1].node;
@@ -135,8 +191,8 @@ exports.createPages = ({ graphql, actions }) => {
             context: {
               slug: project.node.fields.slug,
               left,
-              right,
-            },
+              right
+            }
           });
         });
 
@@ -146,8 +202,8 @@ exports.createPages = ({ graphql, actions }) => {
             path: `/tags/${_.kebabCase(tag)}/`,
             component: tagPage,
             context: {
-              tag,
-            },
+              tag
+            }
           });
         });
 
@@ -157,8 +213,8 @@ exports.createPages = ({ graphql, actions }) => {
             path: `/categories/${_.kebabCase(category)}/`,
             component: categoryPage,
             context: {
-              category,
-            },
+              category
+            }
           });
         });
       })
@@ -169,7 +225,7 @@ exports.createPages = ({ graphql, actions }) => {
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
     resolve: {
-      modules: [path.resolve(__dirname, 'src'), 'node_modules'],
-    },
+      modules: [path.resolve(__dirname, "src"), "node_modules"]
+    }
   });
 };
