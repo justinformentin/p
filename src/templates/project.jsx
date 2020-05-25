@@ -1,39 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'react-emotion';
-import Img from 'gatsby-image';
 import { graphql } from 'gatsby';
-import { SEO, Container, Content, Line, Layout } from 'elements';
-import { Hero, InfoText } from 'utilities';
-import { Suggestions, Button, Card } from 'components';
+import { SEO, Content, Line, Layout } from 'elements';
+import { Suggestions, Button, Card, Header } from 'components';
+import { Container, InfoText } from 'styles/shared'
 
-const Wrapper = styled.div`
-  height: 400px;
-  position: relative;
-  overflow: hidden;
-
-  @media (max-width: ${props => props.theme.breakpoints.m}) {
-    height: 500px;
-    .gatsby-image-wrapper {
-      height: 500px;
-    }
-  }
-  @media (max-width: ${props => props.theme.breakpoints.s}) {
-    height: 400px;
-    .gatsby-image-wrapper {
-      height: 400px;
-    }
-  }
-`;
 
 const H1 = styled.h1`
-  font-size: 3rem;
-  text-shadow: 0px 0px 15px rgba(0, 0, 0, 0.75);
+  color: #222;
+  font-size: 2rem;
 `;
 
 const H2 = styled.h2`
-  font-size: 1.5rem;
-  text-shadow: 0px 0px 15px rgba(0, 0, 0, 0.75);
+  color: #222;
+  font-size: 1.25rem;
 `;
 
 const ButtonCard = styled.div`
@@ -57,7 +38,6 @@ const CardWrapper = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin-top: 2rem;
   ${Card} {
     color: ${props => props.theme.colors.black.base} !important;
     margin-bottom: 2rem;
@@ -80,17 +60,17 @@ const Project = ({ pageContext: { slug, left, right }, data: { markdownRemark: p
   if (!post.id) {
     post.id = slug;
   }
+  console.log('post.title', post.title)
   return (
     <Layout>
       <SEO postPath={slug} postNode={postNode} postSEO />
-      <Wrapper>
-        <Hero>
+      <Header>
+
           <H1>{post.title}</H1>
           <H2>{post.chunk}</H2>
-        </Hero>
-        <Img fluid={fluid} />
-      </Wrapper>
-      <Container type="article">
+
+      </Header>
+      <Container>
         <CardWrapper>
           <Card>
             <h3>Tools Used</h3>

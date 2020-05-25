@@ -1,13 +1,14 @@
-import React from 'react';
-import { Link, graphql } from 'gatsby';
-import PropTypes from 'prop-types';
-import styled from 'react-emotion';
-import kebabCase from 'lodash/kebabCase';
-import { darken } from 'polished';
-import Helmet from 'react-helmet';
-import { Container, Layout } from 'elements';
-import { Header } from 'components';
-import config from '../../config/website';
+import React from "react";
+import { Link, graphql } from "gatsby";
+import PropTypes from "prop-types";
+import styled from "react-emotion";
+import kebabCase from "lodash/kebabCase";
+import { darken } from "polished";
+import Helmet from "react-helmet";
+import { Layout } from "elements";
+import { Header } from "components";
+import { Container } from "styles/shared";
+import config from "../../config/website";
 
 const TagsContainer = styled.div`
   margin: 2rem 0 4rem 0;
@@ -36,8 +37,8 @@ const Number = styled.span`
 
 const Tags = ({
   data: {
-    allMarkdownRemark: { group },
-  },
+    allMarkdownRemark: { group }
+  }
 }) => (
   <Layout>
     <Helmet title={`Tags | ${config.siteTitle}`} />
@@ -62,14 +63,16 @@ Tags.propTypes = {
   data: PropTypes.shape({
     allMarkdownRemark: PropTypes.shape({
       group: PropTypes.array.isRequired,
-      edges: PropTypes.array.isRequired,
-    }),
-  }).isRequired,
+      edges: PropTypes.array.isRequired
+    })
+  }).isRequired
 };
 
 export const pageQuery = graphql`
   query TagsPage {
-    allMarkdownRemark(filter: { fields: { sourceInstanceName: { eq: "blog" } } }) {
+    allMarkdownRemark(
+      filter: { fields: { sourceInstanceName: { eq: "blog" } } }
+    ) {
       group(field: frontmatter___tags) {
         fieldValue
         totalCount

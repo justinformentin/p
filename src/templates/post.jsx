@@ -1,10 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled from "react-emotion";
-import { Link, graphql } from "gatsby";
-import { SEO, Container, Content, Line, Layout, PostItem } from "elements";
-import { InfoText } from "utilities";
-import { Centered } from 'styles/shared';
+import { graphql } from "gatsby";
+import { SEO, Content, Line, Layout, PostItem } from "elements";
+import { Centered, Container, InfoText } from 'styles/shared';
 import { Tags, Suggestions, Header } from "components";
 
 const Post = ({

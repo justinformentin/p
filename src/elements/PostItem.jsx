@@ -57,6 +57,4 @@ export const PostItem = ({ post, timeToRead, excerpt, chunk, path }) => (
   </>
 );
 
-export const PostWithExcerpt = ({ excerpt }) => {};
-
 export default PostItem;

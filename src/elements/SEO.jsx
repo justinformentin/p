@@ -2,8 +2,9 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
-import { cfl } from 'utilities';
 import config from '../../config/website';
+
+const cfl = string => string.charAt(0).toUpperCase() + string.slice(1)
 
 const SEO = props => {
   const { postNode, postPath, postSEO } = props;

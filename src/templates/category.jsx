@@ -3,9 +3,10 @@ import { Link, graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import styled from 'react-emotion';
 import Helmet from 'react-helmet';
-import { Container, Layout } from 'elements';
+import { Layout } from 'elements';
 import { Header, ItemTagCategory } from 'components';
 import config from '../../config/website';
+import { Container } from 'styles/shared'
 
 const StyledLink = styled(Link)`
   color: ${props => props.theme.colors.white.light};
@@ -22,7 +23,7 @@ const Category = ({
     <Header title={category}>
       <StyledLink to="/categories">All Categories</StyledLink>
     </Header>
-    <Container type="article">
+    <Container>
       {edges.map(edge => (
         <ItemTagCategory
           key={edge.node.frontmatter.title}

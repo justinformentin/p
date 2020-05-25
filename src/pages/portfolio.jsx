@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 import Helmet from 'react-helmet';
 import styled from 'react-emotion';
-import { Container, Layout } from 'elements';
+import { Layout } from 'elements';
 import { ProjectList, Header } from 'components';
 import config from '../../config/website';
+import { Container } from 'styles/shared'
 
 const Base = styled.div`
   column-gap: 2rem;
@@ -22,7 +23,7 @@ const Portfolio = ({
   <Layout>
     <Helmet title={`Portfolio | ${config.siteTitle}`} />
     <Header title="Portfolio" height="small" />
-    <Container type="big">
+    <Container>
       <Base>
         {edges.map(project => (
           <ProjectList

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Link, graphql } from "gatsby";
 import styled from "react-emotion";
 import { Container, Layout, PostItem } from "elements";
-import { Button } from "components";
+import { Button, Header } from "components";
 
 const MorePostsLink = styled(Link)`
   display: flex;
@@ -16,34 +16,30 @@ const PostWrapper = styled.div`
 
 const Index = ({
   data: {
-    // projects: { edges: projectEdges },
-    posts: { edges: postEdges },
+    posts: { edges: postEdges }
   }
 }) => (
   <Layout edges={postEdges}>
-        <Container>
-          {postEdges.map(post => {
-            return <PostWrapper>
-              <PostItem
-              key={post.node.frontmatter.title}
-              // date={post.node.frontmatter.date}
+    <Header title="Recent Posts" />
+    <Container>
+      {postEdges.map(post => {
+        return (
+          <PostWrapper key={post.node.frontmatter.title}>
+            <PostItem
               path={post.node.fields.slug}
-              // title={post.node.frontmatter.title}
-              // category={post.node.frontmatter.category}
-              // chunk={post.node.frontmatter.chunk}
-              // tags={post.node.frontmatter.tags}
-            post={post.node.frontmatter}
+              post={post.node.frontmatter}
               excerpt={post.node.excerpt}
-              timeToRead={'Time to read: ' + post.node.timeToRead}
+              timeToRead={"Time to read: " + post.node.timeToRead}
             />
-            </PostWrapper>
-          })}
-            <MorePostsLink to="/blog">
-              <Button large type="primary">
-                More Posts
-              </Button>
-            </MorePostsLink>
-        </Container>
+          </PostWrapper>
+        );
+      })}
+      <MorePostsLink to="/blog">
+        <Button large type="primary">
+          More Posts
+        </Button>
+      </MorePostsLink>
+    </Container>
   </Layout>
 );
 
@@ -76,23 +72,12 @@ export const pageQuery = graphql`
             chunk
             customer
             title
-            cover {
-              childImageSharp {
-                fluid(
-                  maxWidth: 1000
-                  quality: 90
-                  traceSVG: { color: "#2B2B2F" }
-                ) {
-                  ...GatsbyImageSharpFluid_withWebp_tracedSVG
-                }
-              }
-            }
           }
         }
       }
     }
     posts: allMarkdownRemark(
-      limit: 6
+      limit: 1
       sort: { fields: [frontmatter___date], order: DESC }
       filter: { fields: { sourceInstanceName: { eq: "blog" } } }
     ) {
@@ -108,9 +93,7 @@ export const pageQuery = graphql`
             title
             category
             tags
-            # date(formatString: "MM-DD-YYYY")
             date(formatString: "MMMM DD, YYYY")
-
           }
         }
       }

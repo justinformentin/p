@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import { Link, graphql } from 'gatsby';
 import styled from 'react-emotion';
 import Helmet from 'react-helmet';
-import { Container, Layout } from 'elements';
+import { Layout } from 'elements';
 import { Header, ItemTagCategory } from 'components';
+import { Container } from 'styles/shared'
+
 
 import config from '../../config/website';
 
@@ -23,7 +25,7 @@ const Tag = ({
     <Header title={tag}>
       <StyledLink to="/tags">All Tags</StyledLink>
     </Header>
-    <Container type="article">
+    <Container>
       {edges.map(edge => (
         <ItemTagCategory
           key={edge.node.frontmatter.title}

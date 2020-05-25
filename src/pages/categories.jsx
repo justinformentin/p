@@ -5,9 +5,10 @@ import styled from 'react-emotion';
 import kebabCase from 'lodash/kebabCase';
 import { darken } from 'polished';
 import Helmet from 'react-helmet';
-import { Container, Layout } from 'elements';
+import { Layout } from 'elements';
 import { Header } from 'components';
 import config from '../../config/website';
+import { Container } from 'styles/shared'
 
 const TagsContainer = styled.div`
   margin: 2rem 0 4rem 0;
