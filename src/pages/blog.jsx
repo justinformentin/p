@@ -24,7 +24,7 @@ const Blog = ({
     allMarkdownRemark: { edges },
   },
 }) => (
-  <Layout>
+  <Layout edges={edges}>
     <Helmet title={`Blog | ${config.siteTitle}`} />
     <Header
       big

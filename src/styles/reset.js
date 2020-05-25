@@ -8,6 +8,8 @@ const reset = css`
     box-sizing: inherit;
   }
   html {
+    height: 100vh;
+    overflow: auto;
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
     box-sizing: border-box;
@@ -45,8 +47,12 @@ const reset = css`
     }
   }
   body {
+    height: 100%;
     color: ${theme.colors.black.base};
     background-color: ${theme.colors.white.light};
+  }
+  #___gatsby{
+    height: 100%;
   }
   ::selection {
     color: ${theme.colors.white.base};
@@ -91,6 +97,9 @@ const reset = css`
   }
   [tabindex='-1']:focus {
     outline: none !important;
+  }
+  [tabindex='-1'] {
+    height: 100%;
   }
   pre {
     margin-top: 0;

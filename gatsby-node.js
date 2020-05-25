@@ -14,21 +14,10 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     const pathPrefix = pathPrefixes[fileNode.sourceInstanceName];
     if (
       Object.prototype.hasOwnProperty.call(node, 'frontmatter') &&
-      Object.prototype.hasOwnProperty.call(node.frontmatter, 'slug')
-    ) {
-      slug = `/${_.kebabCase(node.frontmatter.path)}`;
-    }
-    if (
-      Object.prototype.hasOwnProperty.call(node, 'frontmatter') &&
       Object.prototype.hasOwnProperty.call(node.frontmatter, 'title')
     ) {
       slug = `/${_.kebabCase(node.frontmatter.path)}`;
-    }
-    if (
-      Object.prototype.hasOwnProperty.call(node, 'frontmatter') &&
-      Object.prototype.hasOwnProperty.call(node.frontmatter, 'customer')
-    ) {
-      slug = `/${_.kebabCase(node.frontmatter.path)}`;
+      console.log('second if statemnet', slug)
     }
     createNodeField({ node, name: 'sourceInstanceName', value: fileNode.sourceInstanceName });
     createNodeField({ node, name: 'slug', value: `${pathPrefix}${slug}` });
@@ -118,7 +107,7 @@ exports.createPages = ({ graphql, actions }) => {
             categorySet.add(post.node.frontmatter.category);
           }
 
-          const filtered = _.filter(postsList, input => input.node.fields.slug !== post.node.fields.slug);
+          const filtered = postsList.filter(input => input.node.fields.slug !== post.node.fields.slug);
           const sample = _.sampleSize(filtered, 2);
           const left = sample[0].node;
           const right = sample[1].node;
@@ -135,7 +124,7 @@ exports.createPages = ({ graphql, actions }) => {
         });
 
         projectsList.forEach(project => {
-          const filtered = _.filter(projectsList, input => input.node.fields.slug !== project.node.fields.slug);
+          const filtered = projectsList.filter(input => input.node.fields.slug !== project.node.fields.slug);
           const sample = _.sampleSize(filtered, 2);
           const left = sample[0].node;
           const right = sample[1].node;

@@ -44,7 +44,6 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-emotion": "^9.2.3",
-    "react-headroom": "^2.2.2",
     "react-helmet": "^5.2.0",
     "react-transition-group": "^2.5.3",
     "react-typography": "^0.16.13",
@@ -55,15 +54,7 @@
     "typography": "^0.16.17"
   },
   "devDependencies": {
-    "babel-eslint": "^8.2.3",
     "babel-preset-env": "^1.7.0",
-    "eslint": "^4.19.1",
-    "eslint-config-airbnb": "^16.1.0",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-import": "^2.12.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-prettier": "^2.6.0",
-    "eslint-plugin-react": "^7.9.1",
     "prettier": "^1.13.5"
   },
   "keywords": [

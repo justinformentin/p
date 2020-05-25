@@ -46,12 +46,6 @@ const colors = {
   },
 };
 
-const header = {
-  small: '400px',
-  medium: '500px',
-  large: '650px',
-};
-
 const largeheader = {
   small: '400px',
   medium: '600px',
@@ -124,7 +118,6 @@ const transition = {
 const theme = {
   colors,
   tint,
-  header,
   largeheader,
   gradient,
   button,
@@ -160,9 +153,6 @@ const theme = {
       duration: transition.duration,
       timing: transition.easeOutBack,
       transition: `all ${transition.duration} ${transition.easeOutBack}`,
-    },
-    headroom: {
-      transition: 'all 0.25s ease-in-out',
     },
   },
 };

@@ -1,17 +1,18 @@
 /* eslint no-unused-expressions: 0 */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { injectGlobal } from 'emotion';
-import { ThemeProvider } from 'emotion-theming';
-import 'typeface-aileron';
-import 'typeface-open-sans';
-import { reset, headroom } from 'styles';
-import { SEO } from 'elements';
-import { Footer, Navigation } from 'components';
-import theme from '../../config/theme';
-import prism from '../styles/prism';
-import ScrollTop from './ScrollTop';
+import React from "react";
+import PropTypes from "prop-types";
+import { injectGlobal } from "emotion";
+import { ThemeProvider } from "emotion-theming";
+import styled from "react-emotion";
+import "typeface-aileron";
+import "typeface-open-sans";
+import { reset } from "styles";
+import { SEO } from "elements";
+import theme from "../../config/theme";
+import prism from "../styles/prism";
+import ScrollTop from "./ScrollTop";
+import { Sidebar } from "elements";
 // const prismstyles = require('../styles/prismstyles.js');
 
 injectGlobal`
@@ -35,17 +36,32 @@ injectGlobal`
   .gatsby-resp-iframe-wrapper {
     margin-bottom: 2rem;
   }
-  ${headroom}
 `;
 
-const Layout = ({ children }) => (
+const BodyContainer = styled.div`
+  height: 100%;
+  display: flex;
+`;
+
+const ChildrenContainer = styled.div`
+  height: 100%;
+  width: 83%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+`;
+
+const Layout = ({ edges, children }) => (
   <ThemeProvider theme={theme}>
     <React.Fragment>
       <SEO />
-      <Navigation />
-      {children}
-      <Footer />
-      <ScrollTop />
+      <BodyContainer>
+        <Sidebar edges={edges} />
+          <ChildrenContainer>
+            {children}
+          </ChildrenContainer>
+        <ScrollTop />
+      </BodyContainer>
     </React.Fragment>
   </ThemeProvider>
 );
@@ -53,5 +69,10 @@ const Layout = ({ children }) => (
 export default Layout;
 
 Layout.propTypes = {
-  children: PropTypes.any.isRequired,
+  edges: PropTypes.array,
+  children: PropTypes.any.isRequired
+};
+
+Layout.defaultProps = {
+  edges: []
 };

@@ -37,6 +37,6 @@ Even google.com has a 92/100 for desktop and 62/100 for mobile. Youtube has a 70
 
 Or you can build your site with React using Gatsby; this site was built with Gatsby and scores 100 in every single category of the Lighthouse Audit.
 
-![Pagespeed](../../projects/2018-10-30/speed.png)
+![Pagespeed](./pagespeed5.jpg)
 
 You can read my full guide on how to build a full site using Gatsby in [this article](https://justinformentin.com/guide-to-building-a-gatsby-site).
