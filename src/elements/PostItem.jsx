@@ -46,13 +46,15 @@ const PostTitle = ({ path, title }) =>
 export const PostItem = ({ post, timeToRead, excerpt, chunk, path }) => (
   <>
     <PostTitle path={path} title={post.title} />
-    <Information>
-      {post.date}
-      <LightLine>|</LightLine>
-      {timeToRead} Min.
-      <LightLine>|</LightLine>
-      <Link to={`/categories/${post.category}`}>{post.category}</Link>
-    </Information>
+    {timeToRead && (
+      <Information>
+        {post.date}
+        <LightLine>|</LightLine>
+        {timeToRead} Min.
+        <LightLine>|</LightLine>
+        <Link to={`/categories/${post.category}`}>{post.category}</Link>
+      </Information>
+    )}
     {(excerpt || chunk) && <SubText>{excerpt || chunk}</SubText>}
   </>
 );
