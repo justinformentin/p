@@ -1,15 +1,14 @@
-import React from 'react';
-import { Link, graphql } from 'gatsby';
-import PropTypes from 'prop-types';
-import styled from 'react-emotion';
-import kebabCase from 'lodash/kebabCase';
-import { darken } from 'polished';
-import Helmet from 'react-helmet';
-import { Layout } from 'elements';
-import { Header } from 'components';
-import config from '../../config/website';
-import { Container } from 'styles/shared'
-// import { useCodeCats, useGeneralCats } from 'utilities/hooks'
+import React from "react";
+import { Link, graphql } from "gatsby";
+import PropTypes from "prop-types";
+import styled from "react-emotion";
+import kebabCase from "lodash/kebabCase";
+import { darken } from "polished";
+import Helmet from "react-helmet";
+import { Layout } from "elements";
+import { Header } from "components";
+import config from "../../config/website";
+import { Container } from "styles/shared";
 
 const TagsContainer = styled.div`
   margin: 2rem 0 4rem 0;
@@ -39,33 +38,32 @@ const Number = styled.span`
 const Categories = ({
   data: {
     code: { group: codeGroup },
-    general: { group: generalGroup },
-  },
+    general: { group: generalGroup }
+  }
 }) => {
+  const allCats = [...codeGroup, ...generalGroup];
 
-
-    // const codeCats = useCodeCats();
-    // const generalCats = useGeneralCats();
-    // const allCats = [...codeCats, ...generalCats];
-    const allCats = [...codeGroup, ...generalGroup];
-
-
-  return (<Layout>
-    <Helmet title={`Categories | ${config.siteTitle}`} />
-    <Header title="Categories" />
-    <Container>
-      <TagsContainer>
-        {allCats.map(category => (
-          <Link key={category.fieldValue} to={`/categories/${kebabCase(category.fieldValue)}`}>
-            <span>
-              {category.fieldValue} <Number>{category.totalCount}</Number>
-            </span>
-          </Link>
-        ))}
-      </TagsContainer>
-    </Container>
-  </Layout>)
-}
+  return (
+    <Layout>
+      <Helmet title={`Categories | ${config.siteTitle}`} />
+      <Header title="Categories" />
+      <Container>
+        <TagsContainer>
+          {allCats.map(category => (
+            <Link
+              key={category.fieldValue}
+              to={`/categories/${kebabCase(category.fieldValue)}`}
+            >
+              <span>
+                {category.fieldValue} <Number>{category.totalCount}</Number>
+              </span>
+            </Link>
+          ))}
+        </TagsContainer>
+      </Container>
+    </Layout>
+  );
+};
 
 export default Categories;
 
@@ -73,14 +71,16 @@ Categories.propTypes = {
   data: PropTypes.shape({
     allMarkdownRemark: PropTypes.shape({
       group: PropTypes.array.isRequired,
-      edges: PropTypes.array.isRequired,
-    }),
-  }).isRequired,
+      edges: PropTypes.array.isRequired
+    })
+  }).isRequired
 };
 
 export const pageQuery = graphql`
   query CategoriesPage {
-    code: allMarkdownRemark(filter: { fields: { sourceInstanceName: { eq: "code" } } }) {
+    code: allMarkdownRemark(
+      filter: { fields: { sourceInstanceName: { eq: "code" } } }
+    ) {
       group(field: frontmatter___category) {
         fieldValue
         totalCount
@@ -91,7 +91,9 @@ export const pageQuery = graphql`
         }
       }
     }
-    general: allMarkdownRemark(filter: { fields: { sourceInstanceName: { eq: "general" } } }) {
+    general: allMarkdownRemark(
+      filter: { fields: { sourceInstanceName: { eq: "general" } } }
+    ) {
       group(field: frontmatter___category) {
         fieldValue
         totalCount

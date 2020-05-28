@@ -4,8 +4,7 @@ import styled from 'react-emotion';
 import { graphql } from 'gatsby';
 import { SEO, Content, Line, Layout } from 'elements';
 import { Suggestions, Button, Card, Header } from 'components';
-import { Container, InfoText } from 'styles/shared'
-
+import { Container, InfoText } from 'styles/shared';
 
 const H1 = styled.h1`
   color: #222;
@@ -54,21 +53,22 @@ const CardWrapper = styled.div`
   }
 `;
 
-const Project = ({ pageContext: { slug, left, right }, data: { markdownRemark: postNode } }) => {
+const Project = ({
+  pageContext: { slug, left, right },
+  data: { markdownRemark: postNode },
+}) => {
   const post = postNode.frontmatter;
   const { fluid } = post.cover.childImageSharp;
   if (!post.id) {
     post.id = slug;
   }
-  console.log('post.title', post.title)
+  console.log('post.title', post.title);
   return (
     <Layout>
       <SEO postPath={slug} postNode={postNode} postSEO />
       <Header>
-
-          <H1>{post.title}</H1>
-          <H2>{post.chunk}</H2>
-
+        <H1>{post.title}</H1>
+        <H2>{post.chunk}</H2>
       </Header>
       <Container>
         <CardWrapper>
@@ -122,7 +122,11 @@ export const pageQuery = graphql`
         time
         cover {
           childImageSharp {
-            fluid(maxWidth: 1920, quality: 90, duotone: { highlight: "#2f61a8", shadow: "#1a355b", opacity: 90 }) {
+            fluid(
+              maxWidth: 1920
+              quality: 90
+              duotone: { highlight: "#2f61a8", shadow: "#1a355b", opacity: 90 }
+            ) {
               ...GatsbyImageSharpFluid_withWebp
             }
             resize(width: 1200, quality: 90) {
