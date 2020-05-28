@@ -1,22 +1,65 @@
 ---
-title: "Your Code is not Self Documenting"
-path: "self-documenting-code"
-date: "2020-05-24"
+title: "Object Literals vs Switch Statements"
+path: "object-literal-vs-switch"
+date: "2020-05-26"
 category: "Advice"
 kind: "Article"
-chunk: "No, your code is not self-documenting. Yes, you need to write comments."
+chunk: "Object Literals vs Switch Statements"
 tags:
     - Coding
 ---
 
-Write comments. Write documentation. It's as simple as that. If anybody tells you their code is self documenting, they're mistaken. The people whose code truly is as close to self documenting as possible, are the types of people that wouldn't say that phrase. You'd have to be incredibly conceited to believe that your code is so amazing and clear that you don't need to write any comments at all, and everyone will just perfectly understand your code the firs time they read it. That phrase has almost turned into a joke, yet I still hear people say that their code is self document and mean it seriously.
+This post is not to argue the use of one over the other. As with pretty much everything related to programming, you should decide what syntax, structure, style, etc. to use that best fits your needs.
 
-I hear the argument: "Well, outdated comments are as good as useless" as if that's a good excuse to not write comments in the first place. No kidding outdated comments are useless. You need to update them. That would be like arguing against buying a plant because they die unless you water them. If you don't want to kill plants, your two options are to either not buy a plant in the first place, or to water the plant. There's no third option. Code and comments should be viewed the same way. And unless you're completely changing a function, even a slightly outdated comment will be more helpful than none at all.
+This post is just an overview of what's possible, because the more you know, the better equipped you'll be to make those decisions in the future.
 
-You will update your code in the future, that's almost guaranteed. While updating the code, you update the comment. That's it. It's like anything else- tests, documentation, etc. It's work that needs to be completed, and is part of the coding process. You don't complain about needing to write a function to make you app work, right? So you shouldn't complain about needing to write a comment on that function.
+### Switch
 
-And it's not just for you. Someone will read your code in the future, and they will inevitably need to re-read your "clean, self documenting code" multiple times to understand what you were doing. Even if you really are good about naming, structure, whatever, maybe the next person that comes along won't have as much experience as you, and they'll need help understanding that totally necessary, cool and efficient abstraction that you wrote. Have a little empathy. It doesn't matter how good you are at naming things, or how clear you think certain parts of the code are - what is obvious to you, and what is obvious to someone else are never the same.
+```js
+const numberCheck = numStr => {
+  switch(numStr) {
+   case("one"):
+     return "Its number one!"
+   case("two"):
+     return "Its number two!"
+   default:
+     return "Nothing"
+  }
+}
+```
+Switches are nice because it's easy to see what's going on- there are clear returns. You can use any complex logic, return functions, whatever you want and the structure won't get more complicated than that.
 
-And even if nobody else will ever read your code, there will be a time that you need to go back to old code. Maybe it's tomorrow, maybe next week, maybe next year, and maybe and you won't remember exactly what's going on in the code. And you will wish you had even a single line comment.
+### Object Literals
 
-If you're still not convinced, you should try one or both of these exercises. Go find someone else that claims their code is self documenting and task yourself with reading and understanding a portion of it. Or even better, post your code online and ask for critique.
+An object literal is just that.
+
+```js
+const obj = {
+'one': 'Its number one!',
+'two': 'Its number two!'
+}
+
+const two = obj.two
+// Its number two!
+```
+
+Let's turn it into a function
+
+```js
+const numberCheck = (numStr) => ({
+  'one': 'Its number one!',
+  'two': 'Its number two!'
+})[numStr]
+numberCheck('two')
+// 'Its number two!'
+```
+
+The array at the end is basically what you'd be doing by writing out the object like `obj[numStr]`, or think of it like the switch's `case` (but it isn't really).
+
+It's totally subjective, but I think object literals are a nice alternative for very simple switches. They're just more compact and look nicer, to me anyway. Of course, if you have a *really* simple switch/object literal, ifs are the way to go.
+
+One issue with object literals is as soon as you need to do more complicated lookups/returns, the code quickly becomes less readable.
+
+Again, this is all just opinion since the more tools you have at your disposal, the better. If something works for you, use it.
+
+To get another point of reference, check out an [article by Drew Hoover](https://spin.atomicobject.com/2016/11/06/switch-statements-object-literals/)

@@ -1,17 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
+import styled from "react-emotion";
+import theme from "../../config/theme";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleSidebar } from "../store/sidebar";
 import { injectGlobal } from "emotion";
 import { ThemeProvider } from "emotion-theming";
-import styled from "react-emotion";
+import { reset, prism } from "styles";
+import { SEO, Sidebar, ScrollTop } from "elements";
+import { Burger, Cross } from "icons";
 import "typeface-aileron";
 import "typeface-open-sans";
-import { reset } from "styles";
-import { SEO } from "elements";
-import theme from "../../config/theme";
-import prism from "../styles/prism";
-import ScrollTop from "./ScrollTop";
-import { Sidebar } from "elements";
-// const prismstyles = require('../styles/prismstyles.js');
 
 injectGlobal`
   ${reset}
@@ -43,27 +42,69 @@ const BodyContainer = styled.div`
 
 const ChildrenContainer = styled.div`
   height: 100%;
-  width: 83%;
+  width: ${props => (props.open ? "83%" : "98%")};
+  transition: width ease 0.3s;
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
   background: #f0f0f0;
 `;
 
-const Layout = ({ edges, children }) => (
-  <ThemeProvider theme={theme}>
-    <React.Fragment>
-      <SEO />
-      <BodyContainer>
-        <Sidebar edges={edges} />
-          <ChildrenContainer id="child-container">
+const BurgerContainer = styled.div`
+  transition: all ease 0.3s;
+  top: 0;
+  left: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: table;
+  z-index: 1100;
+  -webkit-transition: opacity 0.2s, margin 0.4s;
+  transition: opacity 0.2s, margin 0.4s;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+  text-align: center;
+  cursor: pointer;
+  &:hover {
+    opacity: 1;
+  }
+`;
+
+const BurgerWrap = styled.div`
+  display: table-cell;
+  vertical-align: middle;
+`;
+
+const Layout = ({ edges, children }) => {
+  const dispatch = useDispatch();
+  const { open } = useSelector(state => state.sidebar);
+
+  const toggleAction = () => {
+    dispatch(toggleSidebar(open ? false : true));
+  };
+
+  const SidebarButton = () => (
+    <BurgerContainer onClick={toggleAction} open={open}>
+      <BurgerWrap>{open ? <Cross /> : <Burger />}</BurgerWrap>
+    </BurgerContainer>
+  );
+
+  return (
+    <ThemeProvider theme={theme}>
+      <>
+        <SEO />
+        <BodyContainer>
+          <Sidebar edges={edges} open={open} />
+          <ChildrenContainer id="child-container" open={open}>
+            <SidebarButton />
             {children}
             <ScrollTop />
           </ChildrenContainer>
-      </BodyContainer>
-    </React.Fragment>
-  </ThemeProvider>
-);
+        </BodyContainer>
+      </>
+    </ThemeProvider>
+  );
+};
 
 export default Layout;
 

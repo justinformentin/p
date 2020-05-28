@@ -14,12 +14,6 @@ module.exports = {
     "gatsby-plugin-emotion",
     "gatsby-plugin-favicon",
     {
-      resolve: "gatsby-plugin-transition-link",
-      options: {
-        layout: require.resolve(`./src/elements/Layout.jsx`)
-      }
-    },
-    {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "code",
