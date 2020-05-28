@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 // import PropTypes from "prop-types";
-import styled from "react-emotion";
-import { Link } from "gatsby";
+import styled from 'react-emotion';
+import { Link } from 'gatsby';
 
 const Information = styled.div`
   font-family: ${props => props.theme.fontFamily.heading};

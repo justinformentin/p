@@ -1,16 +1,16 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styled from "react-emotion";
-import theme from "../../config/theme";
-import { useSelector, useDispatch } from "react-redux";
-import { toggleSidebar } from "../store/sidebar";
-import { injectGlobal } from "emotion";
-import { ThemeProvider } from "emotion-theming";
-import { reset, prism } from "styles";
-import { SEO, Sidebar, ScrollTop } from "elements";
-import { Burger, Cross } from "icons";
-import "typeface-aileron";
-import "typeface-open-sans";
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'react-emotion';
+import theme from '../../config/theme';
+import { useSelector, useDispatch } from 'react-redux';
+import { toggleSidebar } from '../store/sidebar';
+import { injectGlobal } from 'emotion';
+import { ThemeProvider } from 'emotion-theming';
+import { reset, prism } from 'styles';
+import { SEO, Sidebar, ScrollTop } from 'elements';
+import { Burger, Cross } from 'icons';
+import 'typeface-aileron';
+import 'typeface-open-sans';
 
 injectGlobal`
   ${reset}
@@ -42,7 +42,7 @@ const BodyContainer = styled.div`
 
 const ChildrenContainer = styled.div`
   height: 100%;
-  width: ${props => (props.open ? "83%" : "98%")};
+  width: ${props => (props.open ? '83%' : '98%')};
   transition: width ease 0.3s;
   display: flex;
   flex-direction: column;
@@ -110,9 +110,9 @@ export default Layout;
 
 Layout.propTypes = {
   edges: PropTypes.array,
-  children: PropTypes.any.isRequired
+  children: PropTypes.any.isRequired,
 };
 
 Layout.defaultProps = {
-  edges: []
+  edges: [],
 };

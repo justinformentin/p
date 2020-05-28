@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Link, graphql } from "gatsby";
-import styled from "react-emotion";
-import { Container, Layout, PostItem } from "elements";
-import { Button, Header } from "components";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link, graphql } from 'gatsby';
+import styled from 'react-emotion';
+import { Container, Layout, PostItem } from 'elements';
+import { Button, Header } from 'components';
 
 const MorePostsLink = styled(Link)`
   display: flex;
@@ -64,7 +64,7 @@ const ColumnItem = (name, arr) => (
                 path={node.fields.slug}
                 post={node.frontmatter}
                 excerpt={node.excerpt}
-                timeToRead={"Time to read: " + node.timeToRead}
+                timeToRead={'Time to read: ' + node.timeToRead}
               />
             </PostWrapper>
           </Column>
@@ -76,13 +76,13 @@ const ColumnItem = (name, arr) => (
 const Index = ({
   data: {
     code: { edges: codeEdges },
-    general: { edges: generalEdges }
-  }
+    general: { edges: generalEdges },
+  },
 }) => {
   const findArticle = edges =>
-    edges.find(item => item.node.frontmatter.kind === "Article");
+    edges.find(item => item.node.frontmatter.kind === 'Article');
   const findRandom = edges =>
-    edges.find(item => item.node.frontmatter.kind === "Random");
+    edges.find(item => item.node.frontmatter.kind === 'Random');
   const code = [findArticle(codeEdges), findRandom(codeEdges)];
   const general = [findArticle(generalEdges), findRandom(generalEdges)];
 
@@ -93,10 +93,10 @@ const Index = ({
         <RowWrapper>
           {/* <ColumnTitle>Code</ColumnTitle> */}
 
-          {ColumnItem("Code", code)}
+          {ColumnItem('Code', code)}
           {/* <ColumnTitle>Everything Else</ColumnTitle> */}
 
-          {ColumnItem("Everything Else", general)}
+          {ColumnItem('Everything Else', general)}
         </RowWrapper>
         <MorePostsLink to="/blog">
           <Button large type="primary">
@@ -113,15 +113,15 @@ export default Index;
 Index.propTypes = {
   data: PropTypes.shape({
     projects: PropTypes.shape({
-      edges: PropTypes.array.isRequired
+      edges: PropTypes.array.isRequired,
     }),
     code: PropTypes.shape({
-      edges: PropTypes.array.isRequired
+      edges: PropTypes.array.isRequired,
     }),
     general: PropTypes.shape({
-      edges: PropTypes.array.isRequired
-    })
-  }).isRequired
+      edges: PropTypes.array.isRequired,
+    }),
+  }).isRequired,
 };
 
 export const pageQuery = graphql`

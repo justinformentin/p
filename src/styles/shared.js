@@ -1,4 +1,4 @@
-import styled from "react-emotion";
+import styled from 'react-emotion';
 
 export const Centered = styled.div`
   display: flex;
@@ -8,7 +8,7 @@ export const Centered = styled.div`
 `;
 
 export const Container = styled.div`
-  padding: ${props => (props.small ? "2rem 5rem" : "2rem 10rem")};
+  padding: ${props => (props.small ? '2rem 5rem' : '2rem 10rem')};
 `;
 
 export const InfoText = styled.div`

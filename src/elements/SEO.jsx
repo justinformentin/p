@@ -1,8 +1,8 @@
 /* eslint-disable react/require-default-props */
-import React from "react";
-import Helmet from "react-helmet";
-import PropTypes from "prop-types";
-import config from "../../config/website";
+import React from 'react';
+import Helmet from 'react-helmet';
+import PropTypes from 'prop-types';
+import config from '../../config/website';
 
 const cfl = string => string.charAt(0).toUpperCase() + string.slice(1);
 
@@ -27,47 +27,47 @@ const SEO = props => {
     description = config.siteDescription;
     image = config.siteBanner;
   }
-  const realPrefix = config.pathPrefix === "/" ? "" : config.pathPrefix;
+  const realPrefix = config.pathPrefix === '/' ? '' : config.pathPrefix;
   image = config.siteUrl + realPrefix + image;
   const blogURL = config.siteUrl + config.pathPrefix;
   const schemaOrgJSONLD = [
     {
-      "@context": "http://schema.org",
-      "@type": "WebSite",
+      '@context': 'http://schema.org',
+      '@type': 'WebSite',
       url: blogURL,
       name: title,
-      alternateName: config.siteTitleAlt ? config.siteTitleAlt : ""
-    }
+      alternateName: config.siteTitleAlt ? config.siteTitleAlt : '',
+    },
   ];
   if (postSEO) {
     schemaOrgJSONLD.push(
       {
-        "@context": "http://schema.org",
-        "@type": "BreadcrumbList",
+        '@context': 'http://schema.org',
+        '@type': 'BreadcrumbList',
         itemListElement: [
           {
-            "@type": "ListItem",
+            '@type': 'ListItem',
             position: 1,
             item: {
-              "@id": postURL,
+              '@id': postURL,
               name: title,
-              image
-            }
-          }
-        ]
+              image,
+            },
+          },
+        ],
       },
       {
-        "@context": "http://schema.org",
-        "@type": "BlogPosting",
+        '@context': 'http://schema.org',
+        '@type': 'BlogPosting',
         url: blogURL,
         name: title,
         alternateName: config.siteTitleAlt,
         headline: title,
         image: {
-          "@type": "ImageObject",
-          url: image
+          '@type': 'ImageObject',
+          url: image,
         },
-        description
+        description,
       }
     );
   }
@@ -129,5 +129,5 @@ export default SEO;
 SEO.propTypes = {
   postNode: PropTypes.object,
   postPath: PropTypes.string,
-  postSEO: PropTypes.bool
+  postSEO: PropTypes.bool,
 };

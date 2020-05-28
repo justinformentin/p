@@ -1,13 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { graphql } from "gatsby";
-import { SEO, Content, Line, Layout, PostItem } from "elements";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { graphql } from 'gatsby';
+import { SEO, Content, Line, Layout, PostItem } from 'elements';
 import { Centered, Container, InfoText } from 'styles/shared';
-import { Tags, Suggestions, Header } from "components";
+import { Tags, Suggestions, Header } from 'components';
 
 const Post = ({
   pageContext: { slug, left, right },
-  data: { markdownRemark: postNode }
+  data: { markdownRemark: postNode },
 }) => {
   const post = postNode.frontmatter;
   if (!post.id) {
@@ -37,11 +37,11 @@ export default Post;
 
 Post.propTypes = {
   pageContext: PropTypes.shape({
-    slug: PropTypes.string.isRequired
+    slug: PropTypes.string.isRequired,
   }).isRequired,
   data: PropTypes.shape({
-    markdownRemark: PropTypes.object.isRequired
-  }).isRequired
+    markdownRemark: PropTypes.object.isRequired,
+  }).isRequired,
 };
 
 export const pageQuery = graphql`

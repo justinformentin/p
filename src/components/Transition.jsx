@@ -1,5 +1,8 @@
 import React, { PureComponent } from 'react';
-import { TransitionGroup, Transition as ReactTransition } from 'react-transition-group';
+import {
+  TransitionGroup,
+  Transition as ReactTransition,
+} from 'react-transition-group';
 import PropTypes from 'prop-types';
 
 const timeout = 500;

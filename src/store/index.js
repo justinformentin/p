@@ -1,5 +1,5 @@
-import { createStore, combineReducers } from "redux";
-import sidebar from "./sidebar";
+import { createStore, combineReducers } from 'redux';
+import sidebar from './sidebar';
 
 const rootReducer = combineReducers({ sidebar });
 

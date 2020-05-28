@@ -42,7 +42,8 @@ const ItemTagCategory = ({ category, path, title, date, excerpt }) => (
         <h1>{title}</h1>
       </Link>
       <Statistics>
-        {date} | Category: <Link to={`/categories/${kebabCase(category)}`}>{category}</Link>
+        {date} | Category:{' '}
+        <Link to={`/categories/${kebabCase(category)}`}>{category}</Link>
       </Statistics>
       <Excerpt>{excerpt}</Excerpt>
     </Information>

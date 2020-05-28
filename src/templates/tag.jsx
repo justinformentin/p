@@ -5,8 +5,7 @@ import styled from 'react-emotion';
 import Helmet from 'react-helmet';
 import { Layout } from 'elements';
 import { Header, ItemTagCategory } from 'components';
-import { Container } from 'styles/shared'
-
+import { Container } from 'styles/shared';
 
 import config from '../../config/website';
 

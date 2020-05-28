@@ -1,54 +1,54 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
 export const ScrollTop = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   const handleScroll = () => {
-    const el = document.querySelector("#child-container");
-    setIsScrolled(el.scrollTop > 450)
+    const el = document.querySelector('#child-container');
+    setIsScrolled(el.scrollTop > 450);
   };
 
   const scrollUp = () => {
-    const el = document.querySelector("#child-container");
+    const el = document.querySelector('#child-container');
     el.scrollTop = 0;
-    setIsScrolled(false)
-  }
+    setIsScrolled(false);
+  };
 
   useEffect(() => {
-    const el = document.querySelector("#child-container");
-    el.addEventListener("scroll", handleScroll);
-    return () => el.removeEventListener("scroll", handleScroll);
+    const el = document.querySelector('#child-container');
+    el.addEventListener('scroll', handleScroll);
+    return () => el.removeEventListener('scroll', handleScroll);
   }, []);
 
   const styles = {
     MainStyle: {
-      backgroundColor: "rgba(50, 50, 50, 0.5)",
-      boxShadow: "3px 3px 10px rgba(0, 0, 0, 0.4)",
-      borderRadius: "10px",
+      backgroundColor: 'rgba(50, 50, 50, 0.5)',
+      boxShadow: '3px 3px 10px rgba(0, 0, 0, 0.4)',
+      borderRadius: '10px',
       height: 50,
-      position: "fixed",
+      position: 'fixed',
       bottom: 20,
       width: 50,
-      WebkitTransition: "all 0.5s ease-in-out",
-      transition: "all 0.5s ease-in-out",
-      transitionProperty: "opacity, right",
-      cursor: "pointer",
+      WebkitTransition: 'all 0.5s ease-in-out',
+      transition: 'all 0.5s ease-in-out',
+      transitionProperty: 'opacity, right',
+      cursor: 'pointer',
       opacity: 0,
       right: -50,
-      zIndex: 1000
+      zIndex: 1000,
     },
     SvgStyle: {
-      display: "inline-block",
-      width: "100%",
-      height: "100%",
+      display: 'inline-block',
+      width: '100%',
+      height: '100%',
       strokeWidth: 0,
-      stroke: "white",
-      fill: "white"
+      stroke: 'white',
+      fill: 'white',
     },
     ToggledStyle: {
       opacity: 1,
-      right: 20
-    }
+      right: 20,
+    },
   };
 
   return (
@@ -59,7 +59,7 @@ export const ScrollTop = () => {
       data-testid="react-scroll-up-button"
       style={{
         ...styles.MainStyle,
-        ...(isScrolled && styles.ToggledStyle)
+        ...(isScrolled && styles.ToggledStyle),
       }}
       onClick={scrollUp}
       onKeyPress={scrollUp}

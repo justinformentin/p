@@ -5,7 +5,7 @@ import Helmet from 'react-helmet';
 import { Layout } from 'elements';
 import { Header, ItemTagCategory } from 'components';
 import config from '../../config/website';
-import { Container } from 'styles/shared'
+import { Container } from 'styles/shared';
 
 const Category = ({
   pageContext: { category },

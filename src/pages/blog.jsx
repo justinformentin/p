@@ -1,12 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { graphql } from "gatsby";
-import Helmet from "react-helmet";
-import styled from "react-emotion";
-import { Layout, PostItem } from "elements";
-import { Container } from "styles/shared";
-import { Header } from "components";
-import config from "../../config/website";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { graphql } from 'gatsby';
+import Helmet from 'react-helmet';
+import styled from 'react-emotion';
+import { Layout, PostItem } from 'elements';
+import { Container } from 'styles/shared';
+import { Header } from 'components';
+import config from '../../config/website';
 
 const Base = styled.div`
   display: flex;
@@ -14,7 +14,7 @@ const Base = styled.div`
   justify-content: space-between;
   margin: 0 auto;
   &::after {
-    content: "";
+    content: '';
     flex: 0 0 32%;
   }
 `;
@@ -62,15 +62,15 @@ const PostWrapper = styled.div`
 const Blog = ({
   data: {
     code: { edges: codeEdges },
-    general: { edges: generalEdges }
-  }
+    general: { edges: generalEdges },
+  },
 }) => {
   const allEdges = [...codeEdges, ...generalEdges];
-  const sortedEdges = allEdges.sort((a,b) => {
+  const sortedEdges = allEdges.sort((a, b) => {
     const ae = new Date(a.node.frontmatter.date);
     const be = new Date(b.node.frontmatter.date);
-    return ae < be ? 1 : ae > be ? -1 : 0
-  })
+    return ae < be ? 1 : ae > be ? -1 : 0;
+  });
   return (
     <Layout>
       <Helmet title={`Blog | ${config.siteTitle}`} />
@@ -98,9 +98,9 @@ export default Blog;
 Blog.propTypes = {
   data: PropTypes.shape({
     allMarkdownRemark: PropTypes.shape({
-      edges: PropTypes.array.isRequired
-    })
-  }).isRequired
+      edges: PropTypes.array.isRequired,
+    }),
+  }).isRequired,
 };
 
 export const pageQuery = graphql`

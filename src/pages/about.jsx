@@ -1,12 +1,12 @@
 /* eslint max-len: 0 */
 
-import React from "react";
-import Helmet from "react-helmet";
-import styled from "react-emotion";
-import { Layout } from "elements";
-import { Header } from "components";
-import config from "../../config/website";
-import { Container } from 'styles/shared'
+import React from 'react';
+import Helmet from 'react-helmet';
+import styled from 'react-emotion';
+import { Layout } from 'elements';
+import { Header } from 'components';
+import config from '../../config/website';
+import { Container } from 'styles/shared';
 
 const Wrapper = styled.div`
   margin: 0 auto;

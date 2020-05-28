@@ -1,12 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { graphql } from "gatsby";
-import Helmet from "react-helmet";
-import styled from "react-emotion";
-import { Layout, PostItem } from "elements";
-import { Container } from 'styles/shared'
-import { Header } from "components";
-import config from "../../config/website";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { graphql } from 'gatsby';
+import Helmet from 'react-helmet';
+import styled from 'react-emotion';
+import { Layout, PostItem } from 'elements';
+import { Container } from 'styles/shared';
+import { Header } from 'components';
+import config from '../../config/website';
 
 const Base = styled.div`
   display: flex;
@@ -14,7 +14,7 @@ const Base = styled.div`
   justify-content: space-between;
   margin: 0 auto;
   &::after {
-    content: "";
+    content: '';
     flex: 0 0 32%;
   }
 `;
@@ -61,8 +61,8 @@ const PostWrapper = styled.div`
 
 const General = ({
   data: {
-    allMarkdownRemark: { edges }
-  }
+    allMarkdownRemark: { edges },
+  },
 }) => (
   <Layout>
     <Helmet title={`General | ${config.siteTitle}`} />
@@ -89,9 +89,9 @@ export default General;
 General.propTypes = {
   data: PropTypes.shape({
     allMarkdownRemark: PropTypes.shape({
-      edges: PropTypes.array.isRequired
-    })
-  }).isRequired
+      edges: PropTypes.array.isRequired,
+    }),
+  }).isRequired,
 };
 
 export const pageQuery = graphql`

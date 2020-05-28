@@ -1,14 +1,14 @@
-import React from "react";
-import { Link, graphql } from "gatsby";
-import PropTypes from "prop-types";
-import styled from "react-emotion";
-import kebabCase from "lodash/kebabCase";
-import { darken } from "polished";
-import Helmet from "react-helmet";
-import { Layout } from "elements";
-import { Header } from "components";
-import config from "../../config/website";
-import { Container } from "styles/shared";
+import React from 'react';
+import { Link, graphql } from 'gatsby';
+import PropTypes from 'prop-types';
+import styled from 'react-emotion';
+import kebabCase from 'lodash/kebabCase';
+import { darken } from 'polished';
+import Helmet from 'react-helmet';
+import { Layout } from 'elements';
+import { Header } from 'components';
+import config from '../../config/website';
+import { Container } from 'styles/shared';
 
 const TagsContainer = styled.div`
   margin: 2rem 0 4rem 0;
@@ -38,8 +38,8 @@ const Number = styled.span`
 const Categories = ({
   data: {
     code: { group: codeGroup },
-    general: { group: generalGroup }
-  }
+    general: { group: generalGroup },
+  },
 }) => {
   const allCats = [...codeGroup, ...generalGroup];
 
@@ -71,9 +71,9 @@ Categories.propTypes = {
   data: PropTypes.shape({
     allMarkdownRemark: PropTypes.shape({
       group: PropTypes.array.isRequired,
-      edges: PropTypes.array.isRequired
-    })
-  }).isRequired
+      edges: PropTypes.array.isRequired,
+    }),
+  }).isRequired,
 };
 
 export const pageQuery = graphql`

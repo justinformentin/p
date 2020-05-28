@@ -44,5 +44,5 @@ Header.propTypes = {
 Header.defaultProps = {
   big: false,
   children: false,
-  title: null
+  title: null,
 };

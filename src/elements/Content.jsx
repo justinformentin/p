@@ -4,7 +4,6 @@ import styled from 'react-emotion';
 // import { prism } from 'styles';
 
 const Wrapper = styled.div`
-
   p,
   li {
     letter-spacing: -0.003em;
@@ -81,7 +80,9 @@ const Wrapper = styled.div`
   }
 `;
 
-const Content = ({ input }) => <Wrapper dangerouslySetInnerHTML={{ __html: input }} />;
+const Content = ({ input }) => (
+  <Wrapper dangerouslySetInnerHTML={{ __html: input }} />
+);
 
 export default Content;
 

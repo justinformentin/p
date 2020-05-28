@@ -6,7 +6,7 @@ import styled from 'react-emotion';
 import { Layout } from 'elements';
 import { ProjectList, Header } from 'components';
 import config from '../../config/website';
-import { Container } from 'styles/shared'
+import { Container } from 'styles/shared';
 
 const Base = styled.div`
   column-gap: 2rem;
@@ -64,7 +64,11 @@ export const pageQuery = graphql`
             title
             cover {
               childImageSharp {
-                fluid(maxWidth: 900, quality: 90, traceSVG: { color: "#2B2B2F" }) {
+                fluid(
+                  maxWidth: 900
+                  quality: 90
+                  traceSVG: { color: "#2B2B2F" }
+                ) {
                   ...GatsbyImageSharpFluid_withWebp_tracedSVG
                 }
               }
