@@ -1,7 +1,7 @@
 /* eslint max-len: 0 */
 
 import React from 'react';
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import styled from 'react-emotion';
 import { Layout } from 'elements';
 import { Header } from 'components';

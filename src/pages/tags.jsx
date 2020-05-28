@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'react-emotion';
 import kebabCase from 'lodash/kebabCase';
 import { darken } from 'polished';
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import { Layout } from 'elements';
 import { Header } from 'components';
 import { Container } from 'styles/shared';

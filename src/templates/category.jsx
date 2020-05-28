@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, graphql } from 'gatsby';
 import PropTypes from 'prop-types';
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import { Layout } from 'elements';
 import { Header, ItemTagCategory } from 'components';
 import config from '../../config/website';

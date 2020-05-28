@@ -17,6 +17,8 @@ const SidebarContainer = styled.div`
 const Wrapper = styled.header`
   position: relative;
   display: ${props => (props.open ? 'block' : 'none')};
+  opacity: ${props => (props.open ? '1' : '0')};
+  transition: all ease 0.3s;
 `;
 
 const Text = styled.div`

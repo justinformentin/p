@@ -22,7 +22,7 @@ const Post = ({
           <PostItem post={post} timeToRead={postNode.timeToRead} />
         </Centered>
       </Header>
-      <Container pt3 type="article">
+      <Container>
         <Content input={postNode.html} />
         <Line aria-hidden="true" />
         <Tags center tags={post.tags} />

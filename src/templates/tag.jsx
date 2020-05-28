@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, graphql } from 'gatsby';
 import styled from 'react-emotion';
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import { Layout } from 'elements';
 import { Header, ItemTagCategory } from 'components';
 import { Container } from 'styles/shared';

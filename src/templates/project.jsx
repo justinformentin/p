@@ -58,7 +58,7 @@ const Project = ({
   data: { markdownRemark: postNode },
 }) => {
   const post = postNode.frontmatter;
-  const { fluid } = post.cover.childImageSharp;
+  // const { fluid } = post.cover.childImageSharp;
   if (!post.id) {
     post.id = slug;
   }
