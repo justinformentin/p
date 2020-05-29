@@ -9,6 +9,7 @@ import { ThemeProvider } from 'emotion-theming';
 import { reset, prism } from 'styles';
 import { SEO, Sidebar, ScrollTop } from 'elements';
 import { Burger, Cross } from 'icons';
+import { useCurrentWidth } from 'hooks/useCurrentWidth';
 import 'typeface-aileron';
 import 'typeface-open-sans';
 
@@ -42,32 +43,32 @@ const BodyContainer = styled.div`
 
 const ChildrenContainer = styled.div`
   height: 100%;
-  width: ${props => (props.open ? '83%' : '98%')};
   transition: width ease 0.3s;
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
   background: #f0f0f0;
+  width: ${props => (props.open ? '83%' : '98%')};
+  @media (max-width: 850px) {
+    width: ${props => (props.open ? '0%' : '98%')};
+  }
 `;
 
 const BurgerContainer = styled.div`
-  transition: all ease 0.3s;
-  top: 0;
-  left: 0;
-  width: 2.5rem;
-  height: 2.5rem;
-  display: table;
   z-index: 1100;
-  -webkit-transition: opacity 0.2s, margin 0.4s;
-  transition: opacity 0.2s, margin 0.4s;
-  padding-left: 0;
-  margin-bottom: 0;
-  list-style: none;
-  text-align: center;
   cursor: pointer;
   &:hover {
     opacity: 1;
   }
+  margin-right: ${props => (props.mobile && props.open ? '0' : '1rem')};
+  ${props =>
+    props.mobile
+      ? `
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+      `
+      : ` margin: 0.75rem 0 0 1rem;`};
 `;
 
 const BurgerWrap = styled.div`
@@ -75,17 +76,21 @@ const BurgerWrap = styled.div`
   vertical-align: middle;
 `;
 
-const Layout = ({ edges, children }) => {
+const Layout = ({ children }) => {
   const dispatch = useDispatch();
   const { open } = useSelector(state => state.sidebar);
 
-  const toggleAction = () => {
-    dispatch(toggleSidebar(open ? false : true));
-  };
+  let width = useCurrentWidth();
 
-  const SidebarButton = () => (
-    <BurgerContainer onClick={toggleAction} open={open}>
-      <BurgerWrap>{open ? <Cross /> : <Burger />}</BurgerWrap>
+  React.useEffect(() => {
+    width < 850 && dispatch(toggleSidebar(false));
+  }, []);
+
+  const toggleAction = () => dispatch(toggleSidebar(open ? false : true));
+
+  const SidebarButton = ({ mobile }) => (
+    <BurgerContainer mobile={mobile} open={open} onClick={toggleAction}>
+      <BurgerWrap>{open ? <Cross mobile={mobile} /> : <Burger />}</BurgerWrap>
     </BurgerContainer>
   );
 
@@ -94,9 +99,10 @@ const Layout = ({ edges, children }) => {
       <>
         <SEO />
         <BodyContainer>
-          <Sidebar edges={edges} open={open} />
+          <Sidebar open={open} />
+          {width < 850 && <SidebarButton mobile={true} />}
           <ChildrenContainer id="child-container" open={open}>
-            <SidebarButton />
+            {width > 850 && <SidebarButton mobile={false} />}
             {children}
             <ScrollTop />
           </ChildrenContainer>
@@ -109,10 +115,5 @@ const Layout = ({ edges, children }) => {
 export default Layout;
 
 Layout.propTypes = {
-  edges: PropTypes.array,
   children: PropTypes.any.isRequired,
-};
-
-Layout.defaultProps = {
-  edges: [],
 };

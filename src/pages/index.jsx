@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, graphql } from 'gatsby';
 import styled from 'react-emotion';
-import { Container, Layout, PostItem } from 'elements';
+import { Layout, PostItem } from 'elements';
 import { Button, Header } from 'components';
+import { Container } from 'styles/shared';
 
 const MorePostsLink = styled(Link)`
   display: flex;
@@ -32,46 +33,45 @@ const Column = styled.div`
   flex-direction: column;
 `;
 
-const ColumnTitle = styled.h3`
-  margin-bottom: 0.5rem;
+const PostKindContainer = styled.div`
   display: flex;
 `;
 
 const PostKindWrapper = styled.div`
-  margin-bottom: 0.5rem;
+  margin: 0 0.5rem 0.75rem 0;
 `;
 
-const PostKind = styled.div`
+const PostCat = styled.div`
   display: inline;
-  background: grey;
+  background: ${props => (props.kind === 'Code' ? '#2c5a9c' : '#1c3b66')};
   border-radius: 5px;
   color: white;
   padding: 0.25rem;
   font-size: 0.7rem;
 `;
+
 const ColumnItem = (name, arr) => (
-  <>
-    <ColumnTitle>{name}</ColumnTitle>
-    <Row>
-      {arr.map(({ node }) => (
-        <React.Fragment key={node.frontmatter.title}>
-          <Column className="column-container">
-            <PostKindWrapper>
-              <PostKind>{node.frontmatter.kind}</PostKind>
-            </PostKindWrapper>
-            <PostWrapper>
-              <PostItem
-                path={node.fields.slug}
-                post={node.frontmatter}
-                excerpt={node.excerpt}
-                timeToRead={'Time to read: ' + node.timeToRead}
-              />
-            </PostWrapper>
-          </Column>
-        </React.Fragment>
-      ))}
-    </Row>
-  </>
+  <Row>
+    {arr.map(({ node }) => (
+      <Column className="column-container" key={node.frontmatter.title}>
+        <PostKindContainer>
+          <PostKindWrapper>
+            <Link to={`/${name.toLowerCase()}`}>
+              <PostCat kind={name}>{name}</PostCat>
+            </Link>
+          </PostKindWrapper>
+        </PostKindContainer>
+        <PostWrapper>
+          <PostItem
+            path={node.fields.slug}
+            post={node.frontmatter}
+            excerpt={node.excerpt}
+            timeToRead={'Time to read: ' + node.timeToRead}
+          />
+        </PostWrapper>
+      </Column>
+    ))}
+  </Row>
 );
 const Index = ({
   data: {
@@ -91,17 +91,11 @@ const Index = ({
       <Header title="Recent Posts" />
       <Container>
         <RowWrapper>
-          {/* <ColumnTitle>Code</ColumnTitle> */}
-
           {ColumnItem('Code', code)}
-          {/* <ColumnTitle>Everything Else</ColumnTitle> */}
-
-          {ColumnItem('Everything Else', general)}
+          {ColumnItem('General', general)}
         </RowWrapper>
         <MorePostsLink to="/blog">
-          <Button large type="primary">
-            More Posts
-          </Button>
+          <Button type="primary">More Posts</Button>
         </MorePostsLink>
       </Container>
     </Layout>
@@ -137,7 +131,7 @@ export const pageQuery = graphql`
             slug
           }
           timeToRead
-          excerpt(pruneLength: 200)
+          excerpt(pruneLength: 100)
           frontmatter {
             kind
             chunk
@@ -160,7 +154,7 @@ export const pageQuery = graphql`
             slug
           }
           timeToRead
-          excerpt(pruneLength: 200)
+          excerpt(pruneLength: 100)
           frontmatter {
             kind
             chunk

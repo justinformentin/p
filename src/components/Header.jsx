@@ -2,8 +2,7 @@ import React from 'react';
 import styled from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const Wrapper = styled.header`
-  padding: 1.5rem;
+const HeaderWrapper = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,26 +10,29 @@ const Wrapper = styled.header`
   background: transparent;
 `;
 
-const Text = styled.div`
+const HeaderText = styled.div`
   color: #111;
   z-index: 10;
   text-align: center;
   & h2 {
     margin-bottom: 0;
   }
+  @media (max-width: 850px) {
+    margin-top: 1rem;
+  }
 `;
 
-const Subtitle = styled.div`
+const HeaderSubtitle = styled.div`
   margin: 0;
 `;
 
 const Header = ({ children, title }) => (
-  <Wrapper>
-    <Text>
+  <HeaderWrapper>
+    <HeaderText>
       {title && <h2>{title}</h2>}
-      {children && <Subtitle>{children}</Subtitle>}
-    </Text>
-  </Wrapper>
+      {children && <HeaderSubtitle>{children}</HeaderSubtitle>}
+    </HeaderText>
+  </HeaderWrapper>
 );
 
 export default Header;

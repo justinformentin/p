@@ -9,6 +9,12 @@ export const Centered = styled.div`
 
 export const Container = styled.div`
   padding: ${props => (props.small ? '2rem 5rem' : '2rem 10rem')};
+  @media (max-width: 1200px) {
+   padding: 2rem 4rem;
+  }
+  @media (max-width: 600px) {
+    padding: 2rem 2rem;
+   }
 `;
 
 export const InfoText = styled.div`

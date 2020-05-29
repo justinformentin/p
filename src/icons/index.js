@@ -47,7 +47,7 @@ export const Burger = () => (
   </svg>
 );
 
-export const Cross = () => (
+export const Cross = ({ mobile }) => (
   <svg height="25" width="25" viewBox="0 0 64 64">
     <line
       x1="9.37"
@@ -55,7 +55,7 @@ export const Cross = () => (
       y1="9.37"
       y2="54.63"
       fill="none"
-      stroke="#010101"
+      stroke={mobile ? 'white' : '#010101'}
       strokeWidth="4"
     />
     <line
@@ -64,7 +64,7 @@ export const Cross = () => (
       y1="54.63"
       y2="9.37"
       fill="none"
-      stroke="#010101"
+      stroke={mobile ? 'white' : '#010101'}
       strokeWidth="4"
     />
   </svg>

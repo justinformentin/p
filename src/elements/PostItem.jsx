@@ -16,11 +16,11 @@ const LightLine = styled.span`
 const H1 = styled.h1`
   font-size: 1.5rem;
   color: #111;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 `;
 
 const SubText = styled.div`
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
 `;
 
 const StyledLink = styled(Link)`
