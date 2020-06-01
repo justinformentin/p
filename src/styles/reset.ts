@@ -1,6 +1,9 @@
 import { css } from 'styled-components'
 
 const reset = css`
+  html{
+    overflow: auto;
+  }
   button,
   input,
   optgroup,

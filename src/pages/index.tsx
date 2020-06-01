@@ -1,178 +1,172 @@
-import React from 'react'
-import { graphql } from 'gatsby'
-import Img from 'gatsby-image'
-import styled from 'styled-components'
-import { animated, useSpring, config } from 'react-spring'
-import Layout from '../components/layout'
-import GridItem from '../components/grid-item'
-import SEO from '../components/SEO'
-import { ChildImageSharp } from '../types'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link, graphql } from 'gatsby';
+import styled from 'styled-components';
+import { Button, Header, Layout, PostItem } from '../components';
+import { Container } from '../styles/shared';
 
-type PageProps = {
+const MorePostsLink = styled(Link)`
+  display: flex;
+  justify-content: center;
+`;
+
+const PostWrapper = styled.div`
+  margin: 0 0 3rem 0;
+`;
+
+const RowWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Row = styled.div`
+  display: flex;
+  margin-top: 1rem;
+  .column-container:nth-child(1) {
+    margin-right: 1rem;
+  }
+`;
+
+const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const PostKindContainer = styled.div`
+  display: flex;
+`;
+
+const PostKindWrapper = styled.div`
+  margin: 0 0.5rem 0.75rem 0;
+`;
+
+const PostCat = styled.div`
+  display: inline;
+  background: ${props => (props.kind === 'Code' ? '#2c5a9c' : '#1c3b66')};
+  border-radius: 5px;
+  color: white;
+  padding: 0.25rem;
+  font-size: 0.7rem;
+`;
+
+const ColumnItem = (name, arr) => (
+  <Row>
+    {arr.map(({ node }) => (
+      <Column className="column-container" key={node.frontmatter.title}>
+        <PostKindContainer>
+          <PostKindWrapper>
+            <Link to={`/${name.toLowerCase()}`}>
+              <PostCat kind={name}>{name}</PostCat>
+            </Link>
+          </PostKindWrapper>
+        </PostKindContainer>
+        <PostWrapper>
+          <PostItem
+            path={node.fields.slug}
+            post={node.frontmatter}
+            excerpt={node.excerpt}
+            chunk={null}
+            timeToRead={'Time to read: ' + node.timeToRead}
+          />
+        </PostWrapper>
+      </Column>
+    ))}
+  </Row>
+);
+const Index = ({
   data: {
-    firstProject: {
-      title: string
-      slug: string
-      cover: ChildImageSharp
-    }
-    threeProjects: {
-      nodes: {
-        title: string
-        slug: string
-        cover: ChildImageSharp
-      }[]
-    }
-    aboutUs: ChildImageSharp
-    instagram: ChildImageSharp
-  }
-}
-
-const Area = styled(animated.div)`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 35vw 40vw 25vw;
-  grid-template-areas:
-    'first-project about-us about-us'
-    'three-projects three-projects three-projects'
-    'instagram instagram instagram';
-
-  @media (max-width: ${(props) => props.theme.breakpoints[3]}) {
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: 35vw 30vw 30vw 25vw;
-
-    grid-template-areas:
-      'first-project first-project about-us about-us'
-      'three-projects three-projects three-projects three-projects'
-      'three-projects three-projects three-projects three-projects'
-      'instagram instagram instagram instagram';
-  }
-
-  @media (max-width: ${(props) => props.theme.breakpoints[1]}) {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(5, 38vw);
-
-    grid-template-areas:
-      'first-project about-us'
-      'three-projects three-projects'
-      'three-projects three-projects'
-      'three-projects three-projects'
-      'instagram instagram';
-  }
-
-  @media (max-width: ${(props) => props.theme.breakpoints[0]}) {
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(6, 50vw);
-
-    grid-template-areas:
-      'first-project'
-      'about-us'
-      'three-projects'
-      'three-projects'
-      'three-projects'
-      'instagram';
-  }
-`
-
-const FirstProject = styled(GridItem)`
-  grid-area: first-project;
-`
-
-const AboutUs = styled(GridItem)`
-  grid-area: about-us;
-`
-
-const ThreeProjects = styled.div`
-  grid-area: three-projects;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-
-  @media (max-width: ${(props) => props.theme.breakpoints[1]}) {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-  }
-`
-
-const Instagram = styled(GridItem)`
-  grid-area: instagram;
-`
-
-const Index: React.FunctionComponent<PageProps> = ({ data: { firstProject, threeProjects, aboutUs, instagram } }) => {
-  const pageAnimation = useSpring({
-    config: config.slow,
-    from: { opacity: 0 },
-    to: { opacity: 1 },
-  })
+    code: { edges: codeEdges },
+    general: { edges: generalEdges },
+  },
+}) => {
+  const findArticle = edges =>
+    edges.find(item => item.node.frontmatter.kind === 'Article');
+  const findRandom = edges =>
+    edges.find(item => item.node.frontmatter.kind === 'Random');
+  const code = [findArticle(codeEdges), findRandom(codeEdges)];
+  const general = [findArticle(generalEdges), findRandom(generalEdges)];
 
   return (
     <Layout>
-      <SEO />
-      <Area style={pageAnimation}>
-        <FirstProject to={firstProject.slug} aria-label={`View project "${firstProject.title}"`}>
-          <Img fluid={firstProject.cover.childImageSharp.fluid} />
-          <span>{firstProject.title}</span>
-        </FirstProject>
-        <AboutUs to="/about" aria-label="Visit my about page">
-          <Img fluid={aboutUs.childImageSharp.fluid} />
-          <span>About</span>
-        </AboutUs>
-        <ThreeProjects>
-          {threeProjects.nodes.map((project) => (
-            <GridItem to={project.slug} key={project.slug} aria-label={`View project "${project.title}"`}>
-              <Img fluid={project.cover.childImageSharp.fluid} />
-              <span>{project.title}</span>
-            </GridItem>
-          ))}
-        </ThreeProjects>
-        <Instagram to="/instagram" aria-label="See my Instagram pictures">
-          <Img fluid={instagram.childImageSharp.fluid} />
-          <span>Instagram</span>
-        </Instagram>
-      </Area>
+      <Header title="Recent Posts" />
+      <Container>
+        <RowWrapper>
+          {ColumnItem('Code', code)}
+          {ColumnItem('General', general)}
+        </RowWrapper>
+        <MorePostsLink to="/blog">
+          <Button>More Posts</Button>
+        </MorePostsLink>
+      </Container>
     </Layout>
-  )
-}
+  );
+};
 
-export default Index
+export default Index;
 
-export const query = graphql`
-  query Index {
-    firstProject: projectsYaml {
-      title
-      slug
-      cover {
-        childImageSharp {
-          fluid(quality: 95, maxWidth: 1200) {
-            ...GatsbyImageSharpFluid_withWebp
+Index.propTypes = {
+  data: PropTypes.shape({
+    projects: PropTypes.shape({
+      edges: PropTypes.array.isRequired,
+    }),
+    code: PropTypes.shape({
+      edges: PropTypes.array.isRequired,
+    }),
+    general: PropTypes.shape({
+      edges: PropTypes.array.isRequired,
+    }),
+  }).isRequired,
+};
+
+export const pageQuery = graphql`
+  query IndexQuery {
+    code: allMarkdownRemark(
+      limit: 8
+      sort: { fields: [frontmatter___date], order: DESC }
+      filter: { fields: { sourceInstanceName: { eq: "code" } } }
+    ) {
+      edges {
+        node {
+          fields {
+            slug
+          }
+          timeToRead
+          excerpt(pruneLength: 100)
+          frontmatter {
+            kind
+            chunk
+            title
+            category
+            tags
+            # date @dateformat(formatString: "MMMM DD, YYYY")
+            date
           }
         }
       }
     }
-    threeProjects: allProjectsYaml(limit: 3, skip: 1) {
-      nodes {
-        title
-        slug
-        cover {
-          childImageSharp {
-            fluid(quality: 95, maxWidth: 1200) {
-              ...GatsbyImageSharpFluid_withWebp
-            }
+    general: allMarkdownRemark(
+      limit: 8
+      sort: { fields: [frontmatter___date], order: DESC }
+      filter: { fields: { sourceInstanceName: { eq: "general" } } }
+    ) {
+      edges {
+        node {
+          fields {
+            slug
           }
-        }
-      }
-    }
-    aboutUs: file(sourceInstanceName: { eq: "images" }, name: { eq: "about-us" }) {
-      childImageSharp {
-        fluid(quality: 95, maxWidth: 1200) {
-          ...GatsbyImageSharpFluid_withWebp
-        }
-      }
-    }
-    instagram: file(sourceInstanceName: { eq: "images" }, name: { eq: "instagram" }) {
-      childImageSharp {
-        fluid(quality: 95, maxWidth: 1920) {
-          ...GatsbyImageSharpFluid_withWebp
+          timeToRead
+          excerpt(pruneLength: 100)
+          frontmatter {
+            kind
+            chunk
+            title
+            category
+            tags
+            # date @dateformat(formatString: "MMMM DD, YYYY")
+            date
+          }
         }
       }
     }
   }
-`
+`;
