@@ -17,14 +17,13 @@ const Wrapper = styled.div`
     }
   }
   a:not(.gatsby-resp-image-link):not(.anchor) {
-    color: black;
+    color: var(--theme-md-link);
     border-bottom: 3px solid ${props => props.theme.tint.blue};
     transition: ${props => props.theme.transitions.default.transition};
     text-decoration: none;
     &:hover,
     &:focus {
       border-bottom: 3px solid ${props => props.theme.colors.primary.light};
-      color: black;
     }
   }
   h2 {

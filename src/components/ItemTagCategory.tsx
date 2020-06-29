@@ -18,17 +18,20 @@ const Information = styled.div`
     font-size: 2rem;
     margin-bottom: 1.25rem;
     display: inline-block;
-    color: ${props => props.theme.colors.black.base};
+    color: var(--theme-text);
     transition: all ${props => props.theme.transitions.default.duration};
     &:hover {
-      color: #666666;
+      color: var(--theme-grey);
     }
   }
 `;
 
 const Statistics = styled.div`
-  color: ${props => props.theme.colors.black.lighter};
+  color: var(--theme-grey);
   margin-bottom: 1rem;
+  a{
+    color: var(--theme-text);
+  }
 `;
 
 const Excerpt = styled.div`

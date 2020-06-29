@@ -27,6 +27,7 @@
     "test:ci": "npm-run-all -s test:compile server:ci"
   },
   "dependencies": {
+    "@styled-icons/feather": "^10.5.0",
     "babel-plugin-styled-components": "^1.10.7",
     "gatsby": "^2.19.26",
     "gatsby-image": "^2.2.42",

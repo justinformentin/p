@@ -15,9 +15,11 @@ const HeaderWrapper = styled.header`
 `;
 
 const HeaderText = styled.div`
-  color: #111;
+  color: var(--theme-text);
   z-index: 10;
   text-align: center;
+  transition: color ease 0.3s;
+
   & h2 {
     margin-bottom: 0;
   }

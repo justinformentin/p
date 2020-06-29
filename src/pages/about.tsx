@@ -1,27 +1,16 @@
 import React from 'react';
-import { config, useSpring } from 'react-spring';
+// import { config, useSpring } from 'react-spring';
 import Layout from '../components/Layout';
-import { AnimatedBox } from '../elements';
+// import { AnimatedBox } from '../elements';
 // import SEO from '../components/SEO';
 
 const About = () => {
-  const pageAnimation = useSpring({
-    config: config.slow,
-    from: { opacity: 0 },
-    to: { opacity: 1 },
-  });
-
-  return (
+    return (
     <Layout>
       {/* <SEO
-        title="About | Jodie"
-        desc="Hi. I'm LekoArts! You can visit my website or my other Gatsby projects."
+        title="About | Justin Formentin"
+        desc="About"
       /> */}
-      <AnimatedBox
-        style={pageAnimation}
-        py={[6, 6, 6, 8]}
-        px={[6, 6, 8, 6, 8, 13]}
-      >
         <p>
           Early on in my days of learning, I realized that documentation was an
           integral part of any project. I'm also a firm believer that the best
@@ -33,7 +22,6 @@ const About = () => {
           learning, and write articles that are easy to follow and can be
           updated.
         </p>
-      </AnimatedBox>
     </Layout>
   );
 };

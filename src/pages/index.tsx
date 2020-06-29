@@ -8,10 +8,12 @@ import { Container } from '../styles/shared';
 const MorePostsLink = styled(Link)`
   display: flex;
   justify-content: center;
+  text-decoration: none;
 `;
 
 const PostWrapper = styled.div`
   margin: 0 0 3rem 0;
+  color: var(--theme-text);
 `;
 
 const RowWrapper = styled.div`
@@ -24,6 +26,9 @@ const Row = styled.div`
   margin-top: 1rem;
   .column-container:nth-child(1) {
     margin-right: 1rem;
+  }
+  @media (max-width: 600px) {
+    flex-direction: column;
   }
 `;
 
@@ -38,11 +43,14 @@ const PostKindContainer = styled.div`
 
 const PostKindWrapper = styled.div`
   margin: 0 0.5rem 0.75rem 0;
+  a {
+    text-decoration: none;
+  }
 `;
 
-const PostCat = styled.div`
+const PostCat = styled.div<{ kind: string }>`
   display: inline;
-  background: ${props => (props.kind === 'Code' ? '#2c5a9c' : '#1c3b66')};
+  background: ${(props) => (props.kind === 'Code' ? '#2c5a9c' : '#1c3b66')};
   border-radius: 5px;
   color: white;
   padding: 0.25rem;
@@ -65,7 +73,7 @@ const ColumnItem = (name, arr) => (
             path={node.fields.slug}
             post={node.frontmatter}
             excerpt={node.excerpt}
-            chunk={null}
+            // chunk={null}
             timeToRead={'Time to read: ' + node.timeToRead}
           />
         </PostWrapper>
@@ -79,10 +87,10 @@ const Index = ({
     general: { edges: generalEdges },
   },
 }) => {
-  const findArticle = edges =>
-    edges.find(item => item.node.frontmatter.kind === 'Article');
-  const findRandom = edges =>
-    edges.find(item => item.node.frontmatter.kind === 'Random');
+  const findArticle = (edges) =>
+    edges.find((item) => item.node.frontmatter.kind === 'Article');
+  const findRandom = (edges) =>
+    edges.find((item) => item.node.frontmatter.kind === 'Random');
   const code = [findArticle(codeEdges), findRandom(codeEdges)];
   const general = [findArticle(generalEdges), findRandom(generalEdges)];
 

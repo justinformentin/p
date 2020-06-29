@@ -64,7 +64,7 @@ const prism = css`
   li > code[class*='language-'] {
     border-radius: 0.3em;
     background: rgba(52, 152, 219, 0.2);
-    color: #2e3246;
+    color: var(--theme-color);
     bottom: 2px;
     position: relative;
   }

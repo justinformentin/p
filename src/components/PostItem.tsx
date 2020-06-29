@@ -5,7 +5,8 @@ import { Link } from 'gatsby';
 
 const Information = styled.div`
   font-family: ${(props) => props.theme.fontFamily.heading};
-  color: #696969;
+  color: var(--theme-grey);
+  transition: color ease 0.3s;
 `;
 
 const LightLine = styled.span`
@@ -13,22 +14,23 @@ const LightLine = styled.span`
   color: #999999;
 `;
 
-const H1 = styled.h1`
+const Title = styled.h1`
   font-size: 1.5rem;
-  color: #111;
+  /* color: var(--theme-text); */
   margin-bottom: 0.75rem;
 `;
 
 const SubText = styled.div`
   margin-top: 0.75rem;
+  transition: color ease 0.3s;
 `;
 
 const StyledLink = styled(Link)`
-  h1 {
-    color: #111;
-    transition: color ease 0.3s;
-  }
-  h1:hover {
+  /* h1 { */
+  color: var(--theme-text);
+  transition: color ease 0.3s;
+  /* } */
+  &:hover {
     color: #6f6f6f;
     transition: color ease 0.3s;
   }
@@ -37,10 +39,10 @@ const StyledLink = styled(Link)`
 const PostTitle = ({ path, title }) =>
   path ? (
     <StyledLink to={path}>
-      <H1>{title}</H1>
+      <Title>{title}</Title>
     </StyledLink>
   ) : (
-    <H1>{title}</H1>
+    <Title>{title}</Title>
   );
 
 export const PostItem = (args: {
@@ -58,9 +60,9 @@ export const PostItem = (args: {
         <LightLine>|</LightLine>
         {args.timeToRead} Min.
         <LightLine>|</LightLine>
-        <Link to={`/categories/${args.post.category}`}>
+        <StyledLink to={`/categories/${args.post.category.toLowerCase()}`}>
           {args.post.category}
-        </Link>
+        </StyledLink>
       </Information>
     )}
     {(args.excerpt || args.chunk) && (

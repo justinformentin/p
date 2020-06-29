@@ -9,7 +9,7 @@ import { Container } from '../styles/shared';
 import config from '../../config/website';
 
 const StyledLink = styled(Link)`
-  color: ${props => props.theme.colors.white.light};
+  color: var(--theme-texy);
 `;
 
 const Tag = ({

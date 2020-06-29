@@ -33,6 +33,6 @@ const Suggestions = ({ left, right }) => (
 export default Suggestions;
 
 Suggestions.propTypes = {
-  left: PropTypes.any.isRequired,
-  right: PropTypes.any.isRequired,
+  left: PropTypes.any,
+  right: PropTypes.any,
 };

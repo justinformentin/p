@@ -5,7 +5,7 @@ const Button = styled.button`
   background: ${(props) => props.theme.button.primary.background};
   border: none;
   border-radius: ${(props) => props.theme.borderRadius.round};
-  box-shadow: ${(props) => props.theme.button.primary.boxShadow};
+  box-shadow: 4px 4px 5px rgba(52,152,219,0.4);
   color: ${(props) => props.theme.colors.white.base};
   cursor: pointer;
   font-family: ${(props) => props.theme.fontFamily.heading};
@@ -24,7 +24,7 @@ const Button = styled.button`
   z-index: 10;
   -webkit-appearance: button;
   &:hover {
-    box-shadow: ${(props) => props.theme.button.primary.hover.boxShadow};
+    box-shadow: 4px 4px 10px rgba(52,152,219,0.3);
     transform: scale(1.04);
   }
 `;
