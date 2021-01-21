@@ -1,30 +1,30 @@
-const path = require("path");
-const _ = require("lodash");
+const path = require('path');
+const _ = require('lodash');
 
 const pathPrefixes = {
-  code: "/code",
-  general: "/general",
-  projects: "/portfolio"
+  code: '/code',
+  general: '/general',
+  projects: '/portfolio',
 };
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions;
   let slug;
-  if (node.internal.type === "MarkdownRemark") {
+  if (node.internal.type === 'MarkdownRemark') {
     const fileNode = getNode(node.parent);
     const pathPrefix = pathPrefixes[fileNode.sourceInstanceName];
     if (
-      Object.prototype.hasOwnProperty.call(node, "frontmatter") &&
-      Object.prototype.hasOwnProperty.call(node.frontmatter, "title")
+      Object.prototype.hasOwnProperty.call(node, 'frontmatter') &&
+      Object.prototype.hasOwnProperty.call(node.frontmatter, 'title')
     ) {
       slug = `/${_.kebabCase(node.frontmatter.path)}`;
     }
     createNodeField({
       node,
-      name: "sourceInstanceName",
-      value: fileNode.sourceInstanceName
+      name: 'sourceInstanceName',
+      value: fileNode.sourceInstanceName,
     });
-    createNodeField({ node, name: "slug", value: `${pathPrefix}${slug}` });
+    createNodeField({ node, name: 'slug', value: `${pathPrefix}${slug}` });
   }
 };
 
@@ -32,10 +32,10 @@ exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
 
   return new Promise((resolve, reject) => {
-    const postPage = path.resolve("src/templates/post.tsx");
-    const projectPage = path.resolve("src/templates/project.tsx");
-    const tagPage = path.resolve("src/templates/tag.tsx");
-    const categoryPage = path.resolve("src/templates/category.tsx");
+    const postPage = path.resolve('src/templates/post.js');
+    const projectPage = path.resolve('src/templates/project.js');
+    const tagPage = path.resolve('src/templates/tag.js');
+    const categoryPage = path.resolve('src/templates/category.js');
     resolve(
       graphql(`
         {
@@ -102,7 +102,7 @@ exports.createPages = ({ graphql, actions }) => {
             }
           }
         }
-      `).then(result => {
+      `).then((result) => {
         if (result.errors) {
           console.log(result.errors);
           reject(result.errors);
@@ -115,106 +115,60 @@ exports.createPages = ({ graphql, actions }) => {
         const generalList = result.data.general.edges;
         const projectsList = result.data.projects.edges;
 
-        codeList.forEach(post => {
-          if (post.node.frontmatter.tags) {
-            post.node.frontmatter.tags.forEach(tag => {
-              tagSet.add(tag);
-            });
-          }
+        const addTagsAndCats = (frontmatter) => {
+          frontmatter.tags &&
+            frontmatter.tags.forEach((tag) => tagSet.add(tag));
+          frontmatter.category && categorySet.add(frontmatter.category);
+        };
 
-          if (post.node.frontmatter.category) {
-            categorySet.add(post.node.frontmatter.category);
-          }
+        const prevPage = (posts, idx) =>
+          idx === 0 ? null : posts[idx - 1].node;
 
-          const filtered = codeList.filter(
-            input => input.node.fields.slug !== post.node.fields.slug
-          );
-          const sample = _.sampleSize(filtered, 2);
-          const left = sample[0].node;
-          const right = sample[1].node;
+        const nextPage = (posts, idx) =>
+          idx === posts.length - 1 ? null : posts[idx + 1].node;
 
+        const createContext = (post, postList, idx) => ({
+          slug: post.node.fields.slug,
+          left: prevPage(postList, idx),
+          right: nextPage(postList, idx),
+        });
+
+        const handleList = (list, component, post, idx) => {
+          addTagsAndCats(post.node.frontmatter);
           createPage({
             path: post.node.fields.slug,
-            component: postPage,
-            context: {
-              slug: post.node.fields.slug,
-              left,
-              right
-            }
+            component,
+            context: createContext(post, list, idx),
           });
-        });
+        };
 
-        generalList.forEach(post => {
-          if(post){
-            if(post.node){
-          if (post.node.frontmatter.tags) {
-            post.node.frontmatter.tags.forEach(tag => {
-              tagSet.add(tag);
-            });
-          }
+        codeList.forEach((post, idx) =>
+          handleList(codeList, postPage, post, idx)
+        );
 
-          if (post.node.frontmatter.category) {
-            categorySet.add(post.node.frontmatter.category);
-          }
+        generalList.forEach((post, idx) =>
+          handleList(generalList, postPage, post, idx)
+        );
 
-          // const filtered = generalList.filter(
-          //   input => input.node.fields.slug !== post.node.fields.slug
-          // );
-          // const sample = _.sampleSize(filtered, 2);
-          // const left = sample[0].node;
-          // const right = sample[1].node;
-
-          createPage({
-            path: post.node.fields.slug,
-            component: postPage,
-            context: {
-              slug: post.node.fields.slug,
-              // left,
-              // right
-            }
-          });
-        }
-      }
-        });
-
-        projectsList.forEach(project => {
-          const filtered = projectsList.filter(
-            input => input.node.fields.slug !== project.node.fields.slug
-          );
-          const sample = _.sampleSize(filtered, 2);
-          const left = sample[0].node;
-          const right = sample[1].node;
-
-          createPage({
-            path: project.node.fields.slug,
-            component: projectPage,
-            context: {
-              slug: project.node.fields.slug,
-              left,
-              right
-            }
-          });
-        });
+        projectsList.forEach((project, idx) =>
+          handleList(projectsList, projectPage, project, idx)
+        );
 
         const tagList = Array.from(tagSet);
-        tagList.forEach(tag => {
+        tagList.forEach((tag) => {
           createPage({
             path: `/tags/${_.kebabCase(tag)}/`,
             component: tagPage,
-            context: {
-              tag
-            }
+            context: { tag },
           });
         });
 
         const categoryList = Array.from(categorySet);
-        categoryList.forEach(category => {
+        categoryList.forEach((category) => {
           createPage({
             path: `/categories/${_.kebabCase(category)}/`,
             component: categoryPage,
-            context: {
-              category
-            }
+            context: { category },
           });
         });
       })
@@ -225,7 +179,7 @@ exports.createPages = ({ graphql, actions }) => {
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
     resolve: {
-      modules: [path.resolve(__dirname, "src"), "node_modules"]
-    }
+      modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+    },
   });
 };
