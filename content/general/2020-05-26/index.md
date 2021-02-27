@@ -64,7 +64,7 @@ But why is this interest rate important? As with anything related to the economy
 <!-- The important thing to remember is that  -->
 Its influence and effects include, but are not limited to, the interest rates of bank loans, credit cards, mortgages, and most importantly the value of the US dollar.
 
-### US Dollar Value
+## US Dollar Value
 
 The value of the US Dollar has been [falling for months](https://finance.yahoo.com/chart/UUP/). The value of the US Dollar compared to foreign fiat has underpinned the US economy for decades, and that value has decreased. The Federal reserve has failed to keep the country's debt leveled. They've failed to raise interest rates. They've printed a boatload of money. We're seeing
 
@@ -76,7 +76,7 @@ The entire economy is quite literally propped up by fact that wages have been st
 This inversely proportional relationship is the sustenence that banks, Wall Street, and others thrive on. If the value of the dollar decreases and interest rates rise, purchasing power and standard of living will sharply fall.
 
 
-### Housing Costs
+## Housing Costs
 
 Taking a step back, let's look at the housing market, where the interest rate plays an important role.
 
@@ -106,7 +106,7 @@ If we divide the 2% interest monthly cost by the 6% interest monthly cost, we se
 
 Does this sound familiar? Well, it should because this is what happened in the 2008 housing market crash. It's more complicated than "interest rates went up, monthly payments went up", but that was the outcome.
 
-### Financial Crisis of 2008
+## Financial Crisis of 2008
 
 What happened in 2008 is worth mentioning here, because it's still relevant today. The 2008 crash was directly caused by wanton deregulation that allowed for speculation on mortgage backed securities.
 
@@ -134,7 +134,7 @@ Fun side note, [Lehman](https://en.wikipedia.org/wiki/Bankruptcy_of_Lehman_Broth
 
 Another side note, why is that that every time there's a financial issue, some actors were overleveraged? Maybe nobody should be able to buy or sell things that they don't own, or that don't exist. That sounds like it makes sense, right?
 
-### The Great Wall Street Scam
+## The Great Wall Street Scam
 
 Unless you've been living under a rock, you've heard about the huge debacle that was `$GME`. If there is one single good thing to come out of this, it's that the general public finally had a glimpse into
 just how disgustingly manipulative, incestuous, and dishonest the media and Wall Street is.
@@ -143,7 +143,7 @@ We saw news stations running stories that were obviously fabricated by some hedg
 
 **Naked Shorts**
 
-Short selling is (essentially) when you bet a stock will go down. You sell a stock you don't own by borrowing and immediately selling a stock. You must return this borrowed stock, so you eventually must buy the stock back. If the price goes down, you will be buying the stock back at a lower price than you initially sold it for, and so you will make money. Conversely, you will lose money if the price goes up.
+Short selling is (essentially) when you bet a stock will go down. You sell a stock you don't own by borrowing and immediately selling it. You must return this borrowed stock, so you eventually must buy the stock back. If the price goes down, you will be buying the stock back at a lower price than you initially sold it for, and so you will make money. Conversely, you will lose money if the price goes up.
 
 The key point here is that you are **borrowing** a stock.
 
@@ -155,13 +155,21 @@ In the case of Gamestop, the stock's short sales were 140%. As in, short sellers
 
 >Retail investors are incapable of doing this because they lack the capital, and thus the relationship, with the brokerages.
 
-We can see how this is a compounding issue if we take a look at exactly how brokerages carry this out. Instead of physically "borrowing" the shares, they would "locate" them, and then say "We know where the shares are, so we can buy them whenever we want." Except multiple brokerages can "locate" the same shares multiple times. So when the time comes to actually buy the shares back, they don't exist.
+The reason why it's even possible that a stock was shorted over 100% is because the brokerage's "lying about borrowing" is a compounding issue. Instead of physically "borrowing" the shares, they would "locate" them, and then say "We know where the shares are, so we can buy them whenever we want." Except multiple brokerages can "locate" the same shares multiple times. So when the time comes to actually buy the shares back, they don't exist.
 
-These shares never existed. They're called "fradulent shares". We can plainly see this when over a million Gamestop shares were marked "failed-to-deliver", which means purchasers never recieved the shares they ordered.
+These shares never existed. They're called "fraudulent shares". We can plainly see this when over a million Gamestop shares were marked "failed-to-deliver", which means purchasers never recieved the shares they ordered.
 
-Another fun fact is that market makers like [Citadel](https://www.citadelsecurities.com/) are exempt from needing to actually locate the shares. Market makers must accept all buy and sell orders, and so aren't required to comply with many of the rules related to naked short selling.
+An especialy salient point is that market makers like [Citadel](https://www.citadelsecurities.com/) are exempt from needing to actually locate the shares. Market makers must accept all buy and sell orders, and so aren't required to comply with many of the rules related to naked short selling.
 
+## Regulation
 
+What does 0000 have in common? A lack of regulation that allowed for overleveraging. I don't blame the hedge funds, the investment banks, or the brokerages. They are all acting in their best interest, with the pursuit of profit, within the confines of the laws. When they do break the law, the fines imposed on them are less than their profit, so it's worth it and that's just the cost of doing business.
+
+I blame the government. The laws are too relaxed. Companies that screw over the entire economy get a slap on the wristm 0000 The SEC might as well not even exist.
+
+What we need is more regulations, not fewer. The issue is that the majority of Congress doesn't even write or read bills. The lobbyists do, and they just place the bills on Congresspeople's desk along with what I assume is a sack with dollar sign on it.
+
+Of course, laws written by lobbyists overwhelmingly help their clients in corporations, Wall Street, etc, so when people hear "more regulation" they recoil.
 
 ### CONCLUSION?
 
@@ -201,7 +209,7 @@ write about how banks and 00000 artificially keep prices low, rates diff, spendi
 
 We've had economic expansion for the past decade. That doesn't normally happen. Stock prices have been going up, and interest rates have been near zero for a decade. That's not sustainable. It's not real. You can't just grow indefinitely, there has to be a breaking point.
 
-And Covid did not cause a crash. The market dropped 30% for seemingly no time at all, rebounded, and is again at all time highs. And again, the stock market is not indicative of overall economic health. Sure some people were out of work, and some businesses closed, but it's a drop in the bucket. Millions of people received unemployment benefits, businesses received stimulus aid, most people are still going to work, they still have their homes. No, Covid did not caush a crash.
+And Covid did not cause a crash. The market dropped temporarily, rebounded, and is again at all time highs. And again, the stock market is not indicative of overall economic health. Sure some people were out of work, and some businesses closed, but it's a drop in the bucket. Millions of people received unemployment benefits, businesses received stimulus aid, most people are still going to work, they still have their homes. No, Covid did not caush a crash.
 
 But we've been throwing around fake money and atrificially propping up the market and the economy for way too long. There will be a crash, and it will be far worse than 2008.
 
