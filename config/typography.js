@@ -5,7 +5,7 @@ const typography = new Typography({
   baseFontSize: '18px',
   baseLineHeight: 1.45,
   headerFontFamily: [
-    'Aileron',
+    'Source Sans Pro',
     '-apple-system',
     'BlinkMacSystemFont',
     'Segoe UI',
@@ -18,7 +18,7 @@ const typography = new Typography({
     'Segoe UI Symbol',
   ],
   bodyFontFamily: [
-    'Open Sans',
+    'Work Sans',
     '-apple-system',
     'BlinkMacSystemFont',
     'Segoe UI',

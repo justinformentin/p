@@ -8,7 +8,11 @@ category: "Blockchain"
 tags:
     - Cryptocurrency
     - JavaScript
+published: "true"
 ---
+
+
+
 
 ## Create the Block Class
 

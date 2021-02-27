@@ -1,41 +1,57 @@
 ---
-title: "Event Listener Handling"
-path: "event-listener-handling"
+title: "Event Listener Removal"
+path: "event-listener-removal"
 date: "2020-05-02"
 chunk: "A quick look at an important event listener gotcha."
 kind: "Random"
 category: "Javascriprt"
 tags:
     - Development
+published: "true"
 ---
 
-The callback of your event listener must be the exact same function. For example
+To properly [remove an event listener](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener), the callback of your event listener must be the same function reference.
+
+## Function Objects
+The reason for this is that [Functions are Objects](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions).
+
+We can see that this is the case by checking the instance of a function.
 
 ```js
-el.addEventListener('someEvent', () => callbackFunc())
-el.removeEventListener('someEvent', () => callbackFunc())
+function whatAmI(){}
+
+whatAmI instanceof Function // true
+whatAmI instanceof Object // true
 ```
 
-will not work and will result in the event listener never being removed. To make this work you need the same 'reference'.
+## Memory Reference
+When [objects](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object) are created, they're stored in memory as unique pieces of information. We can prove this by  checking equality or strict equality of two seemingly identical objects.
 
 ```js
-const callbackFunc = () => {}
-el.addEventListener('someEvent', callbackFunc)
-el.removeEventListener('someEvent', callbackFunc)
+{} === {} // false
 ```
 
-will work because the 'callbackFunc' you're passing is identical in both the addEventListener and removeEventListener.
+This check evaluates to `false` because the JavaScript engine is basically seeing
 
-The reason for this is because functions are objects in in JavaScript, and each object stored in memory gets a unique reference. This is why if you try entering
-
-```
-{} == {}
+```js
+"Object Reference One" === "Object Reference Two"
 ```
 
-in the console, you'll get false. The JavaScript engine basically sees that as
+Of course that wouldn't be equal.
 
-Object_Reference_1 == Object_Reference_2
+## Event Removal
 
-and of course that will be false.
+If we added an event with an anonymouse function as the callback, we wouldn't be able to remove it.
 
-To read more about JavaScript objects in another article of mine, [JavaScript Objects](https://justinformentin.com/dev/javascripts-objects). Or you know, any one of the million of articles online about objects. [MDN Docs about Objects](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object) is always a good place to start.
+```js
+el.addEventListener('someEvent', (e) => console.log(e));
+el.removeEventListener('someEvent', (e) => console.log(e));
+```
+
+To make this work, you need to both callback to be the same function reference.
+
+```js
+const callbackFunc = (e) => console.log(e);
+el.addEventListener('someEvent', callbackFunc);
+el.removeEventListener('someEvent', callbackFunc);
+```

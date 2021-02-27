@@ -19,7 +19,7 @@ const Information = styled.div`
     margin-bottom: 1.25rem;
     display: inline-block;
     color: var(--color-text);
-    transition: all ${props => props.theme.transitions.default.duration};
+    transition: ${props => props.theme.trans.all};
     &:hover {
       color: var(--color-grey);
     }

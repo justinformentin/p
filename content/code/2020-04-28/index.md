@@ -10,7 +10,11 @@ tags:
   - React
   - Theme
   - CSS Variables
+published: "true"
 ---
+
+
+
 
 This is hands down the easiest dark mode/theme switcher you'll find.
 

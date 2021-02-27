@@ -7,12 +7,12 @@ category: "Optimization"
 kind: "Article"
 chunk: "Google PageSpeed is a useful tool, but there's more to consider."
 tags:
-    - Google
-    - Pagespeed
-    - Lighthouse
-    - Minification
     - Optimization
+published: "true"
 ---
+
+
+
 
 [Google PageSpeed](https://developers.google.com/speed/pagespeed/insights/) is a useful tool that gauges the speed of your site, but it shouldn't be taken as gospel. First of all, it doesn't look at your website as a whole and it doesn't take certain things under consideration. It really just looks at your site's code, compares it to a checklist, and then spits out a number. Since it just reads the HTML on your page, you can sometimes get confusing results like when one site loads in 2 seconds but gets a 60, and then another site loads in 8 seconds but gets in the 80s.
 
@@ -36,8 +36,4 @@ Regarding testing your site, real accuracy is gaining insight from multiple sour
 
 Even google.com has a 92/100 for desktop and 62/100 for mobile. Youtube has a 70 and 51. Facebook has a 79 and 48. Obviously these sites are probably not similar to yours, but if your boss or client is demanding scores of 100 across the board, just show them this article.
 
-Or you can build your site with React using Gatsby; this site was built with Gatsby and scores 100 in every single category of the Lighthouse Audit.
-
 ![Pagespeed](./pagespeed5.jpg)
-
-You can read my full guide on how to build a full site using Gatsby in [this article](https://justinformentin.com/guide-to-building-a-gatsby-site).

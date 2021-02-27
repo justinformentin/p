@@ -1,12 +1,11 @@
-
 import Button from './Button';
 import Content from './Content';
-import Title from './Title';
 import ItemTagCategory from './ItemTagCategory';
-import {Masonry} from './Masonry';
+import { HomeSidebar } from './HomeSidebar';
+import { Masonry } from './Masonry';
 import Layout from './Layout';
-import PostItem from './PostItem';
-import ProjectList from './ProjectList';
+import { PostDetails } from './PostDetails';
+import SnippetBlock from './SnippetBlock';
 import Suggestions from './Suggestions';
 import SEO from './SEO';
 import Tags from './Tags';
@@ -14,13 +13,13 @@ import Tags from './Tags';
 export {
   Button,
   Content,
-  Title,
   ItemTagCategory,
   Layout,
+  HomeSidebar,
   Masonry,
-  PostItem,
-  ProjectList,
+  PostDetails,
+  SnippetBlock,
   Suggestions,
   SEO,
-  Tags
+  Tags,
 };

@@ -4,12 +4,13 @@ const _ = require('lodash');
 const pathPrefixes = {
   code: '/code',
   general: '/general',
-  projects: '/portfolio',
+  snippets: '/snippets',
 };
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions;
   let slug;
+  // if (node.internal.type === 'Mdx') {
   if (node.internal.type === 'MarkdownRemark') {
     const fileNode = getNode(node.parent);
     const pathPrefix = pathPrefixes[fileNode.sourceInstanceName];
@@ -33,7 +34,7 @@ exports.createPages = ({ graphql, actions }) => {
 
   return new Promise((resolve, reject) => {
     const postPage = path.resolve('src/templates/post.js');
-    const projectPage = path.resolve('src/templates/project.js');
+    const snippetPage = path.resolve('src/templates/snippet.js');
     const tagPage = path.resolve('src/templates/tag.js');
     const categoryPage = path.resolve('src/templates/category.js');
     resolve(
@@ -51,6 +52,7 @@ exports.createPages = ({ graphql, actions }) => {
                   category
                   title
                   chunk
+                  published
                 }
                 fields {
                   slug
@@ -58,7 +60,6 @@ exports.createPages = ({ graphql, actions }) => {
               }
             }
           }
-
           general: allMarkdownRemark(
             filter: { fields: { sourceInstanceName: { eq: "general" } } }
             sort: { fields: [frontmatter___date], order: DESC }
@@ -71,6 +72,7 @@ exports.createPages = ({ graphql, actions }) => {
                   category
                   title
                   chunk
+                  published
                 }
                 fields {
                   slug
@@ -78,25 +80,20 @@ exports.createPages = ({ graphql, actions }) => {
               }
             }
           }
-          projects: allMarkdownRemark(
-            filter: { fields: { sourceInstanceName: { eq: "projects" } } }
+          snippets: allMarkdownRemark(
+            filter: { fields: { sourceInstanceName: { eq: "snippets" } } }
             sort: { fields: [frontmatter___date], order: DESC }
           ) {
             edges {
               node {
-                fields {
-                  slug
-                }
                 frontmatter {
+                  lang
                   chunk
                   title
-                  cover {
-                    childImageSharp {
-                      resize(width: 600) {
-                        src
-                      }
-                    }
-                  }
+                  published
+                }
+                fields {
+                  slug
                 }
               }
             }
@@ -113,7 +110,7 @@ exports.createPages = ({ graphql, actions }) => {
 
         const codeList = result.data.code.edges;
         const generalList = result.data.general.edges;
-        const projectsList = result.data.projects.edges;
+        const snippetList = result.data.snippets.edges;
 
         const addTagsAndCats = (frontmatter) => {
           frontmatter.tags &&
@@ -150,8 +147,8 @@ exports.createPages = ({ graphql, actions }) => {
           handleList(generalList, postPage, post, idx)
         );
 
-        projectsList.forEach((project, idx) =>
-          handleList(projectsList, projectPage, project, idx)
+        snippetList.forEach((snippet, idx) =>
+          handleList(snippetList, snippetPage, snippet, idx)
         );
 
         const tagList = Array.from(tagSet);
@@ -183,3 +180,21 @@ exports.onCreateWebpackConfig = ({ actions }) => {
     },
   });
 };
+
+// snippets: allMdx(
+//   filter: { fields: { sourceInstanceName: { eq: "snippets" } } }
+//   sort: { fields: [frontmatter___date], order: DESC }
+// ) {
+//   edges {
+//     node {
+//       frontmatter {
+//         lang
+//         tags
+//         title
+//       }
+//       fields {
+//         slug
+//       }
+//     }
+//   }
+// }

@@ -7,7 +7,11 @@ kind: "Article"
 chunk: "Object Literals vs Switch Statements"
 tags:
     - Coding
+published: "true"
 ---
+
+
+
 
 This post is not to argue the use of one over the other. As with pretty much everything related to programming, you should decide what syntax, structure, style, etc. to use that best fits your needs.
 

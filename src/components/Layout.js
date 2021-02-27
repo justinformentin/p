@@ -1,21 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
-// import { Github, Linkedin, Twitter, Mail } from '../icons';
-import 'typeface-work-sans';
+import { PageHeader } from './PageHeader';
 import theme from '../../config/theme';
 import reset from '../styles/reset';
-// import prism from '../styles/prism'
-// import {} from 'styled-components/cssprop';
-// import photo from '../images/jf.jpg';
-import { PageHeader } from './PageHeader';
-import { SearchContainer } from './SearchContainer';
-// import { Github } from '@styled-icons/feather/Github';
-// import { Twitter } from '@styled-icons/feather/Twitter';
-// import { Linkedin } from '@styled-icons/feather/Linkedin';
-// import { Mail } from '@styled-icons/feather/Mail';
-import { Sun } from '@styled-icons/feather/Sun';
-import { Moon } from '@styled-icons/feather/Moon';
-import { MaxWidth } from '../styles/shared';
+import 'typeface-work-sans';
+// import '@fontsource/work-sans';
+// import 'typeface-aileron';
+// import 'typeface-ubuntu';
+import 'typeface-source-sans-pro';
+// import '@fontsource/source-sans-pro';
+// import 'typeface-oxygen';
+// import 'typeface-nunito';
+// import 'typeface-montserrat';
 
 const GlobalStyles = createGlobalStyle`
   *::before,
@@ -26,6 +22,37 @@ const GlobalStyles = createGlobalStyle`
     color: white;
     background-color: #004988;
   }
+  // @font-face{
+  //   font-family:Source Sans Pro;
+  //   font-style:normal;
+  //   font-display:swap;
+  //   font-weight:400;
+  //   src:local("Source Sans Pro Regular normal"),
+  //   local("Source Sans Pro-Regularnormal"),
+  //   url(/static/fonts/source-sans-pro-400.woff2) format("woff2"),
+  //   url(/static/fonts/source-sans-pro-400.woff) format("woff")
+  // }
+  // @font-face{
+  //   font-family:Source Sans Pro;
+  //   font-style:normal;
+  //   font-display:swap;
+  //   font-weight:700;
+  //   src:local("Source Sans Pro Bold normal"),
+  //   local("Source Sans Pro-Boldnormal"),
+  //   url(/static/fonts/source-sans-pro-700.woff2) format("woff2"),
+  //   url(/static/fonts/source-sans-pro-700.woff) format("woff")
+  // }
+
+  // @font-face{
+  //   font-family:Work Sans;
+  //   font-style:normal;
+  //   font-display:swap;
+  //   font-weight:400;
+  //   src:local("Work Sans Regular"),
+  //   local("Work Sans-Regular"),
+  //   url(/static/fonts/work-sans-latin-400.woff2) format("woff2"),
+  //   url(/static/fonts/work-sans-latin-400.woff) format("woff")
+  // }
   html {
     box-sizing: border-box;
     border: 0;
@@ -38,64 +65,37 @@ const GlobalStyles = createGlobalStyle`
     border: 0;
     margin: 0;
     padding: 0;
-    color: black;
-    font-family: 'Work Sans', '-apple-system', 'Roboto', 'Helvetica', 'Arial', sans-serif;
-    background: white;
     font-size: 18px;
+    font-family: Work Sans;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    // font-family: Source Sans Pro;
+    font-family: Work Sans;
+  }
+  h3 {
+    font-size: 1.5rem;
   }
   a {
-    transition: all 0.3s ease-in-out;
-    color: black;
-    text-decoration: underline;
-    &:hover,
-
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: var(--color-text);
   }
-  // #___gatsby {
-  //   height: 100%;
-  // }
+  #___gatsby {
+    height: 100%;
+    transition: filter 0.3s ease;
+  }
   #gatsby-focus-wrapper{
     height: 100%;
-
   }
+
   ${reset}
 `;
 
-const Wrapper = styled.div`
-  height: 100%;
-`;
-
 const Main = styled.main`
-  position: relative;
-  overflow: auto;
   background: var(--color-background);
-  transition: background ease 0.3s;
+  transition: ${(props) => props.theme.trans.bg};
   min-height: 908px;
-`;
-
-const IconContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-`;
-
-const IconWrap = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin-right: 0.5rem;
-  margin-top: 0.25rem;
-  svg {
-    margin-left: 0.5rem;
-    height: 24px;
-    width: 24px;
-    color: var(--color-text);
-  }
-`;
-
-const IconItem = styled.div`
-  font-color: ${(p) => console.log(p)}
-  &:hover {
-    cursor: pointer;
-  }
+  padding-top: 5rem;
 `;
 
 const ThemeVals = {
@@ -103,37 +103,55 @@ const ThemeVals = {
     PRIMARY: '#3da9fc',
     SECONDARY: '#90b4ce',
     TERTIARY: '#fbdd74',
-    BACKGROUND: '#0e141b',
+    BACKGROUND: '#1c232b',
     TEXT: '#f9f9f9',
     GREY: '#a5a5a5',
     LINK: '#ffdead',
+    POSTHEADER: '#1c232b',
+    BLUE: '#4fa2ea',
+    BLUEHEAD: '#4fa2ea',
+    BQ_BG: '#2f3a48',
+    MD_LINK: '#95c4ea',
+    MD_UND: '#a9aff6',
+    INLINECODE: '#b1a3ff',
   },
   light: {
     PRIMARY: '#5aa7cd',
-    SECONDARY: '#994ff3',
+    SECONDARY: '#5d1bdc',
     TERTIARY: '#fbdd74',
     BACKGROUND: '#f9f9f9',
     TEXT: '#262626',
     GREY: '#696969',
-    LINK: '#392500',
+    LINK: '#b54f07',
+    POSTHEADER: '#b3eaff',
+    BLUE: '#4fa2ea',
+    BLUEHEAD: '#0041b7',
+    BQ_BG: '#e6e6e6',
+    MD_LINK: '#115ac7',
+    MD_UND: '#a9aff6',
+    INLINECODE: '#4b28db',
   },
 };
 
 const Layout = ({ children }) => {
-  const initialTheme = localStorage.getItem('theme-switch');
-  const [colorTheme, setColorTheme] = useState(initialTheme || 'light');
+  const [colorTheme, setColorTheme] = useState(null);
 
   const toggleTheme = () => {
     const c = colorTheme === 'light' ? 'dark' : 'light';
     setColorTheme(c);
   };
   useEffect(() => {
-    const gs = document.body.querySelector('style[id=theme-switch]');
-    gs && gs.remove();
-    const ngs = document.createElement('style');
-    ngs.setAttribute('id', 'theme-switch');
-    const theme = ThemeVals[colorTheme];
-    ngs.innerHTML = `body{
+    const initialTheme = localStorage.getItem('theme-switch');
+    setColorTheme(initialTheme || 'light');
+  }, []);
+  useEffect(() => {
+    if (colorTheme) {
+      const gs = document.body.querySelector('style[id=theme-switch]');
+      gs && gs.remove();
+      const ngs = document.createElement('style');
+      ngs.setAttribute('id', 'theme-switch');
+      const theme = ThemeVals[colorTheme];
+      ngs.innerHTML = `body{
       --color-primary: ${theme.PRIMARY};
       --color-secondary: ${theme.SECONDARY};
       --color-tertiary: ${theme.TERTIARY};
@@ -141,52 +159,75 @@ const Layout = ({ children }) => {
       --color-text: ${theme.TEXT};
       --color-grey: ${theme.GREY};
       --color-link: ${theme.LINK};
+      --color-postheader: ${theme.POSTHEADER};
+      --color-blue: ${theme.BLUE};
+      --color-bluehead: ${theme.BLUEHEAD};
+      --color-bqbg: ${theme.BQ_BG};
+      --color-md-link: ${theme.MD_LINK};
+      --color-md-und: ${theme.MD_UND};
+      --color-inlinecode: ${theme.INLINECODE}
     }`;
-    document.body.insertAdjacentElement('afterbegin', ngs);
-    localStorage.setItem('theme-switch', colorTheme);
+      document.body.insertAdjacentElement('afterbegin', ngs);
+      localStorage.setItem('theme-switch', colorTheme);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [colorTheme]);
-  // useEffect(() => {
-  //   const gt = localStorage.getItem('theme-switch');
-  //   gt && setColorTheme(gt);
-  // }, []);
+
   return (
     <ThemeProvider theme={theme}>
-      <>
-        <GlobalStyles />
-        <Wrapper>
-          <PageHeader />
-          <Main>
-            <IconContainer>
-              {/* <IconWrap>
-                <IconLink href="https://github.com/justinformentin">
-                  <Github size="24" />
-                </IconLink>
-                <IconLink href="https://twitter.com/whatjustin" rel="me">
-                  <Twitter size="24" />
-                </IconLink>
-                <IconLink href="https://linkedin.com/in/justinformentin">
-                  <Linkedin size="24" />
-                </IconLink>
-                <IconLink href="mailto:talktojustintoday@gmail.com">
-                  <Mail size="24" />
-                </IconLink>
-              </IconWrap> */}
-
-              <IconWrap>
-                <IconItem>
-                  <SearchContainer />
-                </IconItem>
-                <IconItem onClick={toggleTheme}>
-                  {colorTheme === 'light' ? <Moon /> : <Sun />}
-                </IconItem>
-              </IconWrap>
-            </IconContainer>
-            <MaxWidth>{children}</MaxWidth>
-          </Main>
-        </Wrapper>
-      </>
+      <GlobalStyles />
+      {colorTheme ? (
+        <>
+          <PageHeader toggleTheme={toggleTheme} colorTheme={colorTheme} />
+          <Main>{children}</Main>
+        </>
+      ) : null}
     </ThemeProvider>
   );
 };
 
 export default Layout;
+
+// const ThemeVals = {
+//   dark: {
+//     PRIMARY: '#3da9fc',
+//     SECONDARY: '#90b4ce',
+//     TERTIARY: '#fbdd74',
+//     BACKGROUND: '#1c232b',
+//     TEXT: '#f9f9f9',
+//     GREY: '#a5a5a5',
+//     LINK: '#ffdead',
+//     HO_DARK: '1',
+//     HO_LIGHT: '0',
+//     POSTHEADER: '#1c232b',
+//     // BLUE: '#96c9dc',
+//     BLUE: '#4fa2ea',
+//     // BLUEHEAD: '#ffa65a',
+//     // BLUEHEAD: '#4fa2ea',
+//     BLUEHEAD: '#0041b7',
+//     BQ_BG: '#2f3a48',
+//     MD_LINK: '#95c4ea',
+//     MD_UND:'#a9aff6',
+//     TITLE_BG: '#2b4964'
+//   },
+//   light: {
+//     PRIMARY: '#5aa7cd',
+//     SECONDARY: '#5d1bdc',
+//     TERTIARY: '#fbdd74',
+//     BACKGROUND: '#f9f9f9',
+//     TEXT: '#262626',
+//     GREY: '#696969',
+//     LINK: '#b54f07',
+//     HO_DARK: '0',
+//     HO_LIGHT: '1',
+//     POSTHEADER: '#b3eaff',
+//     // BLUE: '#96c9dc',
+//     BLUE: '#4fa2ea',
+//     // BLUEHEAD: '#4fa2ea',
+//     BLUEHEAD: '#0041b7',
+//     BQ_BG: '#e6e6e6',
+//     MD_LINK: '#115ac7',
+//     MD_UND:'#a9aff6',
+//     TITLE_BG: '#d2ecff'
+//   },
+// };

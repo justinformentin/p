@@ -1,29 +1,39 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { graphql } from 'gatsby';
-import { Centered, Container, InfoText, Line } from '../styles/shared';
+import { useMediaQuery } from '../hooks/useMediaQuery';
+import { Line, H1 } from '../styles/shared';
+import {
+  PostHeadingWrapper,
+  PostContainer,
+  PostWrap,
+  PostMaxWidth,
+} from '../styles/sharedPost';
 import {
   Tags,
   Suggestions,
-  Title,
-  SEO,
+  // SEO,
+  PostDetails,
   Content,
   Layout,
-  PostItem,
 } from '../components';
-import styled from 'styled-components';
-import { useMediaQuery } from '../hooks/useMediaQuery';
+import { usePageViews } from '../hooks/usePageViews';
 
-const TocWrap = styled.aside`
-  position: fixed;
-  right: 5rem;
-  // margin-top: 2rem;
-  // padding-top: 2rem;
-  transition: all ease 0.3s;
+const TocWrap = styled.div`
+  position: sticky;
+  top: 3rem;
+  transition: ${(props) => props.theme.trans.all};
 `;
+
 const TocItem = styled.div`
-  padding-left: ${({ level }) =>
-    level === 3 ? '1rem' : level === 4 ? '2rem' : '0'};
+  padding-left: ${({ level, highest }) =>
+    level === highest
+      ? '0'
+      : level === 3
+      ? '1rem'
+      : level === 4
+      ? '2rem'
+      : '0'};
 `;
 const TocLink = styled.a`
   color: var(--color-text);
@@ -37,52 +47,63 @@ const TocHeader = styled.div`
   text-transform: uppercase;
   letter-spacing: 2px;
 `;
-const PostContainer = styled.div`
-  // display: flex;
-  color: var(--color-text);
-  padding: 2rem 0;
-  // margin: 0 auto;
-  // margin-right: 30rem;
-  // max-width: 800px;
-  // width: 60%;
-  // @media (max-width: 1600px) {
-  //   width: 75%;
-  // }
-  // @media (max-width: 1200px) {
-  //   width: 80%;
-  // }
-  @media (max-width: 1000px) {
-    max-width: 100%;
-    margin-right: 0;
-  }
-`;
 
-const Post = ({
-  pageContext: { slug, left, right },
-  data: { markdownRemark: postNode },
-}) => {
-  const [toc, setToc] = useState([]);
+// const HighlightH1 = styled(H1)`
+//   // background-image: linear-gradient(0deg, var(--color-title-bg) 50%, transparent 60%);
+//   position: relative;
+//   &:before {
+//     content: '';
+//     position: absolute;
+//     top: 0;
+//     right: 0;
+//     width: 100%;
+//     height: 100%;
+//     background-image: linear-gradient(0deg, #d2ecff 50%, transparent 60%);
+//     transition: opacity ease 0.3s;
+//     opacity: var(--ho-light);
+//     z-index: -1;
+//   }
+//   &:after {
+//     content: '';
+//     position: absolute;
+//     top: 0;
+//     right: 0;
+//     width: 100%;
+//     height: 100%;
+//     background-image: linear-gradient(0deg, #2b4964 50%, transparent 60%);
+//     transition: opacity ease 0.3s;
+//     opacity: var(--ho-dark);
+//     z-index: -1;
+//   }
+// `;
 
-  const medium = useMediaQuery('1000px');
-
+export default ({ pageContext: { slug, left, right }, data }) => {
+  // const pp = usePostQuery();
+  // console.log('pp', pp)
+  // console.log('data', data);
+  const postNode = data.markdownRemark;
   const post = postNode.frontmatter;
-  if (!post.id) {
-    post.id = slug;
-  }
+  if (!post.id) post.id = slug;
+  const postWrap = React.useRef(null);
+  const tocWrap = React.useRef(null);
+
+  const [toc, setToc] = useState([]);
+  const medium = useMediaQuery('900px');
+
+  const views = usePageViews(slug);
+
+  console.log('views', views);
 
   useEffect(() => {
     const getHeadings = () => {
       let activeEl;
 
-      const contentContainer = document.querySelector('#content-container');
-
       const observerCallback = (entries) => {
         entries.forEach((entry) => {
           let newActiveEl;
           if (entry.isIntersecting) {
-            const tocWrap = document.querySelector('#toc-wrap');
-            if (tocWrap)
-              newActiveEl = tocWrap.querySelector(
+            if (tocWrap.current)
+              newActiveEl = tocWrap.current.querySelector(
                 `[href="#${entry.target.getAttribute('id')}"]`
               );
             if (activeEl) activeEl.style.color = 'var(--color-text)';
@@ -92,12 +113,12 @@ const Post = ({
         });
       };
 
-      if (contentContainer) {
-        const headings = contentContainer.querySelectorAll(
+      if (postWrap.current) {
+        const headings = postWrap.current.querySelectorAll(
           'h1, h2, h3, h4, h5, h6'
         );
         const tocArr = [];
-        Array.from(headings).forEach((el) => {
+        headings.forEach((el) => {
           const hid = el.getAttribute('id');
           const level = Number(el.localName.split('').splice(1, 1).join());
 
@@ -110,123 +131,81 @@ const Post = ({
             observer.observe(el);
           }
         });
-        if (tocArr.length > 0) contentContainer.style.maxWidth = '800px';
         setToc(tocArr);
       } else setTimeout(getHeadings, 1000);
     };
-    const watchTitle = () => {
-      const headerContainer = document.querySelector('#header-container');
-      console.log('headerContainer', headerContainer);
-      const observerCallback = (entries) =>
-        entries.forEach((entry) => {
-          const tocWrap = document.querySelector('#toc-wrap');
-          if (tocWrap)
-            tocWrap.style.top = entry.isIntersecting ? '13rem' : '3rem';
-        });
 
-      if (headerContainer) {
-        const observer = new IntersectionObserver(observerCallback, {
-          threshold: 1,
-          root: document,
-        });
-        observer.observe(headerContainer);
-      } else setTimeout(watchTitle, 1000);
-    };
     getHeadings();
-    watchTitle();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // const TOC = () => {
+  //   const convertToSentence = (hid) =>
+  //     hid
+  //       .split('-')
+  //       .join(' ')
+  //       .replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase());
+  //   const sorted = toc.map((item) => item.level).sort();
+  //   const highest = sorted[sorted.length - 1];
+  //   return (
+  //     <TocWrap ref={tocWrap}>
+  //       <TocHeader>Table of Contents</TocHeader>
+  //       {toc.map((item) => (
+  //         <TocItem level={item.level} highest={highest} key={item.hid}>
+  //           <TocLink href={'#' + item.hid}>
+  //             {convertToSentence(item.hid)}
+  //           </TocLink>
+  //         </TocItem>
+  //       ))}
+  //     </TocWrap>
+  //   );
+  // };
   const TOC = () => {
-    const convertToSentence = (hid) =>
-      hid
-        .split('-')
-        .join(' ')
-        .replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase());
+    const highest = postNode.headings.reduce((acc, c) =>
+      acc.depth > c ? acc.depth : c
+    );
     return (
-      <TocWrap id="toc-wrap">
+      <TocWrap ref={tocWrap}>
         <TocHeader>Table of Contents</TocHeader>
-        {toc.map((item) => (
-          <TocItem level={item.level} key={item.hid}>
-            <TocLink href={'#' + item.hid}>
-              {convertToSentence(item.hid)}
-            </TocLink>
+        {postNode.headings.map((item) => (
+          <TocItem level={item.depth} highest={highest.depth} key={item.id}>
+            <TocLink href={'#' + item.id}>{item.value}</TocLink>
           </TocItem>
         ))}
       </TocWrap>
     );
   };
-
-  const WaveContainer = styled.div`
-    overflow: hidden;
-    display: block;
-    position: absolute;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    width: 100%;
-    height: 90px;
-    transform: translateY(1px);
-    z-index: 3;
-  `;
-  const WaveSVG = styled.svg`
-    position: absolute;
-    left: -3%;
-    right: -3%;
-    bottom: 0px;
-    width: 106%;
-    min-width: 600px;
-    fill: var(--color-background);
-    transition: fill 350ms ease 0s;
-  `;
-  const Wave = () => (
-    <WaveContainer>
-      <WaveSVG
-        preserveAspectRatio="none"
-        width="1440"
-        height="74"
-        viewBox="0 0 1440 74"
-      >
-        <path d="M456.464 0.0433865C277.158 -1.70575 0 50.0141 0 50.0141V74H1440V50.0141C1440 50.0141 1320.4 31.1925 1243.09 27.0276C1099.33 19.2816 1019.08 53.1981 875.138 50.0141C710.527 46.3727 621.108 1.64949 456.464 0.0433865Z"></path>
-      </WaveSVG>
-    </WaveContainer>
-  );
-
   return (
     <Layout>
       {/* <SEO postPath={slug} postNode={postNode} postSEO /> */}
-
-      <Title>
-        <Centered>
-          <PostItem post={post} timeToRead={postNode.timeToRead} />
-        </Centered>
-      </Title>
-      <Wave />
-      {/* <PostContainer> */}
-
-      {!medium && toc && toc.length > 0 ? <TOC /> : null}
-
-      <PostContainer id="content-container">
-        <Content input={postNode.html} />
-        <Line aria-hidden="true" />
-        <Tags tags={post.tags} />
-        <InfoText>More Posts</InfoText>
-        <Suggestions left={left} right={right} />
-      </PostContainer>
-
-      {/* </PostContainer> */}
+      <PostHeadingWrapper>
+        <H1>{post.title}</H1>
+        <PostDetails
+          date={post.date}
+          category={post.category}
+          ttr={postNode.timeToRead}
+        />
+      </PostHeadingWrapper>
+      <PostMaxWidth>
+        <PostContainer>
+          <PostWrap
+            ref={postWrap}
+            article={post.kind === 'TOC'}
+            medium={medium}
+          >
+            {/* <Content input={postNode.body} /> */}
+            <Content input={postNode.html} />
+            <Line aria-hidden="true" />
+            <Tags tags={post.tags} />
+            <Suggestions left={left} right={right} />
+          </PostWrap>
+          {/* {!medium && post.kind === 'TOC' ? <TOC /> : null} */}
+          {/* <TOC /> */}
+          {/* <div dangerouslySetInnerHTML={{ __html: postNode.tableOfContents }}></div> */}
+        </PostContainer>
+      </PostMaxWidth>
     </Layout>
   );
-};
-
-export default Post;
-
-Post.propTypes = {
-  pageContext: PropTypes.shape({
-    slug: PropTypes.string.isRequired,
-  }).isRequired,
-  data: PropTypes.shape({
-    markdownRemark: PropTypes.object.isRequired,
-  }).isRequired,
 };
 
 export const pageQuery = graphql`
@@ -235,13 +214,20 @@ export const pageQuery = graphql`
       html
       timeToRead
       excerpt
+      tableOfContents
+      headings {
+        depth
+        value
+        id
+      }
       frontmatter {
         kind
-        title
-        # date @dateformat(formatString: "MMMM DD, YYYY")
-        date
-        category
         tags
+        category
+        title
+        chunk
+        date
+        published
       }
       fields {
         slug

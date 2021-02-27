@@ -7,7 +7,11 @@ kind: "Random"
 chunk: "Increasing global temperature isn't the only thing to worry about with rising CO2 levels."
 tags:
     - Placeholder
+published: "true"
 ---
+
+
+
 
 Our atmosphere's CO2 concentration was at about 300 parts per million in 1960, and it's at about 400ppm today, with 500ppm in urban environments. Indoors in poorly ventilated rooms, the concentration is around 1000ppm.
 

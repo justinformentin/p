@@ -8,19 +8,7 @@ export const Github = () => (
     />
   </svg>
 );
-// export const Github = () => (
-//   <svg
-//     xmlns="http://www.w3.org/2000/svg"
-//     viewBox="0 0 30 30"
-//     fill="none"
-//     stroke="#fff"
-//     stroke-width="2"
-//     stroke-linecap="round"
-//     stroke-linejoin="round"
-//   >
-//     <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-//   </svg>
-// );
+
 export const Linkedin = () => (
   <svg viewBox="0 0 512 512" height="40">
     <path
@@ -29,22 +17,7 @@ export const Linkedin = () => (
     />
   </svg>
 );
-// export const Linkedin = () => (
-//   <svg
-//     xmlns="http://www.w3.org/2000/svg"
-//     viewBox="0 0 24 24"
-//     fill="none"
-//     stroke="#fff"
-//     stroke-width="1"
-//     stroke-linecap="round"
-//     stroke-linejoin="round"
-//     class="feather feather-linkedin"
-//   >
-//     <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-//     <rect x="2" y="9" width="4" height="12"></rect>
-//     <circle cx="4" cy="4" r="2"></circle>
-//   </svg>
-// );
+
 export const Twitter = () => (
   <svg viewBox="0 0 512 512" height="40">
     <path
@@ -68,13 +41,13 @@ export const Logo = () => (
   </svg>
 );
 
-export const Burger = () => (
+export const Burger = ({theme}) => (
   <svg width="20" height="18" viewBox="0 0 20 18">
-    <path fill="#333" d="M0 2V0h20v2H0zm0 8V8h20v2H0zm0 8v-2h20v2H0z" />
+    <path fill={theme === 'light' ? '#262626' : '#f9f9f9'} d="M0 2V0h20v2H0zm0 8V8h20v2H0zm0 8v-2h20v2H0z" />
   </svg>
 );
 
-export const Cross = ({ mobile }) => (
+export const Cross = ({theme}) => (
   <svg height="25" width="25" viewBox="0 0 64 64">
     <line
       x1="9.37"
@@ -82,7 +55,7 @@ export const Cross = ({ mobile }) => (
       y1="9.37"
       y2="54.63"
       fill="none"
-      stroke={mobile ? 'white' : '#010101'}
+      stroke={theme === 'light' ? '#262626' : '#f9f9f9'}
       strokeWidth="4"
     />
     <line
@@ -91,20 +64,11 @@ export const Cross = ({ mobile }) => (
       y1="54.63"
       y2="9.37"
       fill="none"
-      stroke={mobile ? 'white' : '#010101'}
+      stroke={theme === 'light' ? '#262626' : '#f9f9f9'}
       strokeWidth="4"
     />
   </svg>
 );
-
-// export const Mail = () => (
-//   <svg viewBox="0 0 64 48" height="20">
-//     <path
-//       style={{ fill: 'f0f0f0' }}
-//       d="M63.47,5.17A8,8,0,0,0,56,0H8A8,8,0,0,0,.48,5.33,7.44,7.44,0,0,0,0,8V40a8,8,0,0,0,5,7.41A7.85,7.85,0,0,0,8,48H56a7.32,7.32,0,0,0,2.85-.56A7.84,7.84,0,0,0,63,43.89,8,8,0,0,0,64,40V8A7.86,7.86,0,0,0,63.47,5.17ZM5.33,8A2.68,2.68,0,0,1,8,5.33H56A2.68,2.68,0,0,1,58.67,8v.51l-21.26,16L33,27.92l-1,.75-1-.78-4.46-3.33L5.33,8.61Zm0,32V15.28L22.11,27.89,5.39,40.45A2,2,0,0,1,5.33,40Zm6,2.67L26.56,31.23l3.84,2.9a2.64,2.64,0,0,0,3.2,0l3.81-2.88L52.53,42.67ZM58.67,40a2,2,0,0,1-.08.56L41.84,27.89,58.67,15.17Z"
-//     />
-//   </svg>
-// );
 
 const mailStyle = { fill: 'none', stroke: '#fff', strokeWidth: 2 };
 export const Mail = () => (
@@ -115,27 +79,51 @@ export const Mail = () => (
     <line style={mailStyle} x1="24" y1="21" x2="18.3" y2="16" />
   </svg>
 );
-// export const Mail = () => (
-//   <svg
-//     viewBox="0 0 24 24"
-//     fill="none"
-//     strokeWidth="2"
-//     height="40"
-//   >
-//     <path
-//       stroke="f0f0f0"
-//       d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
-//     />
-//     <polyline stroke="f0f0f0" points="22,6 12,13 2,6" />
-//   </svg>
-// );
 
-// export const Mail = () => (
-// <svg width="32px" height="32px" viewBox="0 0 32 32">
-//     <g stroke="none" strokeWidth="2" fill="none" fillRule="evenodd">
-//         <g fill="#f0f0f0">
-//             <path d="M5.31500722,9.27391933 C5.12106043,9.45739405 5,9.71770487 5,10.0068455 L5,21.9931545 C5,22.2828882 5.11915965,22.5440384 5.31310687,22.7277332 L5.31310687,22.7277332 L13.05,16 L5.31500722,9.27391933 L5.31500722,9.27391933 L5.31500722,9.27391933 Z M27.6868931,9.27226685 C27.8808404,9.45596162 28,9.71711185 28,10.0068455 L28,21.9931545 C28,22.2822951 27.8789396,22.542606 27.6849928,22.7260807 L19.95,16 L27.6868931,9.27226685 L27.6868931,9.27226685 Z M19.2018297,16.6505829 L26.5,23 L6.5,23 L13.7981703,16.6505829 L16.5,19 L19.2018297,16.6505829 L19.2018297,16.6505829 Z M6.00359486,8 C4.89703997,8 4,8.89451376 4,9.99406028 L4,22.0059397 C4,23.1072288 4.88976324,24 6.00359486,24 L26.9964051,24 C28.10296,24 29,23.1054862 29,22.0059397 L29,9.99406028 C29,8.8927712 28.1102368,8 26.9964051,8 L6.00359486,8 L6.00359486,8 Z M16.5,17.7000122 L26.5,9 L6.5,9 L16.5,17.7000122 L16.5,17.7000122 Z" />
-//         </g>
-//     </g>
-// </svg>
-// );
+export const SearchIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <circle cx="11" cy="11" r="8"></circle>
+    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+  </svg>
+);
+
+export const SunIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <circle cx="12" cy="12" r="5"></circle>
+    <line x1="12" y1="1" x2="12" y2="3"></line>
+    <line x1="12" y1="21" x2="12" y2="23"></line>
+    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+    <line x1="1" y1="12" x2="3" y2="12"></line>
+    <line x1="21" y1="12" x2="23" y2="12"></line>
+    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+  </svg>
+);
+
+export const MoonIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+  </svg>
+);

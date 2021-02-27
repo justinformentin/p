@@ -17,7 +17,7 @@ const Button = styled.button`
   min-width: 4rem;
   padding: 0.75rem 1.5rem;
   text-align: center;
-  transition: ${(props) => props.theme.transitions.default.transition};
+  transition: ${props => props.theme.trans.all};
   user-select: none;
   vertical-align: middle;
   white-space: nowrap;

@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link, graphql } from 'gatsby';
+import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
-import { Layout, Title, ItemTagCategory } from '../components';
+import { ItemTagCategory, Layout } from '../components';
 import config from '../../config/website';
-import { Container } from '../styles/shared';
+import { MaxWidth, Heading } from '../styles/shared';
 
 const Category = ({
   pageContext: { category },
@@ -14,10 +14,8 @@ const Category = ({
 }) => (
   <Layout>
     <Helmet title={`${category} | ${config.siteTitle}`} />
-    <Title title={category}>
-      <Link to="/categories">All Categories</Link>
-    </Title>
-    <Container>
+    <Heading>{category}</Heading>
+    <MaxWidth>
       {edges.map(edge => (
         <ItemTagCategory
           key={edge.node.frontmatter.title}
@@ -30,7 +28,7 @@ const Category = ({
           excerpt={edge.node.excerpt}
         />
       ))}
-    </Container>
+    </MaxWidth>
   </Layout>
 );
 

@@ -1,11 +1,9 @@
-/* eslint max-len: 0 */
-
 import React from 'react';
 import { Link } from 'gatsby';
 import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
-import { Title, Layout } from '../components';
-import { Container } from '../styles/shared';
+import { Layout } from '../components'
+import { MaxWidth, Heading } from '../styles/shared';
 import config from '../../config/website';
 
 const Wrapper = styled.div`
@@ -13,12 +11,12 @@ const Wrapper = styled.div`
   padding: 1rem 5rem;
 `;
 
-const ErrorPage = () => (
+export default () => (
   <Layout>
     <Helmet title={`404 | ${config.siteTitle}`} />
-    <Title title="404" />
+    <Heading>404</Heading>
     <Wrapper>
-      <Container>
+      <MaxWidth>
         <h1> Woops, something went wrong here.</h1>
         <h3>
           The page you wanted to visit no longer exists or is currently
@@ -39,9 +37,7 @@ const ErrorPage = () => (
             </a>{' '}
           </h3>
         </p>
-      </Container>
+      </MaxWidth>
     </Wrapper>
   </Layout>
 );
-
-export default ErrorPage;

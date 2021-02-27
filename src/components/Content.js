@@ -1,34 +1,51 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import prism from '../styles/prism';
+// import prism from '../styles/prism';
+// import { MDXRenderer } from 'gatsby-plugin-mdx';
 
 const Wrapper = styled.div`
+  color: var(--color-text);
   p,
   li {
-    letter-spacing: -0.003em;
-    --baseline-multiplier: 0.179;
-    --x-height-multiplier: 0.35;
-    font-size: 1rem;
-    line-height: 1.58;
+    letter-spacing: 0.2px;
+    font-family: sans-serif;
+    font-size: 18px;
+    line-height: 1.8;
     code {
       padding: 0.2rem 0.5rem;
       margin: 0.5rem 0;
     }
   }
+  p > code,
+  li > code {
+    // color: var(--color-inlinecode);
+    // background: rgb(83 166 222 / 40%);
+    color: var(--color-inlinecode);
+    word-spacing: normal;
+    word-break: normal;
+    border-radius: 5px;
+    padding: 0;
+  }
+  p > code:before {
+    content: '\`';
+  }
+  p > code:after {
+    content: '\`';
+  }
   a:not(.gatsby-resp-image-link):not(.anchor) {
-    color: var(--color-link);
-    border-bottom: 3px solid ${props => props.theme.tint.blue};
-    transition: ${props => props.theme.transitions.default.transition};
+    color: var(--color-md-link);
+    border-bottom: 2px solid var(--color-md-und);
+    transition: ${(props) => props.theme.trans.all};
     text-decoration: none;
     &:hover,
     &:focus {
-      border-bottom: 3px solid ${props => props.theme.colors.primary.light};
+      border-bottom: 2px solid #535684;
     }
   }
   h2 {
-    margin-top: 1rem;
-    font-size: 1.5rem;
+    margin: 0.5rem 0;
+    font-size: 1.75rem;
   }
   h3 {
     font-size: 1.3rem;
@@ -62,15 +79,15 @@ const Wrapper = styled.div`
     float: none;
     top: 50%;
     transform: translateY(-50%);
-    @media (max-width:900px) {
+    @media (max-width: 900px) {
       margin-left: -24px !important;
     }
     svg {
-      fill: ${props => props.theme.colors.black.base};
+      fill: ${(props) => props.theme.colors.black.base};
       visibility: hidden;
       display: block;
       opacity: 0;
-      transition: all 0.3s ease-in-out;
+      transition: ${(props) => props.theme.trans.all};
       width: 20px;
       height: 20px;
       @media (max-width: 900px) {
@@ -81,11 +98,41 @@ const Wrapper = styled.div`
       }
     }
   }
-  ${prism}
+  blockquote {
+    margin: 0px;
+    padding: 1rem 2rem;
+    border-left: 5px solid #619fd4;
+    border-radius: 5px;
+    background: var(--color-bqbg);
+  }
+  // blockquote > :first-child{
+  //   padding: 1rem 0;
+  // }
+  blockquote > p,
+  blockquote > h5,
+  blockquote > h6 {
+    padding: 0;
+    margin: 0;
+  }
+  .one-monokai .mtk1 {
+    color: #d5d5d5;
+  }
+  .grvsc-gutter {
+    color: #d5d5d5;
+  }
+  .grvsc-source{
+    color: var(--color-background);
+  }
 `;
+
+// ${prism}
 
 const Content = ({ input }) => (
   <Wrapper dangerouslySetInnerHTML={{ __html: input }} />
+
+  // <Wrapper>
+  // <MDXRenderer>{input}</MDXRenderer>
+  // </Wrapper>
 );
 
 export default Content;

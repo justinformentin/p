@@ -1,55 +1,84 @@
-import styled from 'styled-components';
-import theme from '../../config/theme';
+import styled, { css } from 'styled-components';
 
-export const MaxWidth = styled.div`
-  position: relative;
-  z-index: 2;
+export const sharedText = (props) => css`
+  z-index: 10;
+  color: var(--color-text);
+  transition: ${(props) => props.theme.trans.color};
+`;
+
+export const sharedCentered = (props) => css`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+`;
+
+export const Spacer = styled.div`
   width: 100%;
-  max-width: 1100px;
+  height: 30px;
+`;
+
+export const H1 = styled.h1`
+  ${sharedText}
+  font-size: 2rem;
+  margin-top: 0;
+  margin-bottom: 0;
+`;
+
+export const H2 = styled.h2`
+  ${sharedText}
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 1.2rem;
+`;
+
+export const H3 = styled.h3`
+  font-size: 1.75rem;
+  display: inline-block;
+  margin-top: 0;
+  margin-bottom: 0;
+  ${sharedText}
+`;
+
+export const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+export const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const Heading = styled(H2)`
+  padding-top: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: ${(props) => props.align || 'center'};
+  color: var(--color-bluehead);
+`;
+
+export const maxWidthBase = () => css`
+  position: relative;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 0 2rem 0 2rem;
 `;
 
-export const Card = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 2rem;
-  align-items: center;
-  color: ${theme.colors.black.base};
-  border-radius: ${theme.borderRadius.default};
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-  position: relative;
+export const MaxWidth = styled.div`
+  ${maxWidthBase}
 `;
 
 export const Line = styled.div`
   width: 100%;
   height: 2px;
-  background: var(--color-text);
+  background: var(--color-grey);
   margin-top: 2rem;
   margin-bottom: 1rem;
 `;
 
 export const Centered = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const Container = styled.div`
-  // color: var(--theme-text);
-  // padding: 2rem;
-  // margin: 0 auto;
-  // width: 60%;
-  // @media (max-width: 1600px) {
-  //   width: 75%;
-  // }
-  // @media (max-width: 1200px) {
-  //   width: 80%;
-  // }
-  // @media (max-width: 600px) {
-  //   width: 100%;
-  // }
+  ${sharedCentered}
 `;
 
 export const InfoText = styled.div`
@@ -84,55 +113,3 @@ export const Number = styled.span`
   font-size: 0.9rem;
   color: white;
 `;
-
-export const Base = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-// display: flex;
-// flex-flow: row wrap;
-// justify-content: space-between;
-// margin: 0 auto;
-// &::after {
-//   content: '';
-//   flex: 0 0 32%;
-// }
-// @media (max-width: 800px) {
-//   flex-direction: column;
-// }
-// `;
-
-export const PostWrapper = styled.div`
-  height: 100%;
-  margin-bottom: 2rem;
-  flex-direction: column;
-  display: flex;
-  // max-width: 30rem;
-`;
-
-//   // flex-basis: calc(99.9% * 1 / 3 - 2.5rem);
-//   // max-width: calc(99.9% * 1 / 3 - 2.5rem);
-//   // width: calc(99.9% * 1 / 3 - 2.5rem);
-//   // @media (max-width: 1340px) {
-//   //   height: 17rem;
-//   // }
-//   // @media (max-width: 1200px) {
-//     // &:nth-child(n) {
-//     //   flex-basis: calc(99.9% * 1 / 2 - 1rem);
-//     //   max-width: calc(99.9% * 1 / 2 - 1rem);
-//     //   width: calc(99.9% * 1 / 2 - 1rem);
-//     //   height: 15rem;
-//     // }
-//   // }
-//   // @media (max-width: 1080px) {
-//   //   margin-bottom: 2rem;
-//   // }
-//   @media (max-width: 800px) {
-//     flex-direction: column;
-//     // &:nth-child(n) {
-//     //   flex-basis: 100%;
-//     //   max-width: 100%;
-//     //   width: 100%;
-//     // }
-//   }
-// `;

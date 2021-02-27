@@ -83,23 +83,23 @@ const SEO = (props) => {
       <link
         rel="apple-touch-icon"
         sizes="180x180"
-        href="/favicons/apple-touch-icon.png"
+        href="/static/apple-touch-icon.png"
       />
       <link
         rel="icon"
         type="image/png"
         sizes="32x32"
-        href="/favicons/favicon-32x32.png"
+        href="/static/favicon-32x32.png"
       />
       <link
         rel="icon"
         type="image/png"
         sizes="16x16"
-        href="/favicons/favicon-16x16.png"
+        href="/static/favicon-16x16.png"
       />
       <link
         rel="mask-icon"
-        href="/favicons/safari-pinned-tab.svg"
+        href="/static/safari-pinned-tab.svg"
         color="#343849"
       />
       <meta name="apple-mobile-web-app-title" content="Justin Formentin" />

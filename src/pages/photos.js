@@ -11,6 +11,22 @@ const DefText = styled.div`
   bottom: 50%;
   transform: translate(-50%, -50%);
 `;
+const ButtonWrap = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+const PageButton = styled.div`
+  border: none;
+  border-radius: 4px;
+  padding: 5px 8px;
+  margin: 1rem;
+  box-shadow: 2px 2px 7px 1px rgb(0 0 0 / 30%);
+  color: var(--color-background);
+  background: var(--color-bluehead);
+  &:hover {
+    cursor: pointer;
+  }
+`;
 // const flickrKey = 'faff5a05c8a527a64872b8ad415daf46';
 // const flickrSecret = 'ce481e6ab45c99a3';
 
@@ -36,13 +52,23 @@ const Photos = () => {
 
   const fetchBase = (url) => fetch(url).then((r) => r.json());
 
+  const loadPrevPage = () => {
+    setCurrentPage((c) => c - 1);
+  };
+
   const loadNextPage = () => {
     if (!fetching) {
       setFetching(true);
-      const nextPhotoPageUrl =
-        recentPhotosUrl + '&page=' + String(currentPage + 1);
-      setCurrentPage((c) => c + 1);
-      fetchPhotos(nextPhotoPageUrl, currentPage + 1);
+      console.log('photos[currentPage + 1]', photos[currentPage + 1]);
+      if (photos[currentPage + 1] && photos[currentPage + 1].length > 0) {
+        setCurrentPage((c) => c + 1);
+        setFetching(false);
+      } else {
+        const nextPhotoPageUrl =
+          recentPhotosUrl + '&page=' + String(currentPage + 1);
+        setCurrentPage((c) => c + 1);
+        fetchPhotos(nextPhotoPageUrl, currentPage + 1);
+      }
     }
   };
 
@@ -69,12 +95,14 @@ const Photos = () => {
 
   useEffect(() => {
     getPhotosetPhotos();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     Object.keys(photos) &&
       Object.keys(photos).length > 0 &&
       setPhotosLoaded(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [photos]);
 
   const Loader = () => <DefText>Loading ...</DefText>;
@@ -93,7 +121,12 @@ const Photos = () => {
 
   return (
     <Layout>
-      <button onClick={loadNextPage}>Next Page</button>
+      <ButtonWrap>
+        {currentPage > 1 && (
+          <PageButton onClick={loadPrevPage}>Previous Page</PageButton>
+        )}
+        <PageButton onClick={loadNextPage}>Next Page</PageButton>
+      </ButtonWrap>
       <PhotoArea />
     </Layout>
   );

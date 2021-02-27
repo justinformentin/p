@@ -6,10 +6,13 @@ date: "2018-10-30"
 chunk: "Learn how to build a site using Gatsby from empty folder to deployment."
 kind: "Article"
 category: "Gatsby"
+published: "true"
+
 tags:
     - React
     - Development
 ---
+
 > This guide is for Gatsby Version 2.
 
 ##Table of Contents
@@ -92,7 +95,7 @@ To start, install the dependencies with `npm i react react-dom gatsby gatsby-sou
 
 Next create the `gatsby-config.js` file and enter the site metadata. Make sure the file is in the root of the project, not in /src.
 
-```jsx{3}
+```jsx
 // gatsby-config.js
 module.exports = {
   siteMetadata: {
@@ -106,7 +109,7 @@ module.exports = {
 
 Let's create a layout component. It will include the features that we want rendered on all pages, such as the header, the footer, etc. Create the folder `layouts` and in it `index.jsx`. We need to pass the {children} so that whatever we put in our components gets rendered down the line.
 
-```jsx{6}
+```jsx
 // src/layouts/index.jsx
 import React from 'react'
 
@@ -1372,9 +1375,9 @@ module.exports = {
   url: 'https://gatsby-tutorial-starter.netlify.com', // Site domain without trailing slash
   siteURL: 'https://gatsby-tutorial-starter.netlify.com/', // url + pathPrefix
   siteLanguage: 'en', // Language Tag on <html> element
-  logo: 'src/static/logo/logo.png',
-  banner: 'src/static/logo/banner.png',
-  favicon: 'src/static/logo/favicon.png', // Manifest favicon generation
+  logo: 'static/logo/logo.png',
+  banner: 'static/logo/banner.png',
+  favicon: 'static/logo/favicon.png', // Manifest favicon generation
   shortName: 'GatsbyTut', // Shortname for manifest, must be shorter than 12 characters
   author: 'Justin', // Author for schemaORGJSONLD
   themeColor: '#3e7bf2',
