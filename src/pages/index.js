@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { HomeSidebar, Layout } from '../components';
 import { Row, Column, Heading, maxWidthBase } from '../styles/shared';
 import { PostList } from '../components/BlogPageBase';
-import { useAllViews } from '../hooks/usePageViews';
 
 const MaxWidthRow = styled(Row)`
   ${maxWidthBase};

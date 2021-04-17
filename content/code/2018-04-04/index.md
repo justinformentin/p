@@ -1,18 +1,15 @@
 ---
-title: "Another Way To Build A Blockchain Section 1: The Blocks"
-path: "another-blockchain-guide-1"
-cover: "./chain.jpg"
-date: "2018-04-04"
-chunk: "Guide on how to build a fully functional Blockchain using JavaScript."
-category: "Blockchain"
+title: 'Another Way To Build A Blockchain'
+path: 'another-blockchain-guide'
+cover: './chain.jpg'
+date: '2018-04-04'
+chunk: 'Guide on how to build a fully functional Blockchain using JavaScript.'
+category: 'Blockchain'
 tags:
-    - Cryptocurrency
-    - JavaScript
-published: "true"
+  - Blockchain
+  - JavaScript
+published: 'true'
 ---
-
-
-
 
 ## Create the Block Class
 
@@ -165,7 +162,7 @@ class Blockchain {
   }
 
   addBlock(data) {
-    const block = Block.mineBlock(this.chain[this.chain.length-1], data);
+    const block = Block.mineBlock(this.chain[this.chain.length - 1], data);
     this.chain.push(block);
     return block;
   }
@@ -244,7 +241,7 @@ describe('Blockchain', () => {
   it('adds a new block', () => {
     const data = 'foo';
     bc.addBlock(data);
-    expect(bc.chain[bc.chain.length-1].data).toEqual(data);
+    expect(bc.chain[bc.chain.length - 1].data).toEqual(data);
   });
 });
 ```
@@ -312,7 +309,7 @@ app.get('/blocks', (req, res) => {
   res.json(bc.chain);
 });
 
-app.listen(HTTP_PORT, () => console.log(`Listening on port: ${HTTP_PORT}`));
+app.listen(HTTP_PORT, () => console.log(`Listening on port: ${HTTP_PORT}`));
 ```
 
 Now in package.json, add the `start` and `dev` scripts to the “scripts” section:
@@ -348,7 +345,6 @@ Re-open Postman. Open a tab for a new request. Make sure it’s a POST request. 
 ```
 
 Enter `localhost:3001/mine` for the endpoint. Send. See the newly posted block in the chain.
-
 
 ## Connect to Peers
 
@@ -405,7 +401,7 @@ connectSocket(socket) {
 }
 ```
 
-Kill all the running instances on the command line. Fire up one instance with `$ npm run dev` Grow this blockchain a little. Open Postman, and fire two post requests to the mine endpoint. The endpoint is `localhost:3001/mine`, and the Raw→ Body → Type → application/json: ```{ “data”: “foo” }``` Send. Send. Run a second instance in a second command line tab: `$ HTTP_PORT=3002 P2P_PORT=5002 PEERS=ws://localhost:5001 npm run dev` Observe the received message - the blockchain of the original instance. #### P2P Server Install the Websocket module: `ws`. This will allow us to create real-time connections between multiple users of the blockchain: `$ npm i ws --save` Create a file called p2p-server.js (peer-to-peer) to write the `P2pServer` class. Right now the `P2pServer` class will open a websocket server, waiting for connections.
+Kill all the running instances on the command line. Fire up one instance with `$ npm run dev` Grow this blockchain a little. Open Postman, and fire two post requests to the mine endpoint. The endpoint is `localhost:3001/mine`, and the Raw→ Body → Type → application/json: `{ “data”: “foo” }` Send. Send. Run a second instance in a second command line tab: `$ HTTP_PORT=3002 P2P_PORT=5002 PEERS=ws://localhost:5001 npm run dev` Observe the received message - the blockchain of the original instance. #### P2P Server Install the Websocket module: `ws`. This will allow us to create real-time connections between multiple users of the blockchain: `$ npm i ws --save` Create a file called p2p-server.js (peer-to-peer) to write the `P2pServer` class. Right now the `P2pServer` class will open a websocket server, waiting for connections.
 
 ```js
 const Websocket = require('ws');
@@ -420,7 +416,7 @@ class P2pServer {
 
   listen() {
     const server = new Websocket.Server({ port: P2P_PORT });
-    server.on('connection', socket => this.connectSocket(socket));
+    server.on('connection', (socket) => this.connectSocket(socket));
   }
 
   connectSocket(socket) {
@@ -472,10 +468,9 @@ app.post('/mine’, (req, res) => {
 });
 ```
 
-Confirm the chain synchronization. Kill all the running instances on the command line. Fire up one instance with `$ npm run dev` Grow this blockchain a little. Open Postman, and fire two post requests to the mine endpoint. The endpoint is `localhost:3001/mine`, and the Raw→ Body → Type → application/json: ```{ “data”: “foo” }``` Send. Send. Run a second instance in a second command line tab: `$ HTTP_PORT=3002 P2P_PORT=5002 PEERS=ws://localhost:5001 npm run dev` Hit `localhost:3002/blocks`. Notice the synchronization. Check that the post method also synchronization. Add a new block, with `localhost:3001/mine`: Hit localhost:3001/mine Now `localhost:3002/blocks` and `localhost:3002/blocks` should return the same chain.
+Confirm the chain synchronization. Kill all the running instances on the command line. Fire up one instance with `$ npm run dev` Grow this blockchain a little. Open Postman, and fire two post requests to the mine endpoint. The endpoint is `localhost:3001/mine`, and the Raw→ Body → Type → application/json: `{ “data”: “foo” }` Send. Send. Run a second instance in a second command line tab: `$ HTTP_PORT=3002 P2P_PORT=5002 PEERS=ws://localhost:5001 npm run dev` Hit `localhost:3002/blocks`. Notice the synchronization. Check that the post method also synchronization. Add a new block, with `localhost:3001/mine`: Hit localhost:3001/mine Now `localhost:3002/blocks` and `localhost:3002/blocks` should return the same chain.
 
 Next, onto Proof of Work.
-
 
 ## Dynamic Difficulty
 
@@ -613,11 +608,15 @@ Test difficulty adjustment in `block.test.js`:
 
 ```js
 it('lowers the difficulty for slowly mined blocks', () => {
-  expect(Block.adjustDifficulty(block, block.timestamp+360000)).toEqual(block.difficulty-1);
+  expect(Block.adjustDifficulty(block, block.timestamp + 360000)).toEqual(
+    block.difficulty - 1
+  );
 });
 
 it('raises the difficulty for quickly mined blocks', () => {
-  expect(Block.adjustDifficulty(block, block.timestamp+1)).toEqual(block.difficulty+1);
+  expect(Block.adjustDifficulty(block, block.timestamp + 1)).toEqual(
+    block.difficulty + 1
+  );
 });
 ```
 
@@ -625,7 +624,9 @@ Also update the test that previously depended on `DIFFICULTY`, since blocks have
 
 ```js
 it('generates a hash that matches the difficulty', () => {
- 	expect(block.hash.substring(0, block.difficulty)).toEqual('0'.repeat(block.difficulty));
+  expect(block.hash.substring(0, block.difficulty)).toEqual(
+    '0'.repeat(block.difficulty)
+  );
 });
 ```
 
@@ -667,7 +668,6 @@ it('generates a hash that matches the difficulty', () => {
 
 Next we will dive into making the wallet.
 
-
 ## Create the Util Key Gen
 
 To create the keyPair and publicKey objects objects, use a module called 'elliptic’. Elliptic is a module in node that contains classes and methods that enable elliptic-curve based cryptography. Elliptic cryptography is an advanced mathematical subject, but essentially, it centers around the idea in that it is computationally infeasible and impossibly expensive to guess the answer to a randomly generated elliptic curve. Install elliptic as a dependency on the command line: `$ npm i elliptic --save` With the elliptic module installed, create a new file at the root of the project called chain-util.js. Within chain-util.js, create a ChainUtil class. The class will collect helper methods that expose common functions that wrap around functions from elliptic. A few classes in the project will use these functions. Also create an EC instance:
@@ -699,7 +699,7 @@ const ChainUtil = require('../chain-util');
 ...
   this.keyPair = ChainUtil.genKeyPair();
   this.publicKey = this.keyPair.getPublic();
-  ```
+```
 
 ## Create the Transaction
 
@@ -735,10 +735,15 @@ class Transaction {
 
     const transaction = new this();
 
-    transaction.outputs.push(...[
-      { amount: senderWallet.balance - amount, address: senderWallet.publicKey },
-      { amount, address: recipient }
-    ]);
+    transaction.outputs.push(
+      ...[
+        {
+          amount: senderWallet.balance - amount,
+          address: senderWallet.publicKey,
+        },
+        { amount, address: recipient },
+      ]
+    );
 
     return transaction;
   }
@@ -764,7 +769,7 @@ class Wallet {
   toString() {
     return `Wallet -
     publicKey : ${this.publicKey.toString()}
-    balance   : ${this.balance}`
+    balance   : ${this.balance}`;
   }
 }
 
@@ -831,7 +836,7 @@ static hash(timestamp, lastHash, data, nonce, difficulty) {
 Do the same thing in the transaction class to create a hash for the transaction outputs. Head to transaction.js. Now within the sign function call from the sender wallet, make sure to create a hash for the transaction outputs, before we generate the signature:
 
 ```js
-signature: senderWallet.sign(ChainUtil.hash(transaction.outputs))
+signature: senderWallet.sign(ChainUtil.hash(transaction.outputs));
 ```
 
 Lastly, make sure to generate an input by using this function whenever a new transaction is created. Therefore, call the `signTransaction` function in `newTransaction`, passing in the transaction instance, and the senderWallet:
@@ -846,7 +851,7 @@ Add a test to make sure that this input object was created along with our transa
 
 ```js
 it('inputs the balance of the wallet', () => {
-   expect(transaction.input.amount).toEqual(wallet.balance);
+  expect(transaction.input.amount).toEqual(wallet.balance);
 });
 ```
 
@@ -884,15 +889,15 @@ describe('and updating a transaction', () => {
 Add some tests to ensure that the signature verification works properly. In transaction.test.js
 
 ```js
-  it('validates a valid transaction', () => {
-    expect(Transaction.verifyTransaction(transaction)).toBe(true);
-  });
+it('validates a valid transaction', () => {
+  expect(Transaction.verifyTransaction(transaction)).toBe(true);
+});
 
-  it('invalidates a corrupt transaction', () => {
-    transaction.outputs[0].amount = 50000;
-    expect(Transaction.verifyTransaction(transaction)).toBe(false);
-  });
-  ```
+it('invalidates a corrupt transaction', () => {
+  transaction.outputs[0].amount = 50000;
+  expect(Transaction.verifyTransaction(transaction)).toBe(false);
+});
+```
 
 `$ npm run test`
 
@@ -914,13 +919,16 @@ describe('Transaction', () => {
   });
 
   it('ouputs the `amount` subtracted from the wallet balance', () => {
-    expect(transaction.outputs.find(output => output.address === wallet.publicKey).amount)
-      .toEqual(wallet.balance - amount);
+    expect(
+      transaction.outputs.find((output) => output.address === wallet.publicKey)
+        .amount
+    ).toEqual(wallet.balance - amount);
   });
 
   it('outputs the `amount` added to the recipient', () => {
-    expect(transaction.outputs.find(output => output.address === recipient).amount)
-      .toEqual(amount);
+    expect(
+      transaction.outputs.find((output) => output.address === recipient).amount
+    ).toEqual(amount);
   });
 
   describe('transacting with an amount that exceeds the balance', () => {
@@ -932,7 +940,7 @@ describe('Transaction', () => {
     it('does not create the transaction', () => {
       expect(transaction).toEqual(undefined);
     });
-});
+  });
 });
 ```
 
@@ -1111,15 +1119,18 @@ describe('TransactionPool', () => {
   });
 
   it('adds a transaction to the pool', () => {
-    expect(tp.transactions.find(t => t.id === transaction.id)).toEqual(transaction);
+    expect(tp.transactions.find((t) => t.id === transaction.id)).toEqual(
+      transaction
+    );
   });
 
   it('updates a transaction in the pool', () => {
     const oldTransaction = JSON.stringify(transaction);
     const newTransaction = transaction.update(wallet, 'foo-4ddr355', 40);
     tp.updateOrAddTransaction(newTransaction);
-    expect(JSON.stringify(tp.transactions.find(t => t.id === newTransaction.id)))
-      .not.toEqual(oldTransaction);
+    expect(
+      JSON.stringify(tp.transactions.find((t) => t.id === newTransaction.id))
+    ).not.toEqual(oldTransaction);
   });
 });
 ```
@@ -1156,13 +1167,19 @@ describe('Wallet', () => {
       });
 
       it('doubles the `sendAmount` subtracted from the wallet balance', () => {
-        expect(transaction.outputs.find(output => output.address === wallet.publicKey).amount)
-        .toEqual(wallet.balance - sendAmount*2);
+        expect(
+          transaction.outputs.find(
+            (output) => output.address === wallet.publicKey
+          ).amount
+        ).toEqual(wallet.balance - sendAmount * 2);
       });
 
       it('clones the `sendAmount` output for the recipient', () => {
-        expect(transaction.outputs.filter(output => output.address === recipient)
-          .map(output => output.amount)).toEqual([sendAmount, sendAmount]);
+        expect(
+          transaction.outputs
+            .filter((output) => output.address === recipient)
+            .map((output) => output.amount)
+        ).toEqual([sendAmount, sendAmount]);
       });
     });
   });
@@ -1182,9 +1199,13 @@ class TransactionPool {
   }
 
   updateOrAddTransaction(transaction) {
-    let transactionWithId = this.transactions.find(t => t.id === transaction.id);
+    let transactionWithId = this.transactions.find(
+      (t) => t.id === transaction.id
+    );
     if (transactionWithId) {
-      this.transactions[this.transactions.indexOf(transactionWithId)] = transaction;
+      this.transactions[
+        this.transactions.indexOf(transactionWithId)
+      ] = transaction;
     } else {
       this.transactions.push(transaction);
     }
@@ -1254,7 +1275,7 @@ Add the existingTransaction function to transaction-pool.js:
 existingTransaction(address) {
    return this.transactions.find(transaction => transaction.input.address === address);
  }
- ```
+```
 
 Now onto the Miner.
 
@@ -1312,7 +1333,7 @@ validTransactions() {
 
 Note that there is a dependency though on the Transaction class. So import the Transaction class at the top of the file:
 
-```jsconst Transaction = require('../wallet/transaction');```
+`jsconst Transaction = require('../wallet/transaction');`
 
 ## Test Valid Transactions
 
@@ -1331,10 +1352,10 @@ describe('mixing valid and corrupt transactions', () => {
   let validTransactions;
   beforeEach(() => {
     validTransactions = [...tp.transactions];
-    for (let i=0; i<6; i++) {
+    for (let i = 0; i < 6; i++) {
       wallet = new Wallet();
       transaction = wallet.createTransaction('r4nd-4dr355', 30, bc, tp);
-      if (i%2==0) {
+      if (i % 2 == 0) {
         transaction.input.amount = 9999;
       } else {
         validTransactions.push(transaction);
@@ -1343,7 +1364,9 @@ describe('mixing valid and corrupt transactions', () => {
   });
 
   it('shows a difference between valid and corrupt transactions', () => {
-    expect(JSON.stringify(tp.transactions)).not.toEqual(JSON.stringify(validTransactions));
+    expect(JSON.stringify(tp.transactions)).not.toEqual(
+      JSON.stringify(validTransactions)
+    );
   });
 
   it('grabs valid transactions', () => {

@@ -42,9 +42,9 @@ export const PostDetails = ({ date, category, ttr }) => {
   return(
   <Information>
     {formattedDate}
-    <LightLine>-</LightLine>
+    {/* <LightLine>-</LightLine> */}
     {/* <StyledLink to={`/categories/${category.toLowerCase()}`}> */}
-      {category}
+      {/* {category} */}
     {/* </StyledLink> */}
     <LightLine>-</LightLine>
     {ttr} min

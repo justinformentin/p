@@ -2,7 +2,7 @@ module.exports = {
   // Basics
   codePostDir: 'code',
   generalPostDir: 'general',
-  snippetsPostDir: 'snippets',
+  // snippetsPostDir: 'snippets',
   // Meta Data
   siteTitle: 'Justin Formentin - Personal Portfolio and Blog',
   siteTitleAlt: 'JustinFormentin',

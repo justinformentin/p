@@ -1,18 +1,14 @@
 ---
-title: "My Foray Into Online Media Publishing"
-path: "my-foray-into-online-media-publishing"
-cover: "./baby.jpg"
-chunk: "Lessons I learned when failing to build a profitable website."
-date: "2018-04-02"
-category: "Personal"
+title: 'My Foray Into Online Media Publishing'
+path: 'my-foray-into-online-media-publishing'
+cover: './baby.jpg'
+chunk: 'Lessons I learned when failing to build a profitable website.'
+date: '2018-04-02'
+category: 'Personal'
 tags:
-    - Learning
-published: "true"
+  - Personal
+published: 'true'
 ---
-
-
-
-
 
 I can't remember what started it, but a few years ago I was reading some articles that outlined affiliate revenue for some different sites. I looked through estimated earnings for advertising revenue for some others. It seemed like everyone was making a ton of money from their websites. Some terrible quality click bait sites were making more money than I've ever seen in a single month. I wanted a piece of that. Just look at when The New York Times bought [thewirecutter.com](https:/thewirecutter.com) a couple years ago for [$30 million dollars](https://www.recode.net/2016/10/24/13381002/new-york-times-wirecutter-purchase-30-million-briam-lam-consumer-guide). "I can do that", I naively though.
 

@@ -4,7 +4,7 @@ const _ = require('lodash');
 const pathPrefixes = {
   code: '/code',
   general: '/general',
-  snippets: '/snippets',
+  // snippets: '/snippets',
 };
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
@@ -34,7 +34,7 @@ exports.createPages = ({ graphql, actions }) => {
 
   return new Promise((resolve, reject) => {
     const postPage = path.resolve('src/templates/post.js');
-    const snippetPage = path.resolve('src/templates/snippet.js');
+    // const snippetPage = path.resolve('src/templates/snippet.js');
     const tagPage = path.resolve('src/templates/tag.js');
     const categoryPage = path.resolve('src/templates/category.js');
     resolve(
@@ -80,24 +80,6 @@ exports.createPages = ({ graphql, actions }) => {
               }
             }
           }
-          snippets: allMarkdownRemark(
-            filter: { fields: { sourceInstanceName: { eq: "snippets" } } }
-            sort: { fields: [frontmatter___date], order: DESC }
-          ) {
-            edges {
-              node {
-                frontmatter {
-                  lang
-                  chunk
-                  title
-                  published
-                }
-                fields {
-                  slug
-                }
-              }
-            }
-          }
         }
       `).then((result) => {
         if (result.errors) {
@@ -110,7 +92,7 @@ exports.createPages = ({ graphql, actions }) => {
 
         const codeList = result.data.code.edges;
         const generalList = result.data.general.edges;
-        const snippetList = result.data.snippets.edges;
+        // const snippetList = result.data.snippets.edges;
 
         const addTagsAndCats = (frontmatter) => {
           frontmatter.tags &&
@@ -119,10 +101,10 @@ exports.createPages = ({ graphql, actions }) => {
         };
 
         const prevPage = (posts, idx) =>
-          idx === 0 ? null : posts[idx - 1].node;
+          idx === 0 ? null : posts[idx - 1] && posts[idx - 1].node;
 
         const nextPage = (posts, idx) =>
-          idx === posts.length - 1 ? null : posts[idx + 1].node;
+          idx === posts.length - 1 ? null : posts[idx + 1] && posts[idx + 1].node;
 
         const createContext = (post, postList, idx) => ({
           slug: post.node.fields.slug,
@@ -147,9 +129,9 @@ exports.createPages = ({ graphql, actions }) => {
           handleList(generalList, postPage, post, idx)
         );
 
-        snippetList.forEach((snippet, idx) =>
-          handleList(snippetList, snippetPage, snippet, idx)
-        );
+        // snippetList.forEach((snippet, idx) =>
+        //   handleList(snippetList, snippetPage, snippet, idx)
+        // );
 
         const tagList = Array.from(tagSet);
         tagList.forEach((tag) => {
@@ -191,6 +173,28 @@ exports.onCreateWebpackConfig = ({ actions }) => {
 //         lang
 //         tags
 //         title
+//       }
+//       fields {
+//         slug
+//       }
+//     }
+//   }
+// }
+
+
+
+
+// snippets: allMarkdownRemark(
+//   filter: { fields: { sourceInstanceName: { eq: "snippets" } } }
+//   sort: { fields: [frontmatter___date], order: DESC }
+// ) {
+//   edges {
+//     node {
+//       frontmatter {
+//         lang
+//         chunk
+//         title
+//         published
 //       }
 //       fields {
 //         slug

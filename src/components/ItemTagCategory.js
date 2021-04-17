@@ -3,23 +3,21 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
 import kebabCase from 'lodash/kebabCase';
+import { PostDetails } from './PostDetails';
 
 const Wrapper = styled.article`
   display: flex;
   flex-direction: column;
-  margin: 2rem 3rem 4rem 3rem;
-  margin-top: 2rem;
+  margin: 2rem;
   justify-content: center;
   text-align: center;
 `;
 
 const Information = styled.div`
-  h1 {
-    font-size: 2rem;
-    margin-bottom: 1.25rem;
-    display: inline-block;
+  h2 {
     color: var(--color-text);
-    transition: ${props => props.theme.trans.all};
+    margin-bottom: 0.5rem;
+    transition: ${(props) => props.theme.trans.all};
     &:hover {
       color: var(--color-grey);
     }
@@ -29,7 +27,10 @@ const Information = styled.div`
 const Statistics = styled.div`
   color: var(--color-grey);
   margin-bottom: 1rem;
-  a{
+  display: flex;
+  justify-content: center;
+  font-size: 20px;
+  a {
     color: var(--color-text);
   }
 `;
@@ -38,21 +39,25 @@ const Excerpt = styled.div`
   margin-top: 1rem;
 `;
 
-const ItemTagCategory = ({ category, path, title, date, excerpt }) => (
+const ItemTagCategory = ({ category, path, title, date, chunk, ttr }) => {
+  console.log('chunk', chunk)
+  return (
   <Wrapper>
     <Information>
       <Link to={path}>
-        <h1>{title}</h1>
+        <h2>{title}</h2>
       </Link>
       <Statistics>
-        {date} | Category:{' '}
-        <Link to={`/categories/${kebabCase(category)}`}>{category}</Link>
+      <PostDetails date={date} ttr={ttr} />
+
+        {/* {date} | Category:{' '} */}
+        {/* <Link to={`/categories/${kebabCase(category)}`}>{category}</Link> */}
       </Statistics>
-      <Excerpt>{excerpt}</Excerpt>
+      <Excerpt>{chunk}</Excerpt>
     </Information>
   </Wrapper>
 );
-
+  }
 export default ItemTagCategory;
 
 ItemTagCategory.propTypes = {

@@ -190,6 +190,8 @@ export function HomeSidebar() {
           <Mail />
         </IconLink>
       </IconWrap>
+      <Heading></Heading>
+
       <Heading>Tags</Heading>
       <RefBlock ref={refBlock} playing={playing}>
         {!playing && (
@@ -213,17 +215,6 @@ export function HomeSidebar() {
           </GameButton>
         </ButtonWrap>
       )}
-      <Heading>Categories</Heading>
-      <TagContainer>
-        {allCats.map((cat) => (
-          <TagWrapper
-            key={cat.fieldValue}
-            to={`/categories/${kebabCase(cat.fieldValue)}`}
-          >
-            {cat.fieldValue}
-          </TagWrapper>
-        ))}
-      </TagContainer>
     </SideBarWrap>
   );
 }

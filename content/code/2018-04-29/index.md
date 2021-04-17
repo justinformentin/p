@@ -7,7 +7,7 @@ chunk: "Test and automate web browsers actions using Selenium."
 category: "Python"
 tags:
     - Automation
-    - Selenium
+    - Python
 published: "true"
 ---
 

@@ -99,7 +99,7 @@ const Wrapper = styled.div`
     }
   }
   blockquote {
-    margin: 0px;
+    margin: 1rem 0px;
     padding: 1rem 2rem;
     border-left: 5px solid #619fd4;
     border-radius: 5px;

@@ -70,7 +70,7 @@ const ResultWrap = styled.div`
 
 const SearchItem = styled.div`
   margin-bottom: 0.25rem;
-
+  color: white;
   a {
     color: white;
     &:hover {

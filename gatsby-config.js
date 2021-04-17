@@ -40,13 +40,13 @@ module.exports = {
         path: `${__dirname}/content/${config.generalPostDir}`,
       },
     },
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        name: 'snippets',
-        path: `${__dirname}/content/${config.snippetsPostDir}`,
-      },
-    },
+    // {
+    //   resolve: 'gatsby-source-filesystem',
+    //   options: {
+    //     name: 'snippets',
+    //     path: `${__dirname}/content/${config.snippetsPostDir}`,
+    //   },
+    // },
     {
       resolve: 'gatsby-source-filesystem',
       options: {

@@ -15,7 +15,7 @@ const SuggestionsColumn = styled(Column)`
     cursor: pointer;
     h3 {
       color: #6f6f6f;
-      transition: ${props => props.theme.trans.color};
+      transition: ${(props) => props.theme.trans.color};
     }
   }
 `;
@@ -29,55 +29,26 @@ const Label = styled.div`
   margin-bottom: 1rem;
 `;
 
+const SuggestionsColumnWrap = ({ main, ter, kind }) => {
+  const hasMain = main && main.frontmatter && main.frontmatter.title;
+  const hasSecondary = ter && ter.frontmatter && ter.frontmatter.title;
+  return (
+    hasMain && (
+      <SuggestionsColumn both={hasMain && hasSecondary}>
+        <Link to={main.fields.slug}>
+          <Label>{kind} Post</Label>
+          <H3>{main.frontmatter.title}</H3>
+        </Link>
+      </SuggestionsColumn>
+    )
+  );
+};
+
 const Suggestions = ({ left, right }) => (
   <SuggestionsRow>
-    {left && (
-      <SuggestionsColumn both={left && right}>
-        <Link to={left.fields.slug}>
-          <Label>Previous Post</Label>
-          <H3>{left.frontmatter.title}</H3>
-        </Link>
-      </SuggestionsColumn>
-    )}
-    {right && (
-      <SuggestionsColumn both={left && right}>
-        <Link to={right.fields.slug}>
-          <Label>Next Post</Label>
-          <H3>{right.frontmatter.title}</H3>
-        </Link>
-      </SuggestionsColumn>
-    )}
+    <SuggestionsColumnWrap main={left} ter={right} kind="Previous" />
+    <SuggestionsColumnWrap main={right} ter={left} kind="Next" />
   </SuggestionsRow>
 );
 
 export default Suggestions;
-
-// const Suggestions = ({ left, right }) => {
-//   return (
-//     <SuggestionsRow>
-//       {left && (
-//         <SuggestionsColumn both={left && right}>
-//           <Label>Previous Post</Label>
-//           <div>
-//             <StyledLink>
-//               <TransLink to={left.fields.slug} label={left.frontmatter.title} />
-//             </StyledLink>
-//           </div>
-//         </SuggestionsColumn>
-//       )}
-//       {right && (
-//         <SuggestionsColumn both={left && right}>
-//           <Label>Next Post</Label>
-//           <div>
-//             <StyledLink>
-//               <TransLink
-//                 to={right.fields.slug}
-//                 label={right.frontmatter.title}
-//               />
-//             </StyledLink>
-//           </div>
-//         </SuggestionsColumn>
-//       )}
-//     </SuggestionsRow>
-//   );
-// };

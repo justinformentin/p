@@ -11,18 +11,22 @@ export default ({ pageContext, data }) => {
       <Helmet title={`${pageContext.tag} | ${config.siteTitle}`} />
       <Heading>{pageContext.tag}</Heading>
       <MaxWidth>
-        {data.allMarkdownRemark.edges.map((edge) => (
-          <ItemTagCategory
-            key={edge.node.frontmatter.title}
-            title={edge.node.frontmatter.title}
-            category={edge.node.frontmatter.category}
-            path={edge.node.fields.slug}
-            date={edge.node.frontmatter.date}
-            // timeToRead={edge.node.timeToRead}
-            // tags={edge.node.frontmatter.tags}
-            excerpt={edge.node.excerpt}
-          />
-        ))}
+        {data.allMarkdownRemark.edges.map((edge) => {
+          console.log('edge.node', edge.node);
+          return (
+            <ItemTagCategory
+              key={edge.node.frontmatter.title}
+              title={edge.node.frontmatter.title}
+              category={edge.node.frontmatter.category}
+              path={edge.node.fields.slug}
+              date={edge.node.frontmatter.date}
+              ttr={edge.node.timeToRead}
+              // tags={edge.node.frontmatter.tags}
+              excerpt={edge.node.excerpt}
+              chunk={edge.node.frontmatter.chunk}
+            />
+          );
+        })}
       </MaxWidth>
     </Layout>
   );
@@ -47,6 +51,7 @@ export const pageQuery = graphql`
             kind
             title
             tags
+            chunk
             # date @dateformat(formatString: "MMMM DD, YYYY")
             date
             category

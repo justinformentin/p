@@ -131,7 +131,7 @@ export function PageHeader({ toggleTheme, colorTheme }) {
             {!mobile ? (
               <>
                 <HighlightLink to="/blog" label="Posts" />
-                <HighlightLink to="/snippets" label="Snippets" />
+                {/* <HighlightLink to="/snippets" label="Snippets" /> */}
                 <HighlightLink to="/photos" label="Photos" />
               </>
             ) : null}

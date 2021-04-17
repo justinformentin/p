@@ -27,6 +27,7 @@ const PageButton = styled.div`
     cursor: pointer;
   }
 `;
+
 // const flickrKey = 'faff5a05c8a527a64872b8ad415daf46';
 // const flickrSecret = 'ce481e6ab45c99a3';
 

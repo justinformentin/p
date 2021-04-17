@@ -1,20 +1,15 @@
 ---
-title: "How To Make A Basic Neural Network"
-path: "make-a-basic-neural-network"
-cover: "./justinformentin-neural-net.jpg"
-date: "2018-07-06"
-chunk: "Learn the basics and make a simple Neural Network."
-category: "Python"
+title: 'How To Make A Basic Neural Network'
+path: 'make-a-basic-neural-network'
+cover: './justinformentin-neural-net.jpg'
+date: '2018-07-06'
+chunk: 'Learn the basics and make a simple Neural Network.'
+category: 'Python'
 tags:
-    - Neural Network
-    - Perceptron
-    - Machine Learning
-    - Python
-published: "true"
+  - Machine Learning
+  - Python
+published: 'true'
 ---
-
-
-
 
 ## Overview
 
@@ -22,7 +17,7 @@ In this post I want to give a fairly brief example of a simple single layer feed
 
 ![Justin Formentin Perceptron](./perceptron_schematic_overview.png)
 
-These weight values are mathematically applied to the input in such a way that after each iteration, the output prediction gets more accurate. To show an example of this, we can write some python and use only numpy.  
+These weight values are mathematically applied to the input in such a way that after each iteration, the output prediction gets more accurate. To show an example of this, we can write some python and use only numpy.
 
 ## Main Function
 
