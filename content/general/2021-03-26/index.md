@@ -4,7 +4,7 @@ path: 'were-financially-screwed'
 date: '2021-03-26'
 category: 'Article'
 kind: 'Random'
-chunk: "We're screwed"
+chunk: "We're screwed. This is not financial advice."
 tags:
   - Economics
 published: 'true'

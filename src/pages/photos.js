@@ -28,11 +28,8 @@ const PageButton = styled.div`
   }
 `;
 
-// const flickrKey = 'faff5a05c8a527a64872b8ad415daf46';
-// const flickrSecret = 'ce481e6ab45c99a3';
-
 const baseUrl = (type) =>
-  `https://api.flickr.com/services/rest/?method=flickr.${type}&api_key=faff5a05c8a527a64872b8ad415daf46&user_id=10996771@N05&per_page=24&format=json&nojsoncallback=1`;
+  `https://api.flickr.com/services/rest/?method=flickr.${type}&api_key=${process.env.GATSBY_FLICKR_AUTH}&user_id=10996771@N05&per_page=24&format=json&nojsoncallback=1`;
 
 const Photos = () => {
   const [photosError, setPhotosError] = useState(false);
@@ -58,9 +55,9 @@ const Photos = () => {
   };
 
   const loadNextPage = () => {
-    if (!fetching) {
+    if (!fetching && currentPage < 5) {
       setFetching(true);
-      console.log('photos[currentPage + 1]', photos[currentPage + 1]);
+      // console.log('photos[currentPage + 1]', photos[currentPage + 1]);
       if (photos[currentPage + 1] && photos[currentPage + 1].length > 0) {
         setCurrentPage((c) => c + 1);
         setFetching(false);
@@ -77,7 +74,7 @@ const Photos = () => {
     fetchBase(url)
       .then((p) => {
         const createdPhotos = createPhotos(p.photos.photo);
-        console.log('createdPhotos', createdPhotos);
+        // console.log('createdPhotos', createdPhotos);
         setPhotos((prevState) => ({
           ...prevState,
           [pageNum]: createdPhotos,
@@ -106,19 +103,14 @@ const Photos = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [photos]);
 
-  const Loader = () => <DefText>Loading ...</DefText>;
-
-  const Error = ({ message }) => <DefText>{message}</DefText>;
-
-  const PhotoArea = () => {
-    if (photosError) {
-      return <Error message={'Error fetching photos'} />;
-    } else if (!photosLoaded) {
-      return <Loader />;
-    } else {
-      return <Masonry photos={photos[currentPage]} />;
-    }
-  };
+  const PhotoArea = () =>
+    photosError ? (
+      <DefText>Error fetching photos</DefText>
+    ) : !photosLoaded ? (
+      <DefText>Loading ...</DefText>
+    ) : (
+      <Masonry photos={photos[currentPage]} />
+    );
 
   return (
     <Layout>
@@ -126,7 +118,9 @@ const Photos = () => {
         {currentPage > 1 && (
           <PageButton onClick={loadPrevPage}>Previous Page</PageButton>
         )}
-        <PageButton onClick={loadNextPage}>Next Page</PageButton>
+        {currentPage < 5 && (
+          <PageButton onClick={loadNextPage}>Next Page</PageButton>
+        )}
       </ButtonWrap>
       <PhotoArea />
     </Layout>

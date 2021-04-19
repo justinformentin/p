@@ -19,21 +19,25 @@ This is a list of tips, tricks, facts, opinions, and ways of thinking that I wis
 
 Everything you do should be an improvement. Code quality, test coverage, documentation, etc.
 
-If you're refactoring something, delete the code that isn't getting used anymore. If you're adding something that you've never done before, do some research on existing implementations. If you're doing anything non-trivial, add a test and some documentation.
+If you're refactoring, delete code that isn't getting used anymore. If you're working on something you've never done before, research existing implementations. If you're doing anything non-trivial, add a test and some documentation.
 
-Before you submit a PR, look over your code a few more times. If you can honestly say that you've improved the codebase, even a tiny bit, feel free to submit the PR. If not, go back and figure out how you can make it better.
+Before you submit a PR, look over your code a few more times. If you can't honestly say that you've improved the codebase, even a tiny bit, go back and figure out how you can make it better.
 
-### Do things right the first time.
+### Do it right the first time.
 
 I don't mean you should be perfect and never get anything wrong. You will make mistakes, and that's fine. What I mean is that you should put in the amount of effort you will be proud of, and try to write the best code you can given your abilities and time constraints.
 
-Anyone can just throw together some hacky code that's held together with shoelaces and gum. "It works today, I'll get back to it and clean it up later." You won't. It will inevitably need to be fixed in the future. Some poor bastard will need to make sense of your frankenstein's monster, and often that poor bastard will be you.
+Anyone can just throw together hacky code that's held together with shoelaces and gum. "It works today, I'll get back to it and clean it up later." You won't. It will inevitably need to be fixed in the future. Some poor bastard will need to make sense of your Frankenstein's monster, and often that poor bastard will be you.
 
 ![good_code](./good_code.png)
 
-As codebases and companies grow larger, going back to fix old code becomes increasingly difficult and time consuming. Some people may depend on certain parts of the code, other parts might be intertwined and complicated. As time elapses, the cost per line of code grows exponentially.
+As codebases and companies grow larger, going back to fix old code becomes increasingly difficult and time consuming. As the old Russian proverb goes:
 
-If you make some mistakes and cause some bugs, that's fine. You can always go back and fix them. If you fundamentally architected large chunks of code poorly, going back and refactoring is significantly more difficult.
+> There is nothing more permanent than a temporary solution
+
+Code becomes intertwined, and people might depend on the behavior of the workaround. As time elapses, the cost per line of code grows exponentially.
+
+If you make a few mistakes and cause bugs, that's fine. You can always go back and fix them. If you fundamentally architected large chunks of code poorly, going back and refactoring is significantly more difficult.
 
 ## Learn design patterns early
 
@@ -53,7 +57,7 @@ Speaking of design patterns, it's important to understand that you stand on the 
 
 The reason why today you can write a few lines of code, run a few commands, and have something tangible show up on your browser or phone is the combined effort of everyone that has come before you.
 
-We got here because of rules, guidelines, fundamentals, and designs patterns. You should use them to your advantage.
+We're here today because of rules, guidelines, fundamentals, and designs patterns. You should use them to your advantage.
 
 ![principles](./principles.png)
 
@@ -91,21 +95,19 @@ The real crux of "writing disposable code" is embodying the philosophy that your
 
 It doesn't matter what code you wrote, there should be test coverage to back it up. This improves confidence in your code, reduces bugs, makes it easier to debug, makes it easier to refactor, and makes it easier for other people to understand your code.
 
-You don't need to follow arbitrary rules like 100% coverage, 80% coverage, or an equal number of unit and integration tests.
-
-Write tests in a way that you can get to a place where when something breaks or you need to make changes, you can be confident in the code you're writing.
-
-Because your code will break. All the time.
+You don't need to follow any arbitrary rules like "80% test coverage". What is important is that you're writing tests in a way that allow you to confidently make changes to your code when you need to refactor, or if something breaks. Because your code will break. All the time.
 
 ![testing](./testing.png)
 
-Tests are really the front line of documentation. You should be able to understand what the code does just by reading the tests.
+If refactoring large chunks of code makes you nervous, or there are regressions every other release, it means you don't have enough test coverage.
+
+Tests are also the front line of documentation. You should be able to understand what code does just by reading the tests.
 
 ## Write documentation.
 
 Write comments, and write documentation. No, your code isn't self documenting. If you think you shouldn't write any comments anywhere, I'm sorry to tell you that [you're mistaken](/code/self-documenting-code).
 
-It's true that getting better at [naming things](./code.naming-things) and improving the structure of your code should eliminate the need for many comments. But there is a time and place for writing them, and they're often most useful when explaining the **why** behind some code instead of the **how**.
+It's true that getting better at [naming things](/code/naming-things) and improving the structure of your code should eliminate the need for many comments. But there is a time and place for writing them, and they're often most useful when explaining the **why** behind some code instead of the **how**.
 
 Long form documentation should be written when more complex explanations are necessary or you need to explain whole feature sets to people not in your immediate team.
 
@@ -123,7 +125,7 @@ You should try to write documentation in a way that can be understood by someone
 
 For larger features added in your codebase, documentation should often be written first, in the form of a proof of concept. Why waste time writing code when your idea is off or plain wrong?
 
-Write down what you're planning to code with some explanations with a few code snippets. Then have other developers review it. You'll either get a thumbs up and you can move forward with your plans, or your co-workers will ask questions, offer advice, point out flaws and inconsistencies, or talk about general improvements.
+Write down what you're planning to code with a few explanations and snippets. Then have other developers review it. You'll either get a thumbs up and you can move forward with your plans, or your co-workers will ask questions, offer advice, point out flaws and inconsistencies, or talk about general improvements.
 
 These comments might give you a different point of view, or help you with part of your task. And in the end, you'll have an outline of exactly what code you should write. It's a win-win.
 
@@ -167,7 +169,7 @@ In reality, companies will almost always hire the person with less experience wh
 
 ### Learn to take criticism
 
-Don't take things personally. If someone points out issues with your work, and does so **constructively**, as an emotionally mature individual you should be able to separate yourself from your work. You are not your code, and so criticizing your code is not a criticism of you as a person.
+Don't take things personally. If someone points out issues with your work, and does so **constructively**, as an emotionally mature individual you should be able to separate yourself from your work. You are not your code, so criticizing your code is not a criticism of you as a person.
 
 You should seek out criticism because nobody lives in a vacuum. A different point of view will often help you.
 
@@ -193,7 +195,7 @@ If it's a straightforward task, just do it now. You're in a unique position wher
 
 If you choose to leave a TODO or a comment about a bug, someone else will need to spend extra time just getting to where you are right now in terms of knowing the situation. Since you're already there with full knowledge, just fix it.
 
-If it's more complex and requires some more thought or refactoring, create a ticket so it can be tracked. Don't get in the habit of leaving them or else they'll just increase in number, possibly being put off indefinitely.
+If it's more complex and requires additional thought or refactoring, create a ticket so it can be tracked. Don't get in the habit of leaving them or else they'll just increase in number, possibly being put off indefinitely.
 
 ## Time Prioritization
 
@@ -201,7 +203,7 @@ If you find yourself constantly not finishing tasks on time, or finishing tasks 
 
 A general rule of business you'll hear a lot is "under promise, over deliver". This is true in this case, but not for the purpose of making you look good. It's to give yourself more breathing room, and as a result, make your entire team more efficient.
 
-Think of your place in the team, and how your work affects others. If you're behind, you might need to pull someone else in for help. You might delay something by a day or two which throws off someone else's schedule.
+Think of your place in the team, and how your work affects others. If you're behind, you might need to pull someone else in for help. You might cause a delay that throws off another teammate's schedule.
 
 It might seem counterintuitive at first, but padding your estimations with extra time for the unexpected will often speed up development and help your team flow more smoothly.
 

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
-import kebabCase from 'lodash/kebabCase';
+// import kebabCase from 'lodash/kebabCase';
 import { PostDetails } from './PostDetails';
 
 const Wrapper = styled.article`
@@ -40,7 +40,7 @@ const Excerpt = styled.div`
 `;
 
 const ItemTagCategory = ({ category, path, title, date, chunk, ttr }) => {
-  console.log('chunk', chunk)
+  // console.log('chunk', chunk)
   return (
   <Wrapper>
     <Information>

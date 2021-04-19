@@ -9,7 +9,6 @@ import { useTagsQuery } from '../hooks/useTagsQuery';
 import kebabCase from 'lodash/kebabCase';
 import { Heading } from '../styles/shared';
 import { brickBreakerGame } from './BrickBreaker2';
-import { useCategoriesQuery } from '../hooks/useCategoriesQuery';
 import {useMediaQuery} from '../hooks/useMediaQuery';
 
 const SideBarWrap = styled.div`
@@ -104,9 +103,6 @@ export function HomeSidebar() {
   const tagRef = React.useRef(null);
   const mobile = useMediaQuery('750px');
 
-  const cats = useCategoriesQuery();
-  const allCats = [...cats.code.group, ...cats.general.group];
-
   const { code, general } = useTagsQuery();
   const allTags = [...code.group, ...general.group];
 
@@ -155,7 +151,7 @@ export function HomeSidebar() {
 
   React.useEffect(() => {
     if (playing) {
-      console.log('refBlock', refBlock);
+      // console.log('refBlock', refBlock);
       refBlock.current.style.height = refBlock.current.refHeight;
       refBlock.current.style.width = refBlock.current.refWidth;
     }
@@ -190,8 +186,6 @@ export function HomeSidebar() {
           <Mail />
         </IconLink>
       </IconWrap>
-      <Heading></Heading>
-
       <Heading>Tags</Heading>
       <RefBlock ref={refBlock} playing={playing}>
         {!playing && (

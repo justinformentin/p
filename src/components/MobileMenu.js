@@ -85,7 +85,6 @@ export const Menu = ({
         <MaxWidth>
           <LinkColumn>
             <MenuLink to="/blog">Posts</MenuLink>
-            {/* <MenuLink to="/about">Snippets</MenuLink> */}
             <MenuLink to="/photos">Photos</MenuLink>
             <Row>
               <MobileIconLink>

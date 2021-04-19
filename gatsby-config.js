@@ -3,6 +3,7 @@ require('dotenv').config({
 });
 
 const config = require('./config/website');
+const rss = require('./config/rss');
 
 const pathPrefix = config.pathPrefix === '/' ? '' : config.pathPrefix;
 
@@ -10,15 +11,16 @@ module.exports = {
   pathPrefix: config.pathPrefix,
   siteMetadata: {
     siteUrl: config.siteUrl + pathPrefix,
-    // pathPrefix,
-    // title: config.siteTitle,
+    site_url: config.siteUrl,
+    title: config.siteTitle,
+    description: config.siteDescription,
     // titleAlt: config.siteTitleAlt,
-    // description: config.siteDescription,
-    // logo: config.siteLogo,
+    logo: config.siteLogo,
+    logo: config.siteLogo,
     // headline: config.siteHeadline,
     // siteLanguage: config.siteLanguage,
     // ogLanguage: config.ogLanguage,
-    // author: config.author,
+    author: config.author,
     // twitter: config.userTwitter,
     // facebook: config.ogSiteName,
   },
@@ -40,13 +42,6 @@ module.exports = {
         path: `${__dirname}/content/${config.generalPostDir}`,
       },
     },
-    // {
-    //   resolve: 'gatsby-source-filesystem',
-    //   options: {
-    //     name: 'snippets',
-    //     path: `${__dirname}/content/${config.snippetsPostDir}`,
-    //   },
-    // },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
@@ -54,7 +49,10 @@ module.exports = {
         name: 'images',
       },
     },
-    'gatsby-plugin-feed',
+    {
+      resolve: `gatsby-plugin-feed`,
+      options: rss
+    },
     'gatsby-transformer-sharp',
     {
       resolve: 'gatsby-transformer-remark',
@@ -126,12 +124,12 @@ module.exports = {
         display: 'fullscreen',
         icons: [
           {
-            src: '/static/favicon.png',
+            src: '/favicon.png',
             sizes: '192x192',
             type: 'image/png',
           },
           {
-            src: '/static/favicon.png',
+            src: '/favicon.png',
             sizes: '512x512',
             type: 'image/png',
           },

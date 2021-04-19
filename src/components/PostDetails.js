@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'gatsby';
+// import { Link } from 'gatsby';
 
 const Information = styled.span`
   font-family: ${(props) => props.theme.fontFamily.heading};

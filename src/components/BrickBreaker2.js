@@ -185,6 +185,7 @@ export function brickBreakerGame() {
       if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
         dx = -dx;
       }
+
       if (y + dy < ballRadius) {
         dy = -dy;
         // console.log('y+dy<ballRadius', dy)
@@ -222,7 +223,7 @@ export function brickBreakerGame() {
   }
 
   function init(canv, context, coords) {
-    console.log('brickbreaker init canv', canv);
+    // console.log('brickbreaker init canv', canv);
     canvas = canv;
     ctx = context;
     bricks = coords;
@@ -234,7 +235,7 @@ export function brickBreakerGame() {
     gameCleared = false;
     gameOver = false;
 
-    console.log('gameOIver', gameOver);
+    // console.log('gameOIver', gameOver);
     const keyDownBase = (keyCode, bool) => {
       if (keyCode === 39) {
         rightPressed = bool;

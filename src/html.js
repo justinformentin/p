@@ -12,11 +12,6 @@ export default function HTML(props) {
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
         {props.headComponents}
-        <script>
-          var clicky_site_ids = clicky_site_ids || [];
-          clicky_site_ids.push(101300634);
-        </script>
-        {/* <script async src="//static.getclicky.com/js"></script> */}
       </head>
       <body {...props.bodyAttributes}>
         {props.preBodyComponents}
@@ -39,3 +34,9 @@ HTML.propTypes = {
   body: PropTypes.string,
   postBodyComponents: PropTypes.array,
 };
+
+// {/* <script>
+//   var clicky_site_ids = clicky_site_ids || [];
+//   clicky_site_ids.push(101300634);
+// </script> */}
+// {/* <script async src="//static.getclicky.com/js"></script> */}

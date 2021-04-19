@@ -6,6 +6,7 @@ import loading from '../images/transloading.png';
 const MasonryContainer = styled.div`
   columns: 3;
   column-gap: 16px;
+  padding: 0 1rem;
   @media (max-width: 1200px) {
     columns: 3;
   }

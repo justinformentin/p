@@ -140,9 +140,9 @@ function ballBrickCollision() {
     if(isBrickAtColRow(ballBrickCol, ballBrickRow)) {
       brickGrid[brickIndexUnderBall] = false;
       bricksLeft--; //remove brick from the amount
-      console.log(bricksLeft);
+      // console.log(bricksLeft);
       playerScore += 10;
-      console.log(playerScore);
+      // console.log(playerScore);
 
       var previousBallX = ballX - ballSpeedX;
       var previousBallY = ballY - ballSpeedY;
@@ -217,7 +217,7 @@ function brickReset() {
       brickGrid[i] = false;
     }//end of else (random check)
   }//end of for
-  console.log(maximumScore);
+  // console.log(maximumScore);
 }//end of brickReset
 
 function rowColToArrayIndex(col, row) {

@@ -1,8 +1,12 @@
 import styled from 'styled-components';
-import { sharedCentered, MaxWidth } from './shared';
+import { MaxWidth } from './shared';
 
 export const PostHeadingWrapper = styled.header`
-  ${sharedCentered}
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   padding: 2rem;
 `;
 

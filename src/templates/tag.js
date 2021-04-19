@@ -12,7 +12,7 @@ export default ({ pageContext, data }) => {
       <Heading>{pageContext.tag}</Heading>
       <MaxWidth>
         {data.allMarkdownRemark.edges.map((edge) => {
-          console.log('edge.node', edge.node);
+          // console.log('edge.node', edge.node);
           return (
             <ItemTagCategory
               key={edge.node.frontmatter.title}

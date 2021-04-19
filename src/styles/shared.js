@@ -1,17 +1,11 @@
 import styled, { css } from 'styled-components';
 
-export const sharedText = (props) => css`
+export const sharedText = css`
   z-index: 10;
   color: var(--color-text);
+  margin-top: 0;
+  margin-bottom: 0;
   transition: ${(props) => props.theme.trans.color};
-`;
-
-export const sharedCentered = (props) => css`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
 `;
 
 export const Spacer = styled.div`
@@ -22,23 +16,17 @@ export const Spacer = styled.div`
 export const H1 = styled.h1`
   ${sharedText}
   font-size: 2rem;
-  margin-top: 0;
-  margin-bottom: 0;
 `;
 
 export const H2 = styled.h2`
   ${sharedText}
-  margin-top: 0;
-  margin-bottom: 0;
   font-size: 1.2rem;
 `;
 
 export const H3 = styled.h3`
+  ${sharedText}
   font-size: 1.75rem;
   display: inline-block;
-  margin-top: 0;
-  margin-bottom: 0;
-  ${sharedText}
 `;
 
 export const Row = styled.div`
@@ -77,10 +65,6 @@ export const Line = styled.div`
   margin-bottom: 1rem;
 `;
 
-export const Centered = styled.div`
-  ${sharedCentered}
-`;
-
 export const InfoText = styled.div`
   text-transform: uppercase;
   font-family: ${(props) => props.theme.fontFamily.heading};
@@ -90,7 +74,7 @@ export const InfoText = styled.div`
 `;
 
 export const TagsContainer = styled.div`
-  margin: 2rem 0 1rem 0;
+  margin: 2rem 0 3rem 0;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -101,7 +85,7 @@ export const TagsContainer = styled.div`
     padding: 0.25rem 0.85rem;
     border-radius: 1rem;
     white-space: nowrap;
-    margin: 0 1rem 1rem 0;
+    margin: 0 1rem 0 0;
     &:hover {
       color: #cacaca;
     }

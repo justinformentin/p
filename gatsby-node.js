@@ -4,7 +4,6 @@ const _ = require('lodash');
 const pathPrefixes = {
   code: '/code',
   general: '/general',
-  // snippets: '/snippets',
 };
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
@@ -92,7 +91,6 @@ exports.createPages = ({ graphql, actions }) => {
 
         const codeList = result.data.code.edges;
         const generalList = result.data.general.edges;
-        // const snippetList = result.data.snippets.edges;
 
         const addTagsAndCats = (frontmatter) => {
           frontmatter.tags &&
@@ -162,43 +160,3 @@ exports.onCreateWebpackConfig = ({ actions }) => {
     },
   });
 };
-
-// snippets: allMdx(
-//   filter: { fields: { sourceInstanceName: { eq: "snippets" } } }
-//   sort: { fields: [frontmatter___date], order: DESC }
-// ) {
-//   edges {
-//     node {
-//       frontmatter {
-//         lang
-//         tags
-//         title
-//       }
-//       fields {
-//         slug
-//       }
-//     }
-//   }
-// }
-
-
-
-
-// snippets: allMarkdownRemark(
-//   filter: { fields: { sourceInstanceName: { eq: "snippets" } } }
-//   sort: { fields: [frontmatter___date], order: DESC }
-// ) {
-//   edges {
-//     node {
-//       frontmatter {
-//         lang
-//         chunk
-//         title
-//         published
-//       }
-//       fields {
-//         slug
-//       }
-//     }
-//   }
-// }

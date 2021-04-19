@@ -19,9 +19,4 @@ export default Tags;
 
 Tags.propTypes = {
   tags: PropTypes.array.isRequired,
-  center: PropTypes.any,
-};
-
-Tags.defaultProps = {
-  center: null,
 };

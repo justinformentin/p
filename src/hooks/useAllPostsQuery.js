@@ -76,24 +76,3 @@ export const useAllPostsQuery = () => {
   // console.log('q', q);
   return q;
 };
-
-
-// snippets: allMarkdownRemark(
-//   filter: { fields: { sourceInstanceName: { eq: "snippets" } } }
-//   sort: { fields: [frontmatter___date], order: DESC }
-// ) {
-//   edges {
-//     node {
-//       frontmatter {
-//         lang
-//         title
-//         date
-//         chunk
-//         published
-//       }
-//       fields {
-//         slug
-//       }
-//     }
-//   }
-// }
