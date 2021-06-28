@@ -39,7 +39,7 @@
     "glamor": "^2.20.40",
     "lodash": "^4.17.10",
     "polished": "^1.9.2",
-    "prismjs": "^1.15.0",
+    "prismjs": "^1.24.0",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
